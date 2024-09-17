@@ -11,7 +11,7 @@ Giới thiệu website:
 
 
 Role Candidate
-- Cập nhật thông tin hồ sơ bao gồm kinh nghiệm, kĩ nẵng,...
+- Cập nhật thông tin hồ sơ bao gồm kinh nghiệm, kỹ năng,...
 - Tìm kiếm và xem thông tin của job
 - Xem thông tin của công ty tuyển dụng
 - Ứng tuyển vào job thích hợp
