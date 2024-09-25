@@ -1,9 +1,10 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import SignUp from './auth/pages/signup';
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
   <>
-  <h1>Xin chào MN</h1>
+    <SignUp />
   </>
 );
