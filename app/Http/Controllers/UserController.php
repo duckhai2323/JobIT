@@ -25,7 +25,7 @@ class UserController extends Controller
                 'email' => 'required|string|email|max:50|unique:'.User::class,
                 'password' => 'required|string|min:8',
                 'repassword' =>  'required|same:password',
-                'role' => 'required|numeric|min:0|max:2'
+                'role' => 'string|min:0|max:2'
             ]);
 
             $data = $this->userRepository->createUser($request);
@@ -51,7 +51,7 @@ class UserController extends Controller
                 [
                     'message' => $err->getMessage(),
                     'success' => 0,
-                ]
+                ],404
             );
         }
     }

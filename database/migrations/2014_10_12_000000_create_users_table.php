@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name')->nullable(false);
             $table->string('email')->unique();
             $table->string('image')->nullable();
-            $table->enum('role', [0, 1, 2])->default(0);
+            $table->enum('role', ['0', '1', '2'])->default('0'); 
             $table->boolean('actived')->default(false);
             $table->boolean('token_verified')->default(false);
             $table->string('email_token')->nullable();

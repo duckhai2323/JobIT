@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,4 +25,15 @@ Route::prefix('user')->group(function () {
     Route::post('/register', [UserController::class, 'createUser']);
     Route::get('/verify/{email_token}',[MailController::class,'verifyEmail']);
 });
+
+Route::prefix('auth')->group(function () {
+    Route::post('/signin', [AuthController::class, 'signIn']);
+    // Route::put('/reset/password', [AuthController::class, 'renewPass']);
+    // Route::put('/change/password', [AuthController::class, 'changePass']);
+    // Route::middleware('auth:sanctum')->delete('/logout', [AuthController::class, 'logout']);
+});
+
+
+
+
 
