@@ -45,6 +45,43 @@
       @include form-input-group;
     }
 
+    .checkbox-footer {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 15px;
+      input[type='checkbox'] {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 24px;
+        height: 24px;
+        border: 1px solid $grayColor1;
+        border-radius: 4px;
+        cursor: pointer;
+        position: relative;
+      }
+
+      input[type='checkbox']:checked {
+        background-color: $primaryColor;
+        border-color: $primaryColor;
+      }
+
+      input[type='checkbox']:checked::after {
+        content: '✔';
+        color: $whiteColor;
+        font-size: 20px;
+        position: absolute;
+        top: 0px;
+        left: 4px;
+      }
+      .title__fogot {
+        color: $primaryColor;
+        font-size: 15px;
+        font-weight: 400;
+      }
+    }
+
     .title__fogot {
       color: $primaryColor;
       text-align: right;

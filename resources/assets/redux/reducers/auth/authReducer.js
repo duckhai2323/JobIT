@@ -17,6 +17,13 @@ const authSlice = createSlice({
       };
     },
 
+    getAccountRequest: (state) => {
+      return {
+        ...state,
+        error: null,
+      };
+    },
+
     signInSuccess: (state, action) => {
       return {
         ...state,

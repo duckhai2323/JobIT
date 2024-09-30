@@ -17,6 +17,7 @@ function SignIn() {
   const [inputData, setInputData] = useState({
     email: null,
     password: null,
+    remember_token: false,
   });
 
   const onChangeInput = (e) => {
@@ -27,8 +28,16 @@ function SignIn() {
     }));
   };
 
-  const handleSignIn = async (e) => {
-    console.log(authState);
+  const onChangeCheckbox = () => {
+    const { remember_token } = inputData;
+
+    setInputData((preData) => ({
+      ...preData,
+      remember_token: !remember_token,
+    }));
+  };
+
+  const handleSignIn = (e) => {
     e.preventDefault();
     signInRequest(inputData);
   };
@@ -59,10 +68,20 @@ function SignIn() {
                 <br />
                 <div className={cx('form-input-group__input')}>
                   <TbShieldLockFilled size={'22px'} color={'#00b14f'} />
-                  <input type='text' name='password' placeholder='Mật khẩu' onChange={onChangeInput} />
+                  <input type='password' name='password' placeholder='Mật khẩu' onChange={onChangeInput} />
                   <FaEyeSlash size={'22px'} color={'#bcc1c5'} />
                 </div>
               </label>
+
+              <div className={cx('checkbox-footer')}>
+                <input
+                  type='checkbox'
+                  id='customCheckbox'
+                  checked={inputData.remember_token}
+                  onChange={onChangeCheckbox}
+                />
+                <span className={cx('title__fogot')}>Ghi nhớ đăng nhập</span>
+              </div>
 
               <span className={cx('title__fogot')}>Quên mật khẩu?</span>
 

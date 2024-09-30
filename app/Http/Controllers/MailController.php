@@ -21,6 +21,7 @@ class MailController extends Controller
             $data->update([
                 'token_verified' => true,
                 'actived' => true,
+                'email_verified_at' => now()
             ]);
             
             return view('emails.emailVerified');

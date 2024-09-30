@@ -28,7 +28,7 @@ Route::prefix('user')->group(function () {
 
 Route::prefix('auth')->group(function () {
     Route::post('/signin', [AuthController::class, 'signIn']);
-    // Route::put('/reset/password', [AuthController::class, 'renewPass']);
+    Route::post('/account', [AuthController::class, 'getUserAccount']);
     // Route::put('/change/password', [AuthController::class, 'changePass']);
     // Route::middleware('auth:sanctum')->delete('/logout', [AuthController::class, 'logout']);
 });
