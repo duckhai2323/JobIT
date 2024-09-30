@@ -18,6 +18,7 @@ function* signInSaga(action) {
 
 function* getAccountSaga(action) {
   try {
+    yield delay(500);
     const response = yield call(getUserAccount, action.payload);
     if (response.success) {
       yield put(Actions.signInSuccess(response));

@@ -11,11 +11,11 @@ const useAuth = () => {
   useEffect(() => {
     dataSaveSession
       ? dispatch(Actions.signInSuccess(dataSaveSession))
-      : dispatch(Actions.getAccountRequest({ remember_token }));
+      : remember_token && dispatch(Actions.getAccountRequest({ remember_token }));
   }, []);
 
   useEffect(() => {
-    if (!dataSaveSession) {
+    if (!dataSaveSession && authState.data) {
       authState.data &&
         authState.data.jwt_token &&
         sessionStorage.setItem('jwt_token', JSON.stringify(authState.data.jwt_token));
