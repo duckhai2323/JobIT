@@ -1,0 +1,112 @@
+@import '../../../../shared/layout/variables.scss';
+.section-banner {
+  width: 100%;
+  background: $whiteColor;
+  height: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 30px 0 0 0;
+
+  .banner-group {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    &-image {
+      width: 33.333333%;
+      height: 208px;
+      border-radius: 20px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 20px;
+      }
+    }
+
+    .arrow-button-left {
+      position: absolute;
+      left: -19px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid #74d86b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: $whiteColor;
+      cursor: pointer;
+      z-index: 2;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+
+      .icon-arrow {
+        font-size: 20px;
+        color: #74d86b;
+      }
+
+      &:hover {
+        background: #74d86b;
+      }
+
+      &:hover .icon-arrow {
+        color: white;
+      }
+    }
+
+    .arrow-button-right {
+      position: absolute;
+      right: -19px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid #74d86b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: $whiteColor;
+      cursor: pointer;
+      z-index: 2;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+
+      .icon-arrow {
+        font-size: 20px;
+        color: #74d86b;
+      }
+
+      &:hover {
+        background: #74d86b;
+      }
+
+      &:hover .icon-arrow {
+        color: white;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 75em) {
+  .banner-group {
+    width: 1185px;
+  }
+}
+
+@media only screen and (min-width: 62em) and (max-width: 75em) {
+  .banner-group {
+    width: 970px;
+  }
+}
+
+@media only screen and (min-width: 48em) and (max-width: 62em) {
+  .banner-group {
+    width: 750px;
+  }
+}

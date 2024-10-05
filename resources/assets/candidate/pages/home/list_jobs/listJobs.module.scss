@@ -1,0 +1,187 @@
+@import '../../../../shared/layout/variables.scss';
+.section-list-jobs {
+  width: 100%;
+  background: $grayBackground;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+
+  .list-jobs-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 24px 0;
+
+    &__header {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 20px;
+      gap: 2vw;
+
+      &-title {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 20px;
+
+        .header-title {
+          font-size: 20px;
+          font-weight: 600;
+          color: $secondColor;
+        }
+
+        .filter-group {
+          display: flex;
+          position: relative;
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-start;
+          width: 278px;
+          height: 40px;
+          background: $whiteColor;
+          border: 1px solid #f4f5f5;
+          border-radius: 6px;
+          padding: 0 10px;
+          gap: 8px;
+          cursor: pointer;
+
+          .text-filter {
+            margin-left: 5px;
+            color: #6f7882;
+            font-size: 15px;
+          }
+          .text-option {
+            font-size: 15px;
+          }
+
+          .bar-options {
+            position: absolute;
+            top: 44px;
+            right: 0;
+            width: 176px;
+            height: 178px;
+            background: $whiteColor;
+            z-index: 10;
+            border-radius: 6px;
+            box-shadow: 0 1px 16px rgba(5, 5, 5, 0.06);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            padding: 10px 0;
+
+            span {
+              padding: 0 20px;
+              line-height: 40px;
+              width: 100%;
+              font-size: 15px;
+
+              &:hover {
+                background: $grayBackground;
+              }
+            }
+          }
+        }
+      }
+
+      &-content {
+        width: 72%;
+        height: 40px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+
+        .arrow-button {
+          @include button-arrow;
+        }
+
+        .item-content {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 12px;
+          cursor: pointer;
+          overflow-x: scroll;
+          overflow-y: hidden;
+          position: relative;
+          scrollbar-width: none;
+          transition: all 0.2s;
+          white-space: nowrap;
+
+          span {
+            background: #e9eaec !important;
+            border-radius: 20px;
+            color: #212f3f !important;
+            font-size: 14px !important;
+            font-weight: 500;
+            height: 40px;
+            line-height: 20px;
+            padding: 9px 12px !important;
+          }
+        }
+      }
+    }
+
+    &__content {
+      display: grid;
+      grid-gap: 18px;
+      max-width: 100%;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    &__navigate {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+
+      .arrow-button {
+        @include button-arrow;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 75em) {
+  .list-jobs-group {
+    width: 1185px;
+
+    &__content {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+@media only screen and (min-width: 62em) and (max-width: 75em) {
+  .list-jobs-group {
+    width: 970px;
+    &__content {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+@media only screen and (min-width: 48em) and (max-width: 62em) {
+  .list-jobs-group {
+    width: 750px;
+    &__content {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}

@@ -1,0 +1,115 @@
+@import '../../../../shared/layout/variables.scss';
+.section-list-companies {
+  width: 100%;
+  background: $whiteColor;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+
+  .list-companies-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 24px 0;
+
+    &__title {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      span {
+        font-size: 20px;
+        font-weight: 600;
+        color: $secondColor;
+      }
+
+      .arrow-button-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        .arrow-button {
+          @include button-arrow;
+        }
+      }
+    }
+
+    &__content {
+      margin-top: 20px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+
+      .item-company {
+        width: 25%;
+        align-items: center;
+        background: $whiteColor;
+        border: 1px solid #dee0e2;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        min-height: 184px;
+        padding: 16px;
+        transition: 0.3s;
+        justify-content: center;
+        gap: 8px;
+        cursor: pointer;
+
+        .image-company {
+          width: 96px;
+          height: 96px;
+          border-radius: 5px;
+
+          img {
+            border-radius: 5px;
+            width: 100%;
+            object-fit: cover;
+          }
+        }
+
+        .company-name {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: normal;
+          text-align: center;
+          font-size: 16px;
+          font-weight: 600;
+        }
+
+        &:hover {
+          border: 1px solid $borderGreen;
+          box-shadow: 0 10px 30px rgba(14, 166, 59, 0.2);
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 75em) {
+  .list-companies-group {
+    width: 1185px;
+  }
+}
+
+@media only screen and (min-width: 62em) and (max-width: 75em) {
+  .list-companies-group {
+    width: 970px;
+  }
+}
+
+@media only screen and (min-width: 48em) and (max-width: 62em) {
+  .list-companies-group {
+    width: 750px;
+  }
+}

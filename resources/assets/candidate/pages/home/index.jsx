@@ -1,8 +1,23 @@
+import LayoutCandidate from '@/candidate/components/layout';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import SectionHeader from './section_header';
+import ListJobs from './list_jobs';
+import ListCompanies from './listCompanies';
+import ListTopJobs from './listTopJob';
+import FooterHome from './footer';
+import Banner from './banner';
+
 function HomePageCandidate() {
-  const authState = useSelector((state) => state.auth);
-  return <div>{authState.data.data.name}</div>;
+  return (
+    <LayoutCandidate>
+      <SectionHeader />
+      <ListJobs />
+      <Banner />
+      <ListCompanies />
+      <ListTopJobs />
+      <FooterHome />
+    </LayoutCandidate>
+  );
 }
 
 export default HomePageCandidate;
