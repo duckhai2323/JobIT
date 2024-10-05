@@ -1,0 +1,106 @@
+@import '../../../../shared/layout/variables.scss';
+.section-list-top {
+  width: 100%;
+  background: $whiteColor;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+
+  .list-top-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 40px;
+
+    &__title {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      span {
+        font-size: 20px;
+        font-weight: 600;
+        color: $secondColor;
+      }
+    }
+
+    &__content {
+      margin-top: 20px;
+      width: 100%;
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: repeat(4, 1fr);
+
+      .item-top {
+        height: 208px;
+        align-items: center;
+        background: $grayBackground;
+        border: 1px solid transparent;
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 23px;
+        text-align: center;
+        transition: 0.3s;
+
+        .logo-image {
+          width: 100px;
+          height: 100px;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+
+        .item-top-title {
+          margin-top: 10px;
+          font-size: 16px;
+          font-weight: 600;
+        }
+
+        .item-top-subtitle {
+          margin-top: 5px;
+          font-size: 15px;
+          color: $borderGreen;
+        }
+
+        &:hover {
+          background: $whiteColor;
+          border-color: $borderGreen;
+          box-shadow: 0 10px 30px rgba(14, 166, 59, 0.2);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 75em) {
+  .list-top-group {
+    width: 1185px;
+  }
+}
+
+@media only screen and (min-width: 62em) and (max-width: 75em) {
+  .list-top-group {
+    width: 970px;
+  }
+}
+
+@media only screen and (min-width: 48em) and (max-width: 62em) {
+  .list-top-group {
+    width: 750px;
+  }
+}

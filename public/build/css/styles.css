@@ -12,7 +12,8 @@ body {
   font-family: "Roboto", sans-serif;
   line-height: 1.6;
   font-size: 16px;
-  background-color: #f4f4f4;
+  background-color: #ffffff;
+  background: #ffffff;
   color: #333;
   margin: 0;
   padding: 0;
@@ -20,5 +21,5 @@ body {
   display: flex;
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden !important;
 }

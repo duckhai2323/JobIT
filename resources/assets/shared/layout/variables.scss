@@ -1,6 +1,14 @@
 $primaryColor: #00b14f;
+$secondColor: #74d86b;
 $whiteColor: #ffffff;
 $grayColor1: #7f878f;
+$borderGreen: #33c172;
+$grayBackground: #f3f5f7;
+$chartColor1: rgb(17, 215, 105);
+$chartColor2: rgb(48, 138, 255);
+$chartColor3: rgb(218, 131, 0);
+$chartColor4: rgb(28, 255, 241);
+$chartColor5: rgb(255, 231, 0);
 
 $dividerColor: #e7e1e1;
 $fontSizeButtonSubmit: 16px;
@@ -42,5 +50,29 @@ $fontSizeButtonSubmit: 16px;
         text-decoration: none;
       }
     }
+  }
+}
+
+@mixin button-arrow {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid $secondColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  .icon-arrow {
+    font-size: 20px;
+    color: $secondColor;
+  }
+
+  &:hover {
+    background: $secondColor;
+  }
+
+  &:hover .icon-arrow {
+    color: $whiteColor;
   }
 }

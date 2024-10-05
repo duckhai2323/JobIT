@@ -13,7 +13,6 @@ const App = () => {
   if (!authState.data && !remember_token) {
     content = <AuthComponent />;
   } else if (authState.data) {
-    console.log(authState.data.data.role);
     switch (authState.data.data.role) {
       case '0':
         content = <CandidateComponent />;

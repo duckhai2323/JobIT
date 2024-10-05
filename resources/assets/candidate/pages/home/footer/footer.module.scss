@@ -1,0 +1,85 @@
+@import '../../../../shared/layout/variables.scss';
+.section-footer {
+  width: 100%;
+  background: $grayBackground;
+  height: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  padding-top: 35px;
+
+  .footer-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 24px;
+    gap: 15px;
+
+    .company-infor {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 20px;
+
+      &__image {
+        width: 180px;
+        img {
+          width: 100%;
+          object-fit: cover;
+        }
+      }
+
+      &__title {
+        span {
+          font-size: 16px;
+          font-weight: 600;
+          margin-bottom: 12px;
+        }
+
+        .title-group {
+          .title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #6f7882;
+            font-size: 14px;
+            font-weight: 400;
+            margin-right: 4px;
+          }
+        }
+      }
+    }
+
+    .column-infor {
+      margin-top: 10px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+    }
+  }
+}
+
+@media only screen and (min-width: 75em) {
+  .footer-group {
+    width: 1185px;
+  }
+}
+
+@media only screen and (min-width: 62em) and (max-width: 75em) {
+  .footer-group {
+    width: 970px;
+  }
+}
+
+@media only screen and (min-width: 48em) and (max-width: 62em) {
+  .footer-group {
+    width: 750px;
+  }
+}
