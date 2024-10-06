@@ -1,0 +1,90 @@
+@import '../../../shared/layout/variables.scss';
+.layout-section {
+  width: 100%;
+  height: 100%;
+  &__navbar {
+    width: 100%;
+    height: 70px;
+    background: $whiteColor;
+    margin-left: 0;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    .navbar {
+      &__logo {
+        margin-left: 20px;
+        height: 60px;
+        img {
+          margin-top: 3px;
+          height: 50px;
+        }
+      }
+
+      &__left {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 40px;
+      }
+
+      &__right {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        gap: 15px;
+        margin-right: 15px;
+      }
+
+      &__button {
+        width: 100px;
+        height: 70px;
+        padding: 5px;
+        background: $whiteColor;
+        border: none;
+        display: inline-block;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+  
+      &__button:hover {
+        background-color: $primaryColor;
+        color: $whiteColor;
+        transition: all 0.5s;
+      }
+
+      &__icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #d0ebdc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $primaryColor;
+        cursor: pointer;
+      }
+
+      &__avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: inline-block;
+        cursor: pointer;
+
+        img {
+          width: 40px;
+          height: 40px;
+          object-fit: cover;
+          border-radius: 20px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+@import '../../../shared/layout/variables.scss';
+.job-item {
+  max-width: 229px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px;
+  cursor: pointer;
+
+	&__company-logo {
+		width: 48px;
+    height: 48px;
+
+    &__img {
+      width: 48px;
+      height: 48px;
+      border: 1px solid #e9eaec;
+      object-fit: contain;
+      border-radius: 4px;
+      margin-bottom: 0;
+    }
+	}
+
+	&__content {
+    height: 100%;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 5px;
+
+    .job-title {
+      width: 100%;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 16px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      line-clamp: 2;
+      color: white;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+    }
+
+    .company-name, .location {
+      width: 100%;
+      font-size: 10px;
+      font-weight: 500;
+      color: #a6acb2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+	}
+}
