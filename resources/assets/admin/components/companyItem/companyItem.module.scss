@@ -1,0 +1,91 @@
+@import '../../../shared/layout/variables.scss';
+.company-card {
+	width: 98%;
+	height: 148px;
+	margin-bottom: 1rem;
+	padding: 1rem;
+	background-color: white;
+	display: flex;
+	align-items: center;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	border-radius: 0.375rem;
+	border: 1px solid transparent;
+	transition: border 0.3s ease;
+}
+
+.company-card:hover {
+	border-color: #00c853;
+	cursor: pointer;
+}
+
+.company-image {
+	width: 100px;
+	height: 100px;
+}
+
+.image {
+	width: 100px;
+	height: 100px;
+	object-fit: contain;
+	border-radius: 4px;
+}
+
+.company-info {
+	margin-left: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+}
+
+.company-name {
+	width: 100%;
+	font-weight: bold;
+	font-size: 1.125rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.company-intro {
+	width: 100%;
+	color: #757575;
+	font-size: 0.875rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.company-contact {
+	display: flex;
+	gap: 0.25rem;
+	align-items: center;
+	font-size: 0.875rem;
+	color: #757575;
+}
+
+.company-link {
+	font-size: 0.625rem;
+	color: #757575;
+}
+
+.company-details {
+	margin-left: 2rem;
+	width: 30%;
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	color: #757575;
+	font-size: 0.875rem;
+}
+
+.company-detail {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.company-location {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
