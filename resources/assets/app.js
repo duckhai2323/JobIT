@@ -6,11 +6,10 @@ import AdminComponent from './admin';
 import CandidateComponent from './candidate';
 
 const App = () => {
-  const { authState } = useAuth();
-  const remember_token = JSON.parse(localStorage.getItem('remember_token'));
+  const { authState, remember_token, dataSaveSession } = useAuth();
 
   let content;
-  if (!authState.data && !remember_token) {
+  if (!authState.data && !remember_token && !dataSaveSession) {
     content = <AuthComponent />;
   } else if (authState.data) {
     switch (authState.data.data.role) {
