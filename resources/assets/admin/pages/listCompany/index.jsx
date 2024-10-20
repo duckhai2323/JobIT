@@ -4,11 +4,22 @@ import CompanyItem from '../../components/companyItem/index';
 import styles from './listCompany.module.scss';
 import classNames from 'classnames/bind';
 import { FaBuildingCircleCheck } from "react-icons/fa6";
+import CompanyInfoModal from '../../components/companyInfoModal/index';
 
 
 const cx = classNames.bind(styles);
 
 const ListCompany = () => {
+	const [displayModal, setDisplayModal] = useState('none');
+  const onClickHandleDisplayModal = () => {
+    if (displayModal === 'flex') {
+      setDisplayModal('none');
+			console.log(displayModal);
+    } else {
+      setDisplayModal('flex');
+			console.log(displayModal)
+    }
+  };
   return (
 		<div>
 			<AdminLayout>
@@ -29,18 +40,42 @@ const ListCompany = () => {
   				</div>
   				<div className={cx("content")}>
   				  <div className={cx("company-list")}>
-  				    <CompanyItem />
-							<CompanyItem />
-							<CompanyItem />
-							<CompanyItem />
-							<CompanyItem />
-							<CompanyItem />
-							<CompanyItem />
-							<CompanyItem />
-							<CompanyItem />
-							<CompanyItem />
-							<CompanyItem />
-							<CompanyItem />
+							<button onClick={onClickHandleDisplayModal}>
+								<CompanyItem />
+							</button>
+							<button onClick={onClickHandleDisplayModal}>
+								<CompanyItem />
+							</button>
+							<button onClick={onClickHandleDisplayModal}>
+								<CompanyItem />
+							</button>
+							<button onClick={onClickHandleDisplayModal}>
+								<CompanyItem />
+							</button>
+							<button onClick={onClickHandleDisplayModal}>
+								<CompanyItem />
+							</button>
+							<button onClick={onClickHandleDisplayModal}>
+								<CompanyItem />
+							</button>
+							<button onClick={onClickHandleDisplayModal}>
+								<CompanyItem />
+							</button>
+							<button onClick={onClickHandleDisplayModal}>
+								<CompanyItem />
+							</button>
+							<button onClick={onClickHandleDisplayModal}>
+								<CompanyItem />
+							</button>
+							<button onClick={onClickHandleDisplayModal}>
+								<CompanyItem />
+							</button>
+							<button onClick={onClickHandleDisplayModal}>
+								<CompanyItem />
+							</button>
+							<button onClick={onClickHandleDisplayModal}>
+								<CompanyItem />
+							</button>
   				  </div>
   				  <div className={cx("recent-companies-box")}>
   				    <h1 className={cx("recent-title")}>Các công ty gần đây</h1>
@@ -71,6 +106,10 @@ const ListCompany = () => {
   				</div>
 				</div>
 			</AdminLayout>
+			<CompanyInfoModal
+				onClickHandle={onClickHandleDisplayModal}
+				displayModal={displayModal}
+			/>
 		</div>
   )
 }

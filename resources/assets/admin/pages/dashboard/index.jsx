@@ -27,31 +27,6 @@ function Dashboard() {
             <h3>Thị trường việc làm hôm nay <span>{currentDate}</span></h3>
           </div>
           <div className={cx('dashboard__content')}>
-            <div className={cx('newest-job')}>
-              <img className={cx('newest-job__img')} src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/welcome/dashboard/dashboard-item.png" alt="dashboard-item" />
-              <div className={cx('scroll-bar')}>
-                <p className={cx('newest-job__title')}>
-                  Việc làm mới nhất
-                </p>
-                <div className={cx('slider')}>
-                  <JobItem 
-                    jobTitle="Chuyên Viên Kinh Doanh Xuất Nhập Khẩu/Order Hàng Trung Quốc - Taobao,1688 - Thưởng 2 Triệu Khi Nhận Việc" 
-                    companyName="CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ" 
-                    location="Hà Nội"
-                  />
-                  <JobItem 
-                    jobTitle="Chuyên Viên Kinh Doanh Xuất Nhập Khẩu/Order Hàng Trung Quốc - Taobao,1688 - Thưởng 2 Triệu Khi Nhận Việc" 
-                    companyName="CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ" 
-                    location="Hà Nội"
-                  />
-                  <JobItem 
-                    jobTitle="Chuyên Viên Kinh Doanh Xuất Nhập Khẩu/Order Hàng Trung Quốc - Taobao,1688 - Thưởng 2 Triệu Khi Nhận Việc" 
-                    companyName="CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ" 
-                    location="Hà Nội"
-                  />
-                </div>
-              </div>
-            </div>
             <div className={cx('statistics-job')}>
               <div className={cx('work-market')}>
                 <MarketItem type="Việc làm mới 24h gần đây nhất" amount="225" />
@@ -62,7 +37,7 @@ function Dashboard() {
                 <div className={cx('item-chart')}>
                   <div className={cx('header')}>
                     <div className={cx('icon')}>
-                      <FaArrowTrendUp style={{color: 'white', fontSize: '10px'}} />
+                      <FaArrowTrendUp style={{color: 'white', fontSize: '13px'}} />
                     </div>
                     <span className={cx('caption')}>
                       Tăng trưởng cơ hội việc làm
@@ -75,7 +50,7 @@ function Dashboard() {
                 <div className={cx('item-chart')}>
                   <div className={cx('header')}>
                     <div className={cx('icon')}>
-                      <FaArrowTrendUp style={{color: 'white', fontSize: '10px'}} />
+                      <FaArrowTrendUp style={{color: 'white', fontSize: '13px'}} />
                     </div>
                     <span className={cx('caption')}>
                       Nhu cầu tuyển dụng theo ngành nghề
@@ -105,6 +80,30 @@ function Dashboard() {
                       <div className={cx('color5')}></div>
                       <span>IT phần mềm</span>
                     </div>
+                  </div>
+                </div>
+              </div>
+              <div className={cx('newest-job')}>
+                <div className={cx('scroll-bar')}>
+                  <p className={cx('newest-job__title')}>
+                    Việc làm mới nhất
+                  </p>
+                  <div className={cx('slider')}>
+                    <JobItem 
+                      jobTitle="Chuyên Viên Kinh Doanh Xuất Nhập Khẩu/Order Hàng Trung Quốc - Taobao,1688 - Thưởng 2 Triệu Khi Nhận Việc" 
+                      companyName="CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ" 
+                      location="Hà Nội"
+                    />
+                    <JobItem 
+                      jobTitle="Chuyên Viên Kinh Doanh Xuất Nhập Khẩu/Order Hàng Trung Quốc - Taobao,1688 - Thưởng 2 Triệu Khi Nhận Việc" 
+                      companyName="CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ" 
+                      location="Hà Nội"
+                    />
+                    <JobItem 
+                      jobTitle="Chuyên Viên Kinh Doanh Xuất Nhập Khẩu/Order Hàng Trung Quốc - Taobao,1688 - Thưởng 2 Triệu Khi Nhận Việc" 
+                      companyName="CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ" 
+                      location="Hà Nội"
+                    />
                   </div>
                 </div>
               </div>

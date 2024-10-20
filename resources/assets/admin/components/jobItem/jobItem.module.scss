@@ -1,11 +1,13 @@
 @import '../../../shared/layout/variables.scss';
 .job-item {
-  max-width: 229px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   gap: 10px;
   cursor: pointer;
+  padding: 24px 24px;
+  border: 1px solid #e9eaec;
+  border-radius: 5px;
 
 	&__company-logo {
 		width: 48px;
@@ -43,7 +45,6 @@
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       line-clamp: 2;
-      color: white;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: normal;
@@ -53,10 +54,14 @@
       width: 100%;
       font-size: 10px;
       font-weight: 500;
-      color: #a6acb2;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 	}
+}
+
+.job-item:hover {
+  border-color: #00c853;
+  cursor: pointer;
 }

@@ -2,7 +2,7 @@
 .layout-section {
   width: 100%;
   height: 100%;
-  &__navbar {
+  &__header {
     width: 100%;
     height: 70px;
     background: $whiteColor;
@@ -15,7 +15,7 @@
     align-items: center;
     flex-direction: row;
     justify-content: space-between;
-    .navbar {
+    .header {
       &__logo {
         margin-left: 20px;
         height: 60px;
@@ -39,25 +39,6 @@
         flex-direction: row;
         gap: 15px;
         margin-right: 15px;
-      }
-
-      &__button {
-        width: 100px;
-        height: 70px;
-        padding: 5px;
-        background: $whiteColor;
-        border: none;
-        display: inline-block;
-        text-align: center;
-        font-size: 12px;
-        font-weight: 600;
-        cursor: pointer;
-      }
-  
-      &__button:hover {
-        background-color: $primaryColor;
-        color: $whiteColor;
-        transition: all 0.5s;
       }
 
       &__icon {
@@ -85,6 +66,70 @@
           object-fit: cover;
           border-radius: 20px;
         }
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .display-content {
+    margin-right: 20%;
+    width: 60%;
+  }
+  
+  &__sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 0px;
+    margin-left: 15%;
+    margin-top: 70px;
+    background: #FFFFFF;
+    box-shadow: inset -1px 0px 0px #E4E5E8;
+    .sidebar {
+      &__title {
+        height: 18px;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 18px;
+        color: #9199A3;
+        transform: translateX(-24px);
+      }
+
+      &__statistics, &__companies, &__users, &__jobs {
+        margin-right: 2px;
+      }
+
+      &__button {
+        width: 200px;
+        padding: 10px;
+        background-color: #fff;
+        cursor: pointer;
+        text-align: left;
+        font-weight: 600;
+        color: $grayColor1;
+        border: 0;
+        span {
+          font-size: 16px;
+        }
+      }
+      
+      &__button:hover {
+        background-color: #99ff99;
+        color: $primaryColor;
+        border-left: 2px solid $primaryColor;
+      }
+    }
+
+    .nav-link.active {
+      button {
+        background-color: #99ff99;
+        color: $primaryColor;
+        border-left: 2px solid $primaryColor;
       }
     }
   }
