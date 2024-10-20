@@ -24,6 +24,7 @@ ChartJS.register(
 export const LineChart = () => {
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         display: false,
@@ -35,7 +36,7 @@ export const LineChart = () => {
           drawOnChartArea: false
         },
         ticks: {
-          color: "#fff",
+          color: "#000",
           maxRotation: 90,
           minRotation: 60
         }
@@ -46,7 +47,7 @@ export const LineChart = () => {
           drawOnChartArea: true
         },
         ticks: {
-          color: "#fff"
+          color: "#000"
         }
       }
     },
