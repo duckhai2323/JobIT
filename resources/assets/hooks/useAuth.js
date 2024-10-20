@@ -32,7 +32,7 @@ const useAuth = () => {
     dispatch(Actions.signInRequest(data));
   };
 
-  return { authState, signInRequest };
+  return { authState, signInRequest, remember_token, dataSaveSession };
 };
 
 export default useAuth;
