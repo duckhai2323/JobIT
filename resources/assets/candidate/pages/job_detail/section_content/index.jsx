@@ -3,6 +3,7 @@ import style from './section_content.module.scss';
 import classNames from 'classnames/bind';
 import { WiMoonFull } from 'react-icons/wi';
 import { FaRegHeart } from 'react-icons/fa6';
+import JobItemHight from '@/candidate/components/jobItemHight';
 const cx = classNames.bind(style);
 
 const ItemJob = () => {
@@ -162,12 +163,12 @@ const SectionContent = () => {
             <div className={cx('section-left-group__other-jobs')}>
               <span className={cx('section-left-group__title')}>Việc làm liên quan</span>
               <div className={cx('list-other-jobs')}>
-                <ItemJob />
-                <ItemJob />
-                <ItemJob />
-                <ItemJob />
-                <ItemJob />
-                <ItemJob />
+                <JobItemHight />
+                <JobItemHight />
+                <JobItemHight />
+                <JobItemHight />
+                <JobItemHight />
+                <JobItemHight />
               </div>
             </div>
           </div>
