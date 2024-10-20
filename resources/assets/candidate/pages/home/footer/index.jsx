@@ -3,9 +3,9 @@ import style from './footer.module.scss';
 import classNames from 'classnames/bind';
 import logo from '../../../../shared/logo/logo_jobit.png';
 const cx = classNames.bind(style);
-const FooterHome = () => {
+const FooterHome = ({ background }) => {
   return (
-    <div className={cx('section-footer')}>
+    <div className={cx('section-footer')} style={{ background: background }}>
       <div className={cx('footer-group')}>
         <div className={cx('company-infor')}>
           <div className={cx('company-infor__image')}>

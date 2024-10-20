@@ -11,7 +11,7 @@ const JobDetailsPageCandidate = () => {
       <HeaderSearchJobDetail />
       <SectionJobInfor />
       <SectionContent />
-      <FooterHome />
+      <FooterHome background={'white'} />
     </LayoutCandidate>
   );
 };
