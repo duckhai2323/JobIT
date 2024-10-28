@@ -1,0 +1,150 @@
+@import '../../../shared/layout/variables.scss';
+.container {
+  padding: 20px 20px;
+	margin-top: 80px;
+}
+
+.admins-count-info {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	gap: 5px;
+}
+
+.info-box {
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(to right, $primaryColor, $secondColor);
+  border-radius: 0.375rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.info-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+}
+
+.add-button {
+	color: white;
+	background-color: $chartColor2;
+	padding: 10px;
+	border-radius: 0.375rem;
+	border: 0;
+	margin-top: 25%;
+	transform: translateY(-50%);
+}
+
+.add-button:hover {
+	border: 1px solid white;
+	cursor: pointer;
+}
+
+.info-admins {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.admin-count {
+  margin-top: 2px;
+}
+
+.content {
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.admin-list {
+  width: 100%;
+  height: 480px;
+  overflow-y: scroll;
+  button {
+    width: 100%;
+    border: 0;
+    background-color: $whiteColor;
+  }
+}
+
+.admin-list::-webkit-scrollbar {
+  width: 6px;
+  background: transparent;
+}
+
+.admin-list::-webkit-scrollbar-thumb {
+  background-color: $secondColor;
+	border-radius: 10px;
+}
+
+.admin-list::-webkit-scrollbar-thumb:hover {
+  background-color: $primaryColor;
+}
+
+.recent-admins-box {
+  width: 100%;
+  height: 300px;
+  margin-top: 20px;
+  background-color: white;
+}
+
+.recent-title {
+  font-weight: bold;
+  font-size: 1.125rem;
+}
+
+.recent-admins {
+  margin-top: 1.5rem;
+}
+
+.admin-card {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 0.5rem;
+  height: 60px;
+  background-color: white;
+  border-radius: 0.375rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  border: 1px solid transparent;
+}
+
+.admin-card:hover {
+  border-color: $primaryColor;
+  cursor: pointer;
+}
+
+.admin-logo {
+  width: 40px;
+  height: 40px;
+	border-radius: 4px;
+}
+
+.admin-info {
+  display: flex;
+  flex-direction: column;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.admin-name {
+  color: $primaryColor;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.admin-location {
+  font-size: 10px;
+  color: #757575;
+}

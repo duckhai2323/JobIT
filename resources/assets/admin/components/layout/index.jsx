@@ -8,6 +8,7 @@ import { IoBarChartSharp } from "react-icons/io5";
 import { CgOrganisation } from "react-icons/cg";
 import { FaUser } from "react-icons/fa";
 import { FaBriefcase } from "react-icons/fa";
+import { RiAdminFill } from "react-icons/ri";
 import logo from "../../../shared/logo/logo_jobit.png";
 
 const cx = classNames.bind(styles);
@@ -56,8 +57,13 @@ const AdminLayout = ({ children }) => {
               <span><FaUser /></span> Danh sách người dùng
             </button></NavLink>
           </div>
+          <div className={cx('sidebar__admins')}>
+            <NavLink to='/admins' className={({ isActive }) => cx('nav-link', { active: isActive })}><button onClick={() => onChangeContent(4)} className={cx('sidebar__button')}>
+              <span><RiAdminFill /></span> Danh sách quản trị viên
+            </button></NavLink>
+          </div>
           <div className={cx('sidebar__jobs')}>
-            <NavLink to='/jobs' className={({ isActive }) => cx('nav-link', { active: isActive })}><button onClick={() => onChangeContent(4)} className={cx('sidebar__button')}>
+            <NavLink to='/jobs' className={({ isActive }) => cx('nav-link', { active: isActive })}><button onClick={() => onChangeContent(5)} className={cx('sidebar__button')}>
               <span><FaBriefcase /></span> Danh sách công việc
             </button></NavLink>
           </div>
