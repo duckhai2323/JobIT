@@ -24,28 +24,28 @@ const ListCompanies = () => {
             <div className={cx('image-company')}>
               <img src='https://avatars.githubusercontent.com/u/2322183?s=200&v=4' />
             </div>
-            <span className={cx('company-name')}>Công ty Cổ phần Tập đoàn Karofi </span>
+            <span className={cx('company-name')}>Công ty Sun Asterisk </span>
           </div>
 
           <div className={cx('item-company')}>
             <div className={cx('image-company')}>
               <img src='https://avatars.githubusercontent.com/u/2322183?s=200&v=4' />
             </div>
-            <span className={cx('company-name')}>Công ty Cổ phần Tập đoàn Karofi </span>
+            <span className={cx('company-name')}>Công ty Sun Asterisk </span>
           </div>
 
           <div className={cx('item-company')}>
             <div className={cx('image-company')}>
               <img src='https://avatars.githubusercontent.com/u/2322183?s=200&v=4' />
             </div>
-            <span className={cx('company-name')}>Công ty Cổ phần Tập đoàn Karofi rdgfdgg </span>
+            <span className={cx('company-name')}>Công ty Sun Asterisk </span>
           </div>
 
           <div className={cx('item-company')}>
             <div className={cx('image-company')}>
               <img src='https://avatars.githubusercontent.com/u/2322183?s=200&v=4' />
             </div>
-            <span className={cx('company-name')}>Công ty Cổ phần Tập đoàn Karofi </span>
+            <span className={cx('company-name')}>Công ty Sun Asterisk </span>
           </div>
         </div>
       </div>
