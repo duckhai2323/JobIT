@@ -3,6 +3,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import HomePageCandidate from './pages/home';
 import JobDetailsPageCandidate from './pages/job_detail';
 import CompanyInforPageCandidate from './pages/company_infor';
+import RecommendJobPage from './pages/recommend';
 
 const CandidateComponent = () => {
   return (
@@ -10,6 +11,7 @@ const CandidateComponent = () => {
       <Route path='/' element={<HomePageCandidate />} />
       <Route path='/company-infor' element={<CompanyInforPageCandidate />} />
       <Route path='/jobdetail' element={<JobDetailsPageCandidate />} />
+      <Route path='/recommend' element={<RecommendJobPage />} />
       <Route path='/*' element={<Navigate to='/' />} />
     </Routes>
   );

@@ -2,45 +2,8 @@ import React from 'react';
 import style from './section_content.module.scss';
 import classNames from 'classnames/bind';
 import { WiMoonFull } from 'react-icons/wi';
-import { FaRegHeart } from 'react-icons/fa6';
 import JobItemHight from '@/candidate/components/jobItemHight';
 const cx = classNames.bind(style);
-
-const ItemJob = () => {
-  return (
-    <div className={cx('item-job-group')}>
-      <div className={cx('item-job-group__img')}></div>
-
-      <div className={cx('item-job-group__descript')}>
-        <div className={cx('job-title-group')}>
-          <div className={cx('job-title-group__left')}>
-            <span className={cx('job-title-group__left-title')}>Lập Trình Viên PHP Laravel (Middle)</span>
-            <span className={cx('job-title-group__left-subtitle')}>Công ty cổ phần Công nghệ Bekisoft</span>
-          </div>
-          <span className={cx('salary')}>Tới 15 triệu</span>
-        </div>
-
-        <div className={cx('item-job-group__bottom')}>
-          <div className={cx('footer-left')}>
-            <div className={cx('footer-infor')}>
-              <span>Han: 23/10/2025</span>
-            </div>
-            <div className={cx('footer-infor')}>
-              <span>Ha Noi</span>
-            </div>
-          </div>
-
-          <div className={cx('footer-right')}>
-            <button>Ung tuyen</button>
-            <div className={cx('icon-heart')}>
-              <FaRegHeart style={{ color: '#00b14f', fontSize: '16px', cursor: 'pointer' }} />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 const SectionContent = () => {
   return (
