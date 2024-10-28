@@ -6,6 +6,7 @@ import ListCompanies from './listCompanies';
 import ListTopJobs from './listTopJob';
 import FooterHome from './footer';
 import Banner from './banner';
+import RecommendJobs from './recommendJobs';
 
 function HomePageCandidate() {
   return (
@@ -14,6 +15,7 @@ function HomePageCandidate() {
       <ListJobs />
       <Banner />
       <ListCompanies />
+      <RecommendJobs />
       <ListTopJobs />
       <FooterHome />
     </LayoutCandidate>
