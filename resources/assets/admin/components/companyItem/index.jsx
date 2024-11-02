@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './companyItem.module.scss';
 import classNames from 'classnames/bind';
-import { MdMarkEmailUnread } from "react-icons/md";
+import { MdMarkEmailUnread, MdDelete } from "react-icons/md";
+import { IoMdEye } from "react-icons/io";
 import { FaLink } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoToday } from "react-icons/io5";
@@ -10,7 +11,7 @@ import { IoPerson } from "react-icons/io5";
 
 const cx = classNames.bind(styles);
 
-const CompanyItem = () => {
+const CompanyItem = ({ onClickHandle, onClickDelete }) => {
   return (
     <div className={cx("company-card")}>
       <div className={cx("company-image")}>
@@ -58,6 +59,14 @@ const CompanyItem = () => {
           <IoPerson />
           <p>1000+</p>
         </div>
+      </div>
+      <div className={cx("company-options")}>
+        <button className={cx('view-button')} onClick={onClickHandle}>
+					<IoMdEye />
+				</button>
+				<button className={cx('delete-button')} onClick={onClickDelete}>
+					<MdDelete />
+				</button>
       </div>
     </div>
   );

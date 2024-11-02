@@ -5,21 +5,38 @@ import styles from './listAdmin.module.scss';
 import classNames from 'classnames/bind';
 import { GrUserAdmin } from "react-icons/gr";
 import AdminInfoModal from '../../components/adminInfoModal/index';
+import AddAdminModal from '../../components/addAdminModal/index';
 
 const cx = classNames.bind(styles);
 
 const ListAdmin = () => {
 	const [displayModal, setDisplayModal] = useState('none');
+	const [displayModalAdd, setDisplayModalAdd] = useState('none');
 	const [listAdmins, setListAdmins] = useState([1, 2, 3]);
   const onClickHandleDisplayModal = () => {
     if (displayModal === 'flex') {
       setDisplayModal('none');
-			console.log(displayModal);
     } else {
       setDisplayModal('flex');
-			console.log(displayModal)
     }
   };
+	const onClickHandleDisplayModalAdd = () => {
+    if (displayModalAdd === 'flex') {
+      setDisplayModalAdd('none');
+    } else {
+      setDisplayModalAdd('flex');
+    }
+  };
+	const addAdmin = () => {
+		setListAdmins((prevAdmins) => [...prevAdmins, listAdmins.length + 1]);
+	}
+	const deleteAdmin = (admin) => {
+		if(listAdmins) {
+			const newListAdmins = listAdmins.filter((index) => index !== admin);
+			setListAdmins(newListAdmins);
+			console.log(listAdmins);
+		}
+	}
   return (
 		<div>
 			<AdminLayout>
@@ -33,7 +50,7 @@ const ListAdmin = () => {
   				  	</div>
 						</div>	
 						<div className={cx("add-admin-button")}>
-							<button className={cx("add-button")} onClick="">
+							<button className={cx("add-button")} onClick={onClickHandleDisplayModalAdd}>
 								+ Thêm quản trị viên mới
 							</button>
 						</div>
@@ -41,8 +58,8 @@ const ListAdmin = () => {
   				<div className={cx("content")}>
   				  <div className={cx("admin-list")}>
 							{listAdmins && listAdmins.map((admin) => (
-								<button key={admin} onClick={onClickHandleDisplayModal}>
-									<AdminItem onClickHandle={onClickHandleDisplayModal} />
+								<button key={admin}>
+									<AdminItem onClickHandle={onClickHandleDisplayModal} onClickDelete={() => deleteAdmin(admin)} />
 								</button>
 							))}
   				  </div>
@@ -75,6 +92,11 @@ const ListAdmin = () => {
 			<AdminInfoModal
 				onClickHandle={onClickHandleDisplayModal}
 				displayModal={displayModal}
+			/>
+			<AddAdminModal 
+				onClickHandle={onClickHandleDisplayModalAdd}
+				displayModal={displayModalAdd}
+				onSubmit={addAdmin}
 			/>
 		</div>
   )
