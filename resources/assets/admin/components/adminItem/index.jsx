@@ -6,7 +6,7 @@ import { IoMdEye } from "react-icons/io";
 
 const cx = classNames.bind(styles);
 
-const AdminItem = ({ onClickHandle }) => {
+const AdminItem = ({ onClickHandle, onClickDelete }) => {
   return (
     <div className={cx("admin-card")}>
       <div className={cx("admin-image")}>
@@ -29,7 +29,7 @@ const AdminItem = ({ onClickHandle }) => {
         <button className={cx('view-button')} onClick={onClickHandle}>
 					<IoMdEye /> Xem chi tiết
 				</button>
-				<button className={cx('delete-button')}>
+				<button className={cx('delete-button')} onClick={onClickDelete}>
 					<MdDelete /> Xóa
 				</button>
       </div>

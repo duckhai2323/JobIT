@@ -44,6 +44,7 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	text-align: left;
 }
 
 .company-intro {
@@ -53,6 +54,7 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	text-align: left;
 }
 
 .company-contact {
@@ -88,4 +90,42 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+
+.company-options {
+	margin-left: 2rem;
+	width: 40px;
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	color: #757575;
+	font-size: 0.875rem;
+    padding-top: 40px;
+    .view-button {
+        color: white;
+        background-color: $chartColor2;
+        padding: 10px;
+        border-radius: 0.375rem;
+        border: 0;
+        transform: translateY(-50%);
+    }
+    
+    .view-button:hover {
+        border: 1px solid $primaryColor;
+        cursor: pointer;
+    }
+
+    .delete-button {
+        color: white;
+        background-color: rgb(247, 23, 23);
+        padding: 10px;
+        border-radius: 0.375rem;
+        border: 0;
+        transform: translateY(-50%);
+    }
+    
+    .delete-button:hover {
+        border: 1px solid $primaryColor;
+        cursor: pointer;
+    }
 }

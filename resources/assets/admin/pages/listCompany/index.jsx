@@ -19,23 +19,26 @@ const ListCompany = () => {
   const onClickHandleDisplayModal = () => {
     if (displayModal === 'flex') {
       setDisplayModal('none');
-			console.log(displayModal);
     } else {
       setDisplayModal('flex');
-			console.log(displayModal);
     }
   };
 	const onClickHandleDisplayModalAdd = () => {
     if (displayModalAdd === 'flex') {
       setDisplayModalAdd('none');
-			console.log(displayModalAdd);
     } else {
       setDisplayModalAdd('flex');
-			console.log(displayModalAdd);
     }
   };
 	const addCompany = () => {
 		setListCompanies((prevCompanies) => [...prevCompanies, listCompanies.length + 1]);
+	}
+	const deleteCompany = (company) => {
+		if(listCompanies) {
+			const newListCompanies = listCompanies.filter((index) => index !== company);
+			setListCompanies(newListCompanies);
+			console.log(listCompanies);
+		}
 	}
   return (
 		<div>
@@ -58,8 +61,8 @@ const ListCompany = () => {
   				<div className={cx("content")}>
   				  <div className={cx("company-list")}>
 							{listCompanies && listCompanies.map((company) => (
-								<button key={company} onClick={onClickHandleDisplayModal}>
-									<CompanyItem />
+								<button key={company}>
+									<CompanyItem onClickHandle={onClickHandleDisplayModal} onClickDelete={() => deleteCompany(company)} />
 								</button>
 							))}
   				  </div>

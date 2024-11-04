@@ -22,7 +22,7 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
 	const [companyField, setCompanyField] = useState("Cung cấp các phần mềm quản lý nhập hàng và logistics");
 	const [companyOrganize, setCompanyOrganize] = useState("2018-09-01");
 	const [email, setEmail] = useState("company1@gmail.com");
-	const [password, setPassword] = useState("12345678");
+	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [error, setError] = useState("");
 	const onChangeTab = (tab) => {
@@ -307,7 +307,7 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
 							</div>
 							<div className={cx('info-item')}>
 								<div className={cx('info-label')}>Mật khẩu: </div>
-								<div className={cx('info-content')}>{password}</div>
+								<div className={cx('info-content')}>********</div>
 							</div>
 							<div className={cx('submit-button')} onClick={() => setIsEditingTab2(true)}>
 								<button className={cx('button-green')}>
