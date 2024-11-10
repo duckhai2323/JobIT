@@ -7,6 +7,7 @@ import classNames from 'classnames/bind';
 import { FaBuildingCircleCheck } from "react-icons/fa6";
 import CompanyInfoModal from '../../components/companyInfoModal/index';
 import AddCompanyModal from '../../components/addCompanyModal/index';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -14,6 +15,7 @@ const ListJob = () => {
   const [displayModal, setDisplayModal] = useState('none');
   const [displayModalAdd, setDisplayModalAdd] = useState('none');
   const [listJobs, setListJobs] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     setListJobs([1, 2, 3, 4, 5]);
   }, []);
@@ -31,6 +33,9 @@ const ListJob = () => {
       setDisplayModalAdd('flex');
     }
   };
+  const handleNavigate = (jobId) => {
+    navigate(`/jobs/${jobId}`);
+  }
   const addJob = () => {
     setListJobs((prevJobs) => [...prevJobs, listJobs.length + 1]);
   }
@@ -62,7 +67,7 @@ const ListJob = () => {
           <div className={cx("content")}>
             <div className={cx("job-list")}>
               {listJobs && listJobs.map((job) => (
-                <button key={job}>
+                <button key={job} onClick={() => handleNavigate(job)}>
                   <JobLargeItem onClickHandle={onClickHandleDisplayModal} onClickDelete={() => deleteJob(job)} />
                 </button>
               ))}
