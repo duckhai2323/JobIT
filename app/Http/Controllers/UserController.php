@@ -41,7 +41,7 @@ class UserController extends Controller
                         'success' => 1,
                     ], 200
                 );
-            } elseif ($data['error']) {
+            } else if ($data['error']) {
                 throw new Exception($data['error']);
             } else {
                 throw new Exception('failed to create new user');
