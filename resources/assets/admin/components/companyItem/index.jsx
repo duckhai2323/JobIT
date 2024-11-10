@@ -23,14 +23,14 @@ const CompanyItem = ({ onClickHandle, onClickDelete }) => {
       </div>
       <div className={cx("company-info")}>
         <div className={cx("company-name")}>
-					CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ
+          CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ
         </div>
         <div className={cx("company-intro")}>
-					Là công ty hoạt động trong lĩnh vực cung cấp các phần mềm quản lý nhập hàng và logistics. 
-					Sau gần 03 năm phát triển, xây dựng bởi đội ngũ sáng lập dày dặn kinh nghiệm đến từ nhiều 
-					tập đoàn công nghệ hàng đầu như Tima, VCCorp, Sapo,… Gobiz chính thức được thành lập vào 
-					năm 2018. Gobiz được thành lập với tham vọng thay đổi và số hoá phương thức quản lý và kinh 
-					doanh trong ngành thương mại điện tử xuyên biên giới tại Việt Nam.
+          Là công ty hoạt động trong lĩnh vực cung cấp các phần mềm quản lý nhập hàng và logistics. 
+          Sau gần 03 năm phát triển, xây dựng bởi đội ngũ sáng lập dày dặn kinh nghiệm đến từ nhiều 
+          tập đoàn công nghệ hàng đầu như Tima, VCCorp, Sapo,… Gobiz chính thức được thành lập vào 
+          năm 2018. Gobiz được thành lập với tham vọng thay đổi và số hoá phương thức quản lý và kinh 
+          doanh trong ngành thương mại điện tử xuyên biên giới tại Việt Nam.
         </div>
         <div className={cx("company-contact")}>
           <MdMarkEmailUnread />
@@ -62,11 +62,11 @@ const CompanyItem = ({ onClickHandle, onClickDelete }) => {
       </div>
       <div className={cx("company-options")}>
         <button className={cx('view-button')} onClick={onClickHandle}>
-					<IoMdEye />
-				</button>
-				<button className={cx('delete-button')} onClick={onClickDelete}>
-					<MdDelete />
-				</button>
+          <IoMdEye />
+        </button>
+        <button className={cx('delete-button')} onClick={onClickDelete}>
+          <MdDelete />
+        </button>
       </div>
     </div>
   );

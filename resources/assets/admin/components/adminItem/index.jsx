@@ -18,7 +18,7 @@ const AdminItem = ({ onClickHandle, onClickDelete }) => {
       </div>
       <div className={cx("admin-info")}>
         <div className={cx("admin-name")}>
-					Admin01
+          Admin01
         </div>
         <div className={cx("admin-contact")}>
           <MdMarkEmailUnread />
@@ -27,11 +27,11 @@ const AdminItem = ({ onClickHandle, onClickDelete }) => {
       </div>
       <div className={cx("admin-options")}>
         <button className={cx('view-button')} onClick={onClickHandle}>
-					<IoMdEye /> Xem chi tiết
-				</button>
-				<button className={cx('delete-button')} onClick={onClickDelete}>
-					<MdDelete /> Xóa
-				</button>
+          <IoMdEye /> Xem chi tiết
+        </button>
+        <button className={cx('delete-button')} onClick={onClickDelete}>
+          <MdDelete /> Xóa
+        </button>
       </div>
     </div>
   );

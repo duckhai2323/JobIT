@@ -10,12 +10,12 @@ import AddCompanyModal from '../../components/addCompanyModal/index';
 const cx = classNames.bind(styles);
 
 const ListCompany = () => {
-	const [displayModal, setDisplayModal] = useState('none');
-	const [displayModalAdd, setDisplayModalAdd] = useState('none');
-	const [listCompanies, setListCompanies] = useState([]);
-	useEffect(() => {
-		setListCompanies([1, 2, 3, 4, 5]);
-	}, []);
+  const [displayModal, setDisplayModal] = useState('none');
+  const [displayModalAdd, setDisplayModalAdd] = useState('none');
+  const [listCompanies, setListCompanies] = useState([]);
+  useEffect(() => {
+    setListCompanies([1, 2, 3, 4, 5]);
+  }, []);
   const onClickHandleDisplayModal = () => {
     if (displayModal === 'flex') {
       setDisplayModal('none');
@@ -23,88 +23,88 @@ const ListCompany = () => {
       setDisplayModal('flex');
     }
   };
-	const onClickHandleDisplayModalAdd = () => {
+  const onClickHandleDisplayModalAdd = () => {
     if (displayModalAdd === 'flex') {
       setDisplayModalAdd('none');
     } else {
       setDisplayModalAdd('flex');
     }
   };
-	const addCompany = () => {
-		setListCompanies((prevCompanies) => [...prevCompanies, listCompanies.length + 1]);
-	}
-	const deleteCompany = (company) => {
-		if(listCompanies) {
-			const newListCompanies = listCompanies.filter((index) => index !== company);
-			setListCompanies(newListCompanies);
-			console.log(listCompanies);
-		}
-	}
+  const addCompany = () => {
+    setListCompanies((prevCompanies) => [...prevCompanies, listCompanies.length + 1]);
+  }
+  const deleteCompany = (company) => {
+    if(listCompanies) {
+      const newListCompanies = listCompanies.filter((index) => index !== company);
+      setListCompanies(newListCompanies);
+      console.log(listCompanies);
+    }
+  }
   return (
-		<div>
-			<AdminLayout>
-				<div className={cx("container")}>
-  				<div className={cx("info-box")}>
-						<div className={cx("companies-count-info")}>
-							<p className={cx("info-title")}>Các công ty hợp tác</p>
-  				  	<div className={cx("info-companies")}>
-  				  	  <FaBuildingCircleCheck />
-  				  	  <p className={cx("company-count")}>{listCompanies.length} công ty</p> 
-  				  	</div>
-						</div>	
-						<div className={cx("add-company-button")}>
-							<button className={cx("add-button")} onClick={onClickHandleDisplayModalAdd}>
-								+ Thêm công ty
-							</button>
-						</div>
-  				</div>
-  				<div className={cx("content")}>
-  				  <div className={cx("company-list")}>
-							{listCompanies && listCompanies.map((company) => (
-								<button key={company}>
-									<CompanyItem onClickHandle={onClickHandleDisplayModal} onClickDelete={() => deleteCompany(company)} />
-								</button>
-							))}
-  				  </div>
-  				  <div className={cx("recent-companies-box")}>
-  				    <h1 className={cx("recent-title")}>Các công ty gần đây</h1>
-  				    <div className={cx("recent-companies")}>
-  				      <div className={cx("company-card")}>
-  				        <img src="https://avatars.githubusercontent.com/u/2322183?s=200&v=4" alt="" className={cx("company-logo")} />
-  				        <div className={cx("company-info")}>
-  				          <p className={cx("company-name")}>CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ</p>
-  				          <p className={cx("company-location")}>Hà Nội</p>
-  				        </div>
-  				      </div>
-  				      <div className={cx("company-card")}>
-  				        <img src="https://avatars.githubusercontent.com/u/2322183?s=200&v=4" alt="" className={cx("company-logo")} />
-  				        <div className={cx("company-info")}>
-  				          <p className={cx("company-name")}>CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ</p>
-  				          <p className={cx("company-location")}>Hà Nội</p>
-  				        </div>
-  				      </div>
-  				      <div className={cx("company-card")}>
-  				        <img src="https://avatars.githubusercontent.com/u/2322183?s=200&v=4" alt="" className={cx("company-logo")} />
-  				        <div className={cx("company-info")}>
-  				          <p className={cx("company-name")}>CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ</p>
-  				          <p className={cx("company-location")}>Hà Nội</p>
-  				        </div>
-  				      </div>
-  				    </div>
-  				  </div>
-  				</div>
-				</div>
-			</AdminLayout>
-			<CompanyInfoModal
-				onClickHandle={onClickHandleDisplayModal}
-				displayModal={displayModal}
-			/>
-			<AddCompanyModal 
-				onClickHandle={onClickHandleDisplayModalAdd}
-				displayModal={displayModalAdd}
-				onSubmit={addCompany}
-			/>
-		</div>
+    <div>
+      <AdminLayout>
+        <div className={cx("container")}>
+          <div className={cx("info-box")}>
+            <div className={cx("companies-count-info")}>
+              <p className={cx("info-title")}>Các công ty hợp tác</p>
+              <div className={cx("info-companies")}>
+                <FaBuildingCircleCheck />
+                <p className={cx("company-count")}>{listCompanies.length} công ty</p> 
+              </div>
+            </div>	
+            <div className={cx("add-company-button")}>
+              <button className={cx("add-button")} onClick={onClickHandleDisplayModalAdd}>
+                + Thêm công ty
+              </button>
+            </div>
+          </div>
+          <div className={cx("content")}>
+            <div className={cx("company-list")}>
+              {listCompanies && listCompanies.map((company) => (
+                <button key={company}>
+                  <CompanyItem onClickHandle={onClickHandleDisplayModal} onClickDelete={() => deleteCompany(company)} />
+                </button>
+              ))}
+            </div>
+            <div className={cx("recent-companies-box")}>
+              <h1 className={cx("recent-title")}>Các công ty gần đây</h1>
+              <div className={cx("recent-companies")}>
+                <div className={cx("company-card")}>
+                  <img src="https://avatars.githubusercontent.com/u/2322183?s=200&v=4" alt="" className={cx("company-logo")} />
+                  <div className={cx("company-info")}>
+                    <p className={cx("company-name")}>CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ</p>
+                    <p className={cx("company-location")}>Hà Nội</p>
+                  </div>
+                </div>
+                <div className={cx("company-card")}>
+                  <img src="https://avatars.githubusercontent.com/u/2322183?s=200&v=4" alt="" className={cx("company-logo")} />
+                  <div className={cx("company-info")}>
+                    <p className={cx("company-name")}>CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ</p>
+                    <p className={cx("company-location")}>Hà Nội</p>
+                  </div>
+                </div>
+                <div className={cx("company-card")}>
+                  <img src="https://avatars.githubusercontent.com/u/2322183?s=200&v=4" alt="" className={cx("company-logo")} />
+                  <div className={cx("company-info")}>
+                    <p className={cx("company-name")}>CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ</p>
+                    <p className={cx("company-location")}>Hà Nội</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </AdminLayout>
+      <CompanyInfoModal
+        onClickHandle={onClickHandleDisplayModal}
+        displayModal={displayModal}
+      />
+      <AddCompanyModal 
+        onClickHandle={onClickHandleDisplayModalAdd}
+        displayModal={displayModalAdd}
+        onSubmit={addCompany}
+      />
+    </div>
   )
 }
 
