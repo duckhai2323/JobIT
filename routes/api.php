@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,13 @@ Route::prefix('auth')->group(function () {
     Route::post('/account', [AuthController::class, 'getUserAccount']);
     // Route::put('/change/password', [AuthController::class, 'changePass']);
     // Route::middleware('auth:sanctum')->delete('/logout', [AuthController::class, 'logout']);
+});
+
+Route::prefix('company')->group(function () {
+    Route::post('/new', [CompanyController::class, 'createNewCompany']);
+    Route::get('/infor/{company_id}',[CompanyController::class,'getInforCompany']);
+    Route::get('/all', [CompanyController::class, 'getListCompanies']);
+    Route::put('/update/{company_id}', [CompanyController::class, 'update']);
 });
 
 
