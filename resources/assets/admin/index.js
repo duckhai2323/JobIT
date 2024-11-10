@@ -4,6 +4,7 @@ import Dashboard from './pages/dashboard';
 import ListCompany from './pages/listCompany';
 import ListAdmin from './pages/listAdmin';
 import ListJob from './pages/listJob';
+import JobDetail from './pages/jobDetail';
 
 const AdminComponent = () => {
   return (
@@ -12,6 +13,7 @@ const AdminComponent = () => {
       <Route path='/companies' element={<ListCompany />} />
       <Route path='/admins' element={<ListAdmin />} />
       <Route path='/jobs' element={<ListJob />} />
+      <Route path='/jobs/:jobId' element={<JobDetail />} />
       <Route path='/*' element={<Navigate to='/' />} />
     </Routes>
   );
