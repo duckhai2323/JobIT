@@ -54,7 +54,7 @@ const AdminLayout = ({ children }) => {
           </div>
           <div className={cx('sidebar__users')}>
             <NavLink to='/users' className={({ isActive }) => cx('nav-link', { active: isActive })}><button onClick={() => onChangeContent(3)} className={cx('sidebar__button')}>
-              <span><FaUser /></span> Danh sách người dùng
+              <span><FaUser /></span> Danh sách ứng viên
             </button></NavLink>
           </div>
           <div className={cx('sidebar__admins')}>
