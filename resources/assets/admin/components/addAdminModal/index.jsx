@@ -35,7 +35,7 @@ const AddAdminModal = ({ displayModal, onClickHandle, onSubmit }) => {
       <div className={cx('modal-background')}>
         <div className={cx('modal-container')}>
           <div className={cx('modal-header')}>
-            <div className={cx('tabs')}><span className={cx('modal-title')}>Thêm công ty mới</span></div>
+            <div className={cx('tabs')}><span className={cx('modal-title')}>Thêm quản trị viên mới</span></div>
             <button onClick={onClickHandle} className={cx('close-button')}>
               <IoMdClose />
             </button>
