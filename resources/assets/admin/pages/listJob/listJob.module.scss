@@ -40,11 +40,11 @@
   border: 0;
   margin-top: 35%;
   transform: translateY(-50%);
-  font-size: 700;
+  font-weight: 700;
 }
 
 .add-button:hover {
-  border: 1px solid white;
+  color: $secondColor;
   cursor: pointer;
 }
 
