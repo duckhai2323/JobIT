@@ -40,12 +40,12 @@
 	border: 0;
 	margin-top: 37.5%;
 	transform: translateY(-50%);
-  font-size: 700;
+  font-weight: 700;
 }
 
 .add-button:hover {
-	border: 1px solid white;
-	cursor: pointer;
+  color: $secondColor;
+  cursor: pointer;
 }
 
 .info-companies {

@@ -35,7 +35,7 @@ const AdminLayout = ({ children }) => {
             <BiSolidMessageDetail size={'24px'} />
           </div>
           <div className={cx('header__avatar')}>
-            <img />
+            <img src="https://cdn-icons-png.flaticon.com/512/219/219986.png" alt='admin-avatar' />
           </div>
         </div>
       </div>

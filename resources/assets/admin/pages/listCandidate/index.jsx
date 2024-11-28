@@ -58,7 +58,7 @@ const ListCandidate = () => {
               <h1 className={cx("recent-title")}>Ứng viên mới gần đây</h1>
               <div className={cx("recent-candidates")}>
               <div className={cx("candidate-card")}>
-                  <img src="https://static-00.iconduck.com/assets.00/user-icon-2046x2048-9pwm22pp.png" alt="" className={cx("candidate-logo")} />
+                  <img src="https://cdn-icons-png.flaticon.com/512/219/219986.png" alt="" className={cx("candidate-logo")} />
                   <div className={cx("candidate-info")}>
                     <p className={cx("candidate-name")}>Trần Đức Khải</p>
                     <p className={cx("candidate-email")}>tranduckhai26112003@gmail.com</p>

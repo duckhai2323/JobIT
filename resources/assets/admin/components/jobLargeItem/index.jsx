@@ -60,10 +60,10 @@ const JobLargeItem = ({ onClickHandle, onClickDelete }) => {
       </div>
       <div className={cx("job-options")}>
         <button className={cx('view-button')} onClick={onClickHandle}>
-          <IoMdEye />
+          <IoMdEye /> Xem chi tiết
         </button>
         <button className={cx('delete-button')} onClick={onClickDelete}>
-          <MdDelete />
+          <MdDelete /> Xóa
         </button>
       </div>
     </div>

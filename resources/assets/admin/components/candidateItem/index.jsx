@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import styles from './candidateItem.module.scss';
 import classNames from 'classnames/bind';
-import { MdMarkEmailUnread, MdDelete } from "react-icons/md";
+import { MdMarkEmailUnread } from "react-icons/md";
 import { IoMdEye } from "react-icons/io";
 import { AiOutlineStop, AiOutlineReload } from "react-icons/ai";
 
 const cx = classNames.bind(styles);
 
-const CandidateItem = ({ onClickHandle, onClickDelete }) => {
+const CandidateItem = ({ onClickHandle }) => {
   const [isActive, setIsActive] = useState(true);
   const suspendAccount = () => {
     setIsActive(false);
@@ -19,7 +19,7 @@ const CandidateItem = ({ onClickHandle, onClickDelete }) => {
     <div className={cx("candidate-card")}>
       <div className={cx("candidate-image")}>
         <img 
-          src="https://static-00.iconduck.com/assets.00/user-icon-2046x2048-9pwm22pp.png" 
+          src="https://cdn-icons-png.flaticon.com/512/219/219986.png" 
           alt="candidate-image" 
           className={cx("image")} 
         />
@@ -55,7 +55,7 @@ const CandidateItem = ({ onClickHandle, onClickDelete }) => {
             </button>
           ) : (
             <button className={cx('active-button')} onClick={activateAccount}>
-              <AiOutlineReload /> Kích hoạt tài khoản
+              <AiOutlineReload /> Mở tài khoản
             </button>
           )
         }

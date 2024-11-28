@@ -34,9 +34,9 @@
 	margin-left: 1.5rem;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
-	gap: 10px;
-	width: 50%;
+	align-items: flex-start;
+	gap: 5px;
+	width: 45%;
 }
 
 .company-name {
@@ -72,14 +72,46 @@
 	color: #757575;
 }
 
+.company-status {
+  font-weight: 700;
+  .active-status {
+    color: rgb(10, 130, 60);
+  }
+  .suspended-status {
+    color: rgb(247, 23, 23);
+  }
+}
+
 .company-details {
 	margin-left: 2rem;
-	width: 30%;
+	width: 15%;
 	display: flex;
 	flex-direction: column;
 	gap: 0.25rem;
 	color: #757575;
 	font-size: 0.875rem;
+}
+
+@media (max-width: 1576px) {
+	.company-info {
+		width: 40%;
+	}
+}
+
+@media (max-width: 1422px) {
+	.company-info {
+		width: 35%;
+	}
+}
+
+@media (max-width: 1298px) {
+	.company-info {
+		width: 50%;
+	}
+
+	.company-details {
+		display: none;
+	}
 }
 
 .company-detail {
@@ -96,38 +128,61 @@
 
 .company-options {
 	margin-left: 2rem;
-	width: 40px;
+	width: 150px;
 	display: flex;
 	flex-direction: column;
 	gap: 0.25rem;
 	color: #757575;
 	font-size: 0.875rem;
-    padding-top: 40px;
-    .view-button {
-        color: white;
-        background-color: $chartColor2;
-        padding: 10px;
-        border-radius: 0.375rem;
-        border: 0;
-        transform: translateY(-50%);
-    }
-    
-    .view-button:hover {
-        border: 1px solid $primaryColor;
-        cursor: pointer;
-    }
+  padding-top: 40px;
+	.view-button {
+		color: white;
+		background-color: $chartColor2;
+		padding: 10px;
+		height: 40px;
+		border-radius: 0.375rem;
+		border: 0;
+		transform: translateY(-50%);
+		font-weight: 700;
+	}
+	
+	.view-button:hover {
+		border: 2px solid $primaryColor;
+		color: $secondColor;
+		cursor: pointer;
+	}
 
-    .delete-button {
-        color: white;
-        background-color: rgb(247, 23, 23);
-        padding: 10px;
-        border-radius: 0.375rem;
-        border: 0;
-        transform: translateY(-50%);
-    }
-    
-    .delete-button:hover {
-        border: 1px solid $primaryColor;
-        cursor: pointer;
-    }
+	.active-button {
+    color: white;
+    background-color: rgb(10, 130, 60);
+    padding: 10px;
+    height: 40px;
+    border-radius: 0.375rem;
+    border: 0;
+    transform: translateY(-50%);
+    font-weight: 700;
+  }
+
+  .active-button:hover {
+    border: 2px solid $primaryColor;
+		color: $secondColor;
+    cursor: pointer;
+  }
+
+	.delete-button {
+		color: white;
+		background-color: rgb(247, 23, 23);
+		padding: 10px;
+		height: 40px;
+		border-radius: 0.375rem;
+		border: 0;
+		transform: translateY(-50%);
+		font-weight: 700;
+	}
+	
+	.delete-button:hover {
+		border: 2px solid $primaryColor;
+		color: $secondColor;
+		cursor: pointer;
+	}
 }

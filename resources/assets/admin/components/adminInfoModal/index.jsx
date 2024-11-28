@@ -45,7 +45,7 @@ const AdminInfoModal = ({ displayModal, onClickHandle }) => {
             <div className={cx('modal-body')}>
               <div className={cx("admin-logo")}>
                 <img 
-                  src="https://static-00.iconduck.com/assets.00/user-icon-2046x2048-9pwm22pp.png" 
+                  src="https://cdn-icons-png.flaticon.com/512/219/219986.png" 
                   alt="company-logo" 
                   className={cx("logo")} 
                 />
@@ -119,7 +119,7 @@ const AdminInfoModal = ({ displayModal, onClickHandle }) => {
             <div className={cx('modal-body')}>
               <div className={cx("admin-logo")}>
                 <img 
-                  src="https://static-00.iconduck.com/assets.00/user-icon-2046x2048-9pwm22pp.png" 
+                  src="https://cdn-icons-png.flaticon.com/512/219/219986.png" 
                   alt="admin-logo" 
                   className={cx("logo")} 
                 />

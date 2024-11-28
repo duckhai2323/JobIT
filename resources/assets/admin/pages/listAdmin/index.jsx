@@ -67,19 +67,19 @@ const ListAdmin = () => {
               <h1 className={cx("recent-title")}>Danh sách quản trị viên đăng nhập gần nhất</h1>
               <div className={cx("recent-admins")}>
                 <div className={cx("admin-card")}>
-                  <img src="https://static-00.iconduck.com/assets.00/user-icon-2046x2048-9pwm22pp.png" alt="" className={cx("admin-logo")} />
+                  <img src="https://cdn-icons-png.flaticon.com/512/219/219986.png" alt="" className={cx("admin-logo")} />
                   <div className={cx("admin-info")}>
                     <p className={cx("admin-name")}>Admin01</p>
                   </div>
                 </div>
                 <div className={cx("admin-card")}>
-                  <img src="https://static-00.iconduck.com/assets.00/user-icon-2046x2048-9pwm22pp.png" alt="" className={cx("admin-logo")} />
+                  <img src="https://cdn-icons-png.flaticon.com/512/219/219986.png" alt="" className={cx("admin-logo")} />
                   <div className={cx("admin-info")}>
                     <p className={cx("admin-name")}>Admin01</p>
                   </div>
                 </div>
                 <div className={cx("admin-card")}>
-                  <img src="https://static-00.iconduck.com/assets.00/user-icon-2046x2048-9pwm22pp.png" alt="" className={cx("admin-logo")} />
+                  <img src="https://cdn-icons-png.flaticon.com/512/219/219986.png" alt="" className={cx("admin-logo")} />
                   <div className={cx("admin-info")}>
                     <p className={cx("admin-name")}>Admin01</p>
                   </div>

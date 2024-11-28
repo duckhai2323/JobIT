@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './companyItem.module.scss';
 import classNames from 'classnames/bind';
 import { MdMarkEmailUnread, MdDelete } from "react-icons/md";
@@ -8,10 +8,18 @@ import { FaLocationDot } from "react-icons/fa6";
 import { IoToday } from "react-icons/io5";
 import { AiFillProfile } from "react-icons/ai";
 import { IoPerson } from "react-icons/io5";
+import { AiOutlineStop, AiOutlineReload } from "react-icons/ai";
 
 const cx = classNames.bind(styles);
 
-const CompanyItem = ({ onClickHandle, onClickDelete }) => {
+const CompanyItem = ({ onClickHandle }) => {
+  const [isActive, setIsActive] = useState(true);
+  const suspendAccount = () => {
+    setIsActive(false);
+  }
+  const activateAccount = () => {
+    setIsActive(true);
+  }
   return (
     <div className={cx("company-card")}>
       <div className={cx("company-image")}>
@@ -39,6 +47,17 @@ const CompanyItem = ({ onClickHandle, onClickDelete }) => {
             <FaLink />
           </a>
         </div>
+        {
+          isActive ? (
+            <div className={cx("company-status")}>
+              Trạng thái: <span className={cx('active-status')}>Đang hoạt động</span>
+            </div>
+          ) : (
+            <div className={cx("company-status")}>
+              Trạng thái: <span className={cx('suspended-status')}>Dừng hoạt động</span>
+            </div>
+          )
+        }
       </div>
       <div className={cx("company-details")}>
         <div className={cx("company-detail")}>
@@ -62,11 +81,19 @@ const CompanyItem = ({ onClickHandle, onClickDelete }) => {
       </div>
       <div className={cx("company-options")}>
         <button className={cx('view-button')} onClick={onClickHandle}>
-          <IoMdEye />
+          <IoMdEye /> Xem chi tiết
         </button>
-        <button className={cx('delete-button')} onClick={onClickDelete}>
-          <MdDelete />
-        </button>
+        {
+          isActive ? (
+            <button className={cx('delete-button')} onClick={suspendAccount}>
+              <AiOutlineStop /> Đóng tài khoản
+            </button>
+          ) : (
+            <button className={cx('active-button')} onClick={activateAccount}>
+              <AiOutlineReload /> Mở tài khoản
+            </button>
+          )
+        }
       </div>
     </div>
   );
