@@ -39,5 +39,33 @@ class UserEloquentRepository extends EloquentRepository implements UserRepositor
         return $data;
     }
 
+  public function index() {
+    $users = $this->_model->all();
+    if($users) {
+      return $users;
+    } else {
+      return throw new Exception('users not found');
+    }
+  }
+
+  public function editUser(Request $request){
+    $user = $this->_model->where('user_id', $request->user_id)->first();
+    if($user) {
+      $temp = $request->all();
+      $data = $user->update($temp);
+      return $temp;
+    } else {
+      return throw new Exception('users not found');
+    }
+  }
+
+  public function getDetailOfUser(Request $request) {
+    $user = $this->_model->where('user_id', $request->user_id)->first();
+    if($user) {
+      return $user;
+    } else {
+      return throw new Exception('user not found');
+    }
+  }
 
 } 

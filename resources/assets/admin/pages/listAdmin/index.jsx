@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { Actions } from '@/redux/reducers/user/userReducer';
 import AdminLayout from '../../components/layout/index';
 import AdminItem from '../../components/adminItem/index';
 import styles from './listAdmin.module.scss';
@@ -6,13 +8,28 @@ import classNames from 'classnames/bind';
 import { GrUserAdmin } from "react-icons/gr";
 import AdminInfoModal from '../../components/adminInfoModal/index';
 import AddAdminModal from '../../components/addAdminModal/index';
+import FadeLoader from 'react-spinners/FadeLoader';
 
 const cx = classNames.bind(styles);
 
 const ListAdmin = () => {
+  const dispatch = useDispatch();
+  const userState = useSelector((state) => state.user);
   const [displayModal, setDisplayModal] = useState('none');
   const [displayModalAdd, setDisplayModalAdd] = useState('none');
-  const [listAdmins, setListAdmins] = useState([1, 2, 3]);
+  const [loading, setLoading] = useState(true);
+  const [listAdmins, setListAdmins] = useState([]);
+  useEffect(() => {
+    dispatch(Actions.getUsersRequest());
+  }, [dispatch]);
+  useEffect(() => {
+    console.log(userState.loading);
+    if (userState.users && userState.users.length > 0) {
+      setLoading(false);
+      const admins = userState.users.filter((user) => user.role === "1");
+      setListAdmins(admins);
+    }
+  }, [userState]);
   const onClickHandleDisplayModal = () => {
     if (displayModal === 'flex') {
       setDisplayModal('none');
@@ -89,6 +106,12 @@ const ListAdmin = () => {
           </div>
         </div>
       </AdminLayout>
+      <div style={{ display: loading ? 'flex' : 'none' }} className={cx('loading')}>
+        <div>
+          <FadeLoader color='rgba(255, 255, 255, 1)' height='10' width='6' />
+          <span style={{ fontWeight: '500', color: 'white', fontSize: '18px' }}>Loading...</span>
+        </div>
+      </div>
       <AdminInfoModal
         onClickHandle={onClickHandleDisplayModal}
         displayModal={displayModal}
