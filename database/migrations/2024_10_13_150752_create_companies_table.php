@@ -20,10 +20,10 @@ class CreateCompaniesTable extends Migration
            $table->string('company_name')->nullable(false);
            $table->string('email')->nullable(false)->unique();
            $table->string('employee_scale')->nullable();
-           $table->text('company_intro')->nullable(); 
+           $table->longText('company_intro')->nullable(); 
            $table->string('company_link')->nullable(false); 
            $table->string('company_image')->nullable();
-           $table->string('company_location')->nullable();
+           $table->text('company_location')->nullable();
            $table->string('company_organize')->nullable();
            $table->string('company_filed')->nullable();
            $table->integer('status')->unsigned()->default(1);
