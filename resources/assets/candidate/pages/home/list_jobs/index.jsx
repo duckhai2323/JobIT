@@ -4,11 +4,16 @@ import classNames from 'classnames/bind';
 import JobItem from '@/candidate/components/jobItem';
 import { RiFilter3Fill } from 'react-icons/ri';
 import { IoIosArrowDown, IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import useJobsRoleCandidate from '@/hooks/candidate/useJobs';
 const cx = classNames.bind(styles);
 const ListJobs = () => {
   const [filterJob, setFilterJob] = useState(false);
   const [textFilter, setTextFilter] = useState('Địa điểm');
-
+  const { jobsState, nextToPage, revertToPage } = useJobsRoleCandidate();
+  const jobsPerPage = 12;
+  const startIndex = (jobsState.currentPage - 1) * jobsPerPage;
+  const endIndex = startIndex + jobsPerPage;
+  const currentJobs = jobsState.jobs?.slice(startIndex, endIndex);
   return (
     <div className={cx('section-list-jobs')}>
       <div className={cx('list-jobs-group')}>
@@ -79,33 +84,33 @@ const ListJobs = () => {
           </div>
         </div>
         <div className={cx('list-jobs-group__content')}>
-          <JobItem />
-          <JobItem />
-          <JobItem />
-          <JobItem />
-          <JobItem />
-          <JobItem />
-          <JobItem />
-          <JobItem />
-          <JobItem />
-          <JobItem />
-          <JobItem />
-          <JobItem />
+          {currentJobs &&
+            currentJobs.length > 0 &&
+            currentJobs.map((job) => (
+              <JobItem
+                key={job.job_id}
+                company_image={job.company_image}
+                company_name={job.company_name}
+                job_title={job.job_title}
+                job_location={job.job_location}
+                salary={job.salary}
+              />
+            ))}
         </div>
 
         <div className={cx('list-jobs-group__navigate')}>
-          <div className={cx('arrow-button')}>
+          <div className={cx('arrow-button')} onClick={revertToPage}>
             <IoIosArrowBack className={cx('icon-arrow')} />
           </div>
           <div className={cx('page-number-group')}>
             <span className={cx('page-number-left')} style={{ color: '#74d86b' }}>
-              2
+              {jobsState.currentPage}
             </span>
             <span className={cx('page-number-right')} style={{ color: '#6f7882' }}>
-              /55 trang
+              /{jobsState.jobs && Math.ceil(jobsState.jobs.length / jobsPerPage)}
             </span>
           </div>
-          <div className={cx('arrow-button')}>
+          <div className={cx('arrow-button')} onClick={nextToPage}>
             <IoIosArrowForward className={cx('icon-arrow')} />
           </div>
         </div>
