@@ -55,4 +55,104 @@ class UserController extends Controller
             );
         }
     }
+
+    public function getInforUser(Request $request)
+    {
+        try {
+            $data = $this->userRepository->getDetailOfUser($request);
+            if ($data) {
+                return response()->json(
+                    [
+                        'data' => $data,
+                        'message' => 'get info of user',
+                        'success' => 1,
+                    ], 200
+                );
+            } else {
+                throw new Exception('user not found');
+            }
+        } catch (Exception $err) {
+            return response()->json([
+                'success' => 0,
+                'message' => $err->getMessage(),
+            ]);
+        }
+    }
+
+    public function getListUsers() {
+        try {
+            $data = $this->userRepository->index();
+            if ($data) {
+                return response()->json(
+                    [
+                        'data' => $data,
+                        'message' => 'get list users successfull',
+                        'success' => 1,
+                    ], 200
+                );
+            } else {
+                throw new Exception('users not found');
+            }
+        } catch (Exception $err) {
+            return response()->json([
+                'success' => 0,
+                'message' => $err->getMessage(),
+            ]);
+        }
+    }
+
+    public function update(Request $request) {
+        try {
+            $request->validate([
+                'name' => 'required|string|max:50',
+                'email' => 'required|string|email|max:50|unique:'.User::class,
+                'password' => 'required|string|min:8',
+                'repassword' =>  'required|same:password',
+            ]);
+
+            $data = $this->userRepository->editUser($request);
+            if ($data) {
+                return response()->json(
+                    [
+                        'data' => $data,
+                        'message' => 'user updated',
+                        'success' => 1,
+                    ], 200
+                );
+            } else {
+                throw new Exception('user not found / can not be updated');
+            }
+        } catch (Exception $err) {
+            return response()->json(
+                [
+                    'message' => $err->getMessage(),
+                    'success' => 0,
+                ]
+            );
+        }
+    }
+
+    public function updateActive(Request $request) {
+        try {
+            $data = $this->userRepository->editUser($request);
+            if ($data) {
+                return response()->json(
+                    [
+                        'data' => $data,
+                        'message' => 'user updated',
+                        'success' => 1,
+                    ], 200
+                );
+            } else {
+                throw new Exception('user not found / can not be updated');
+            }
+        } catch (Exception $err) {
+            return response()->json(
+                [
+                    'message' => $err->getMessage(),
+                    'success' => 0,
+                ]
+            );
+        }
+    }
 }

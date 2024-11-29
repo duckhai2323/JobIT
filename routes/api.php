@@ -25,6 +25,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('user')->group(function () {
     Route::post('/register', [UserController::class, 'createUser']);
     Route::get('/verify/{email_token}',[MailController::class,'verifyEmail']);
+    Route::get('/all', [UserController::class, 'getListUsers']);
+    Route::get('/infor/{user_id}', [UserController::class, 'getInforUser']);
+    Route::put('/update/{user_id}', [UserController::class, 'update']);
+    Route::put('/activate/{user_id}', [UserController::class, 'updateActive']);
 });
 
 Route::prefix('auth')->group(function () {
