@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\JobDetailController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,6 +40,17 @@ Route::prefix('company')->group(function () {
     Route::get('/infor/{company_id}',[CompanyController::class,'getInforCompany']);
     Route::get('/all', [CompanyController::class, 'getListCompanies']);
     Route::put('/update/{company_id}', [CompanyController::class, 'update']);
+});
+
+Route::prefix('jobdetail')->group(function () {
+    Route::post('/new', [JobDetailController::class, 'createNewJobDetail']);
+    Route::get('/infor/{job_id}', [JobDetailController::class, 'infor']);
+    Route::get('/list-jobs', [JobDetailController::class, 'getListJobs']);
+    Route::get('/list-jobs-company/{company_id}', [JobDetailController::class, 'listJobsOfCompany']);
+    Route::put('/edit-job/{job_id}', [JobDetailController::class, 'editJobDetail']);
+    // Route::get('/infor/{company_id}',[CompanyController::class,'getInforCompany']);
+    // Route::get('/all', [CompanyController::class, 'getListCompanies']);
+    // Route::put('/update/{company_id}', [CompanyController::class, 'update']);
 });
 
 

@@ -22,6 +22,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Company\CompanyRepositoryInterface::class,
             \App\Repositories\Company\CompanyEloquentRepository::class,
         );
+
+        $this->app->singleton(
+            \App\Repositories\JobDetail\JobDetailRepositoryInterface::class,
+            \App\Repositories\JobDetail\JobDetailEloquentRepository::class,
+        );
     }
 
     /**
