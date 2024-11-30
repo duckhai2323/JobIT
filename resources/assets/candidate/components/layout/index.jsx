@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './layoutCandidate.module.scss';
 import classNames from 'classnames/bind';
-import logo from '../../../shared/logo/logo_jobit.png';
 import { IoMdNotifications } from 'react-icons/io';
 import { BiSolidMessageDetail } from 'react-icons/bi';
 import { FaRegEdit, FaRegArrowAltCircleUp } from 'react-icons/fa';
@@ -15,7 +14,10 @@ const LayoutCandidate = ({ children }) => {
       <div className={cx('layout-candidate__navigate-bar')}>
         <div className={cx('navigate-bar-left')}>
           <div className={cx('header-logo')}>
-            <img src={logo} alt='logo-image' />
+            <img
+              src={'http://127.0.0.1:8080/build/images/logo_jobit.png?9ee20b3c2ff45fab217ed1a851eb40a7'}
+              alt='logo-image'
+            />
           </div>
           <div className={cx('header-item')}>
             <span>Việc làm</span>

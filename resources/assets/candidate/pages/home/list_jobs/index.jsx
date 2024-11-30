@@ -14,6 +14,7 @@ const ListJobs = () => {
   const startIndex = (jobsState.currentPage - 1) * jobsPerPage;
   const endIndex = startIndex + jobsPerPage;
   const currentJobs = jobsState.jobs?.slice(startIndex, endIndex);
+
   return (
     <div className={cx('section-list-jobs')}>
       <div className={cx('list-jobs-group')}>
@@ -94,6 +95,7 @@ const ListJobs = () => {
                 job_title={job.job_title}
                 job_location={job.job_location}
                 salary={job.salary}
+                job_id={job.job_id}
               />
             ))}
         </div>

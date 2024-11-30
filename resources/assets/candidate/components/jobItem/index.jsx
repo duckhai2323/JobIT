@@ -2,13 +2,20 @@ import React from 'react';
 import style from './itemJob.module.scss';
 import classNames from 'classnames/bind';
 import { FaRegHeart } from 'react-icons/fa6';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(style);
 
 const JobItem = (props) => {
-  const { company_name, company_image, job_title, salary, job_location } = props;
+  const { company_name, company_image, job_title, salary, job_location, job_id } = props;
+  const navigate = useNavigate();
   return (
-    <div className={cx('item-job-group')}>
+    <div
+      className={cx('item-job-group')}
+      onClick={() => {
+        navigate(`/jobdetail/${job_id}`);
+      }}
+    >
       <div className={cx('item-job-group__company-image')}>
         <img src={company_image} />
       </div>

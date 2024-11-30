@@ -1,7 +1,6 @@
 import React from 'react';
 import style from './footer.module.scss';
 import classNames from 'classnames/bind';
-import logo from '../../../../shared/logo/logo_jobit.png';
 const cx = classNames.bind(style);
 const FooterHome = ({ background }) => {
   return (
@@ -9,7 +8,7 @@ const FooterHome = ({ background }) => {
       <div className={cx('footer-group')}>
         <div className={cx('company-infor')}>
           <div className={cx('company-infor__image')}>
-            <img src={logo} />
+            <img src={'http://127.0.0.1:8080/build/images/logo_jobit.png?9ee20b3c2ff45fab217ed1a851eb40a7'} />
           </div>
           <div className={cx('company-infor__title')}>
             <span>Liên hệ</span>

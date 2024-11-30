@@ -4,7 +4,6 @@ const initJobsState = {
   jobs: null,
   loading: false,
   error: null,
-  selectJobId: null,
   currentPage: null,
 };
 

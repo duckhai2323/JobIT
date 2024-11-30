@@ -39,7 +39,18 @@ class JobDetailEloquentRepository extends EloquentRepository implements JobDetai
     }
 
     public function getDetailOfJobDetail(Request $request) {
-      $jobDetail = $this->_model->where('job_id', $request->job_id)->first();
+      $jobDetail = DB::table('job_details')
+                      ->join('companies', 'job_details.company_id', '=', 'companies.company_id')
+                      ->where('job_details.job_id', $request->job_id)
+                      ->select(
+                        'job_details.*', 
+                        'companies.employee_scale',
+                        'companies.company_filed',
+                        'companies.company_location',
+                        'companies.company_image',
+                        'companies.company_name'
+    )
+    ->first();
       if($jobDetail) {
         return $jobDetail;
       }else {

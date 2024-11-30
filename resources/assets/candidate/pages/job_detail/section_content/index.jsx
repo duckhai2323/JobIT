@@ -5,7 +5,8 @@ import { WiMoonFull } from 'react-icons/wi';
 import JobItemHight from '@/candidate/components/jobItemHight';
 const cx = classNames.bind(style);
 
-const SectionContent = () => {
+const SectionContent = (props) => {
+  const { jobDetail, jobsState } = props;
   return (
     <div className={cx('section-content')}>
       <div className={cx('section-content-group')}>
@@ -15,73 +16,48 @@ const SectionContent = () => {
             <div className={cx('section-left-group__description')}>
               <span className={cx('title')}>Mô tả công việc</span>
               <div className={cx('content-group')}>
-                <div className={cx('content')}>
-                  <WiMoonFull style={{ fontSize: '8px' }} />
-                  <span>Tham gia vào các dự án phát triển web sử dụng PHP và Laravel Framework.</span>
-                </div>
-                <div className={cx('content')}>
-                  <WiMoonFull style={{ fontSize: '8px' }} />
-                  <span>Tham gia vào các dự án phát triển web sử dụng PHP và Laravel Framework.</span>
-                </div>
-                <div className={cx('content')}>
-                  <WiMoonFull style={{ fontSize: '8px' }} />
-                  <span>Tham gia vào các dự án phát triển web sử dụng PHP và Laravel Framework.</span>
-                </div>
-                <div className={cx('content')}>
-                  <WiMoonFull style={{ fontSize: '8px' }} />
-                  <span>Tham gia vào các dự án phát triển web sử dụng PHP và Laravel Framework.</span>
-                </div>
+                {jobDetail &&
+                  jobDetail.job_details.split(/\.+/).map(
+                    (title) =>
+                      title.length > 0 && (
+                        <div className={cx('content')}>
+                          <WiMoonFull style={{ fontSize: '8px' }} />
+                          <span>{title}</span>
+                        </div>
+                      )
+                  )}
               </div>
             </div>
 
             <div className={cx('section-left-group__description')}>
               <span className={cx('title')}>Yêu cầu ứng viên</span>
               <div className={cx('content-group')}>
-                <div className={cx('content')}>
-                  <WiMoonFull style={{ fontSize: '8px' }} />
-                  <span>
-                    Sinh viên năm cuối hoặc vừa tốt nghiệp các ngành Công nghệ Thông tin hoặc ngành liên quan.
-                  </span>
-                </div>
-                <div className={cx('content')}>
-                  <WiMoonFull style={{ fontSize: '8px' }} />
-                  <span>Có kiến thức cơ bản về PHP, OOP (lập trình hướng đối tượng).</span>
-                </div>
-                <div className={cx('content')}>
-                  <WiMoonFull style={{ fontSize: '8px' }} />
-                  <span>Hiểu biết về các công cụ và framework như Laravel là một lợi thế.</span>
-                </div>
-                <div className={cx('content')}>
-                  <WiMoonFull style={{ fontSize: '8px' }} />
-                  <span>Nhiệt tình, ham học hỏi và có khả năng làm việc nhóm tốt.</span>
-                </div>
+                {jobDetail &&
+                  jobDetail.job_require.split(/\.+/).map(
+                    (title) =>
+                      title.length > 0 && (
+                        <div className={cx('content')}>
+                          <WiMoonFull style={{ fontSize: '8px' }} />
+                          <span>{title}</span>
+                        </div>
+                      )
+                  )}
               </div>
             </div>
 
             <div className={cx('section-left-group__description')}>
               <span className={cx('title')}>Quyền lợi</span>
               <div className={cx('content-group')}>
-                <div className={cx('content')}>
-                  <WiMoonFull style={{ fontSize: '8px' }} />
-                  <span>Được đào tạo về các kỹ năng lập trình PHP, Laravel và các công nghệ liên quan.</span>
-                </div>
-                <div className={cx('content')}>
-                  <WiMoonFull style={{ fontSize: '8px' }} />
-                  <span>
-                    Cơ hội làm việc trong môi trường năng động, sáng tạo và có cơ hội học hỏi từ các chuyên gia giàu
-                    kinh nghiệm.
-                  </span>
-                </div>
-                <div className={cx('content')}>
-                  <WiMoonFull style={{ fontSize: '8px' }} />
-                  <span>
-                    Hỗ trợ tài liệu, thiết bị làm việc và các tài nguyên cần thiết cho việc phát triển kỹ năng.
-                  </span>
-                </div>
-                <div className={cx('content')}>
-                  <WiMoonFull style={{ fontSize: '8px' }} />
-                  <span>Được cân nhắc trở thành nhân viên chính thức sau khi kết thúc kỳ thực tập.</span>
-                </div>
+                {jobDetail &&
+                  jobDetail.job_benefit.split(/\.+/).map(
+                    (title) =>
+                      title.length > 0 && (
+                        <div className={cx('content')}>
+                          <WiMoonFull style={{ fontSize: '8px' }} />
+                          <span>{title}</span>
+                        </div>
+                      )
+                  )}
               </div>
             </div>
 
@@ -90,7 +66,7 @@ const SectionContent = () => {
               <div className={cx('content-group')}>
                 <div className={cx('content')}>
                   <WiMoonFull style={{ fontSize: '8px' }} />
-                  <span> Hà Nội: 219 Trung Kính, P.Yên Hòa, Cầu Giấy.</span>
+                  <span> {jobDetail && jobDetail.job_location}</span>
                 </div>
               </div>
             </div>
@@ -100,7 +76,7 @@ const SectionContent = () => {
               <div className={cx('content-group')}>
                 <div className={cx('content')}>
                   <WiMoonFull style={{ fontSize: '8px' }} />
-                  <span>Thứ 2 - Thứ 6 (từ 08:00 đến 17:00)</span>
+                  <span>{jobDetail && jobDetail.work_form}</span>
                 </div>
               </div>
             </div>
@@ -113,7 +89,7 @@ const SectionContent = () => {
                   style={{ flex: 'display', flexDirection: 'column', alignItems: 'start', gap: '15px' }}
                 >
                   <span> Ứng viên nộp hồ sơ trực tuyến bằng cách bấm Ứng tuyển ngay dưới đây.</span>
-                  <span>Hạn nộp hồ sơ: 14/11/2024</span>
+                  <span>{`Hạn nộp hồ sơ: ${jobDetail && jobDetail.deadline_job}`}</span>
                 </div>
               </div>
             </div>
@@ -126,12 +102,10 @@ const SectionContent = () => {
             <div className={cx('section-left-group__other-jobs')}>
               <span className={cx('section-left-group__title')}>Việc làm liên quan</span>
               <div className={cx('list-other-jobs')}>
-                <JobItemHight />
-                <JobItemHight />
-                <JobItemHight />
-                <JobItemHight />
-                <JobItemHight />
-                <JobItemHight />
+                {jobsState &&
+                  jobsState.jobs?.length > 0 &&
+                  jobDetail &&
+                  jobsState.jobs.map((job) => jobDetail.job_id !== job.job_id && <JobItemHight jobDetail={job} />)}
               </div>
             </div>
           </div>
@@ -143,7 +117,7 @@ const SectionContent = () => {
                   <div className={cx('icon-container')}></div>
                   <div className={cx('title-container')}>
                     <span className={cx('title')}>Cấp bậc</span>
-                    <span className={cx('subtitle')}>Thực tập sinh</span>
+                    <span className={cx('subtitle')}>{jobDetail && jobDetail.level}</span>
                   </div>
                 </div>
 
@@ -151,7 +125,7 @@ const SectionContent = () => {
                   <div className={cx('icon-container')}></div>
                   <div className={cx('title-container')}>
                     <span className={cx('title')}>Kinh nghiệm</span>
-                    <span className={cx('subtitle')}>Không yêu cầu kinh nghiệm</span>
+                    <span className={cx('subtitle')}>{jobDetail && jobDetail.experience_require}</span>
                   </div>
                 </div>
 
@@ -159,7 +133,7 @@ const SectionContent = () => {
                   <div className={cx('icon-container')}></div>
                   <div className={cx('title-container')}>
                     <span className={cx('title')}>Số lượng tuyển</span>
-                    <span className={cx('subtitle')}>5 người</span>
+                    <span className={cx('subtitle')}>{jobDetail && jobDetail.candidate_number} người</span>
                   </div>
                 </div>
 
@@ -167,7 +141,7 @@ const SectionContent = () => {
                   <div className={cx('icon-container')}></div>
                   <div className={cx('title-container')}>
                     <span className={cx('title')}>Hình thức làm việc</span>
-                    <span className={cx('subtitle')}>Toàn thời gian</span>
+                    <span className={cx('subtitle')}>{jobDetail && jobDetail.work_form}</span>
                   </div>
                 </div>
 
@@ -175,7 +149,7 @@ const SectionContent = () => {
                   <div className={cx('icon-container')}></div>
                   <div className={cx('title-container')}>
                     <span className={cx('title')}>Giới tính</span>
-                    <span className={cx('subtitle')}>Không yêu cầu</span>
+                    <span className={cx('subtitle')}>{jobDetail && jobDetail.sex}</span>
                   </div>
                 </div>
               </div>

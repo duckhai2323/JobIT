@@ -23,6 +23,7 @@ const useJobsRoleCandidate = () => {
   const revertToPage = () => {
     dispatch(Actions.revertPage());
   };
+
   return { jobsState, nextToPage, revertToPage };
 };
 

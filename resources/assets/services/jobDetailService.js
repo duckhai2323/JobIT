@@ -8,3 +8,12 @@ export const getListJobs = async () => {
     return error.message;
   }
 };
+
+export const getInforJobDetail = async (job_id) => {
+  try {
+    const response = await axios.get(`/api/jobdetail/infor/${job_id}`);
+    return response;
+  } catch (error) {
+    return error.message;
+  }
+};

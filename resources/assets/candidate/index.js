@@ -10,7 +10,7 @@ const CandidateComponent = () => {
     <Routes>
       <Route path='/' element={<HomePageCandidate />} />
       <Route path='/company-infor' element={<CompanyInforPageCandidate />} />
-      <Route path='/jobdetail' element={<JobDetailsPageCandidate />} />
+      <Route path='/jobdetail/:job_id' element={<JobDetailsPageCandidate />} />
       <Route path='/recommend' element={<RecommendJobPage />} />
       <Route path='/*' element={<Navigate to='/' />} />
     </Routes>

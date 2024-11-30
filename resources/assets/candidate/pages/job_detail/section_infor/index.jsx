@@ -9,7 +9,8 @@ import { LuExternalLink } from 'react-icons/lu';
 
 const cx = classNames.bind(style);
 
-const SectionJobInfor = () => {
+const SectionJobInfor = (props) => {
+  const { jobDetail } = props;
   return (
     <div className={cx('section-infor')}>
       <div className={cx('section-infor-group')}>
@@ -18,19 +19,19 @@ const SectionJobInfor = () => {
           <IoIosArrowForward />
           <span className={cx('repage')}>Backend Engineer</span>
           <IoIosArrowForward />
-          <span className={cx('current-page')}>Lập trình Backend Laravel</span>
+          <span className={cx('current-page')}>{jobDetail && jobDetail.job_title}</span>
         </div>
 
         <div className={cx('section-infor-group__content')}>
           <div className={cx('section-left')}>
             <div className={cx('section-left__title-infor')}>
-              <span className={cx('job-name')}>Lập trình Backend Laravel</span>
+              <span className={cx('job-name')}>{jobDetail && jobDetail.job_title}</span>
               <div className={cx('icon-container')}>
                 <div className={cx('icon-group')}>
                   <div className={cx('icon')}></div>
                   <div className={cx('infor-subtitle-group')}>
                     <span className={cx('title')}>Mức lương</span>
-                    <span className={cx('subtitle')}>Thỏa thuận</span>
+                    <span className={cx('subtitle')}>{jobDetail && jobDetail.salary}</span>
                   </div>
                 </div>
 
@@ -38,7 +39,7 @@ const SectionJobInfor = () => {
                   <div className={cx('icon')}></div>
                   <div className={cx('infor-subtitle-group')}>
                     <span className={cx('title')}>Địa điểm</span>
-                    <span className={cx('subtitle')}>Hà Nội</span>
+                    <span className={cx('subtitle')}>{jobDetail && jobDetail.job_location}</span>
                   </div>
                 </div>
 
@@ -46,14 +47,14 @@ const SectionJobInfor = () => {
                   <div className={cx('icon')}></div>
                   <div className={cx('infor-subtitle-group')}>
                     <span className={cx('title')}>Kinh nghiệm</span>
-                    <span className={cx('subtitle')}>Dưới 1 năm</span>
+                    <span className={cx('subtitle')}>{jobDetail && jobDetail.experience_require}</span>
                   </div>
                 </div>
               </div>
 
               <div className={cx('deadline')}>
                 <AiFillClockCircle fontSize='15px' color='#7f878f' />
-                <span>Hạn nộp hồ sơ: 21/10/2024</span>
+                <span>{jobDetail && 'Hạn nộp hồ sợ: ' + jobDetail.deadline_job}</span>
               </div>
 
               <div className={cx('btn-apply-group')}>
@@ -72,26 +73,24 @@ const SectionJobInfor = () => {
             <div className={cx('section-right__title-infor')}>
               <div className={cx('avatar-group')}>
                 <div className={cx('avatar-group__img')}>
-                  <img src='https://en.sun-asterisk.com/wp-content/uploads/2020/06/sun-ogp.png' />
+                  <img src={jobDetail && jobDetail.company_image} />
                 </div>
-                <span className={cx('avatar-group__name')}>Sun Asterisk VN</span>
+                <span className={cx('avatar-group__name')}>{jobDetail && jobDetail.company_name}</span>
               </div>
               <div className={cx('item-infor-group')}>
                 <IoMdPeople style={{ fontSize: '20px', color: '#7f878f' }} />
                 <span className={cx('item-infor-group__title')}>Quy mô:</span>
-                <span className={cx('item-infor-group__subtitle')}>100-499 nhân viên</span>
+                <span className={cx('item-infor-group__subtitle')}>{jobDetail && jobDetail.company_scale}</span>
               </div>
               <div className={cx('item-infor-group')}>
                 <IoMdPeople style={{ fontSize: '20px', color: '#7f878f' }} />
                 <span className={cx('item-infor-group__title')}>Lĩnh vực:</span>
-                <span className={cx('item-infor-group__subtitle')}>IT - Phần mềm</span>
+                <span className={cx('item-infor-group__subtitle')}>{jobDetail && jobDetail.company_filed}</span>
               </div>
               <div className={cx('item-infor-group')}>
                 <IoMdPeople style={{ fontSize: '20px', color: '#7f878f' }} />
                 <span className={cx('item-infor-group__title')}>Địa điểm:</span>
-                <span className={cx('item-infor-group__subtitle')}>
-                  Tầng 19, Tòa nhà Thành Lợi 2, Số 3 Lê Đình Lý, Da Nang, Viet
-                </span>
+                <span className={cx('item-infor-group__subtitle')}>{jobDetail && jobDetail.company_location}</span>
               </div>
               <div className={cx('footer')}>
                 <div className={cx('company-link-group')}>
