@@ -10,6 +10,10 @@
   align-items: center;
   cursor: pointer;
 
+  &:hover {
+    border: 1px solid #74d86b;
+  }
+
   &__company-image {
     width: 25%;
     height: 100%;

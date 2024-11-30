@@ -6,11 +6,13 @@ import { AiFillClockCircle } from 'react-icons/ai';
 import { FaRegPaperPlane, FaRegHeart } from 'react-icons/fa';
 import { IoMdPeople } from 'react-icons/io';
 import { LuExternalLink } from 'react-icons/lu';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(style);
 
 const SectionJobInfor = (props) => {
   const { jobDetail } = props;
+  const navigate = useNavigate();
   return (
     <div className={cx('section-infor')}>
       <div className={cx('section-infor-group')}>
@@ -93,7 +95,12 @@ const SectionJobInfor = (props) => {
                 <span className={cx('item-infor-group__subtitle')}>{jobDetail && jobDetail.company_location}</span>
               </div>
               <div className={cx('footer')}>
-                <div className={cx('company-link-group')}>
+                <div
+                  className={cx('company-link-group')}
+                  onClick={() => {
+                    navigate(`/company-infor/${jobDetail.company_id}`);
+                  }}
+                >
                   <span>Xem trang công ty</span>
                   <LuExternalLink style={{ fontSize: '18px', color: '#00b14f' }} />
                 </div>

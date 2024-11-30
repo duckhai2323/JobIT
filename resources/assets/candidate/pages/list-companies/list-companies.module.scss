@@ -1,0 +1,247 @@
+@import '../../../shared/layout/variables.scss';
+.section-list-companies-page {
+  margin-top: 70px !important;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 15px;
+
+  .section-header {
+    width: 100%;
+    background: transparent linear-gradient(6deg, #fff, #c4ffdd 100%, rgba(195, 255, 221, 0.702) 0) 0 0 no-repeat
+      padding-box;
+    margin-bottom: 0;
+    min-height: 273px;
+    padding-top: 24px;
+    display: flex;
+    justify-content: center;
+
+    &__container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      .box-search {
+        .caption {
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          justify-content: start;
+          gap: 20px;
+          margin-bottom: 25px !important;
+
+          .title {
+            color: #00b14f;
+            font-size: 24px;
+            font-weight: 500;
+            letter-spacing: 0;
+            text-align: left;
+          }
+
+          .description {
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 0;
+          }
+        }
+
+        .form-search {
+          background: #fff 0 0 no-repeat padding-box;
+          border: 1px solid #fff;
+          border-radius: 100px;
+          display: flex;
+          height: 50px;
+          overflow: hidden;
+          position: relative;
+
+          &:hover {
+            border: 1px solid #00b14f !important;
+          }
+
+          &:focus-within {
+            /* Áp dụng khi phần tử con (input) bên trong form-search được focus */
+            border: 1px solid #00b14f !important;
+          }
+
+          .icon-search {
+            left: 32px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+          }
+
+          .form-control {
+            border-color: transparent;
+            box-shadow: none;
+            font-size: 14px;
+            height: 100%;
+            outline: none;
+            padding-left: 62px;
+            width: 80%;
+          }
+
+          .btn-search {
+            background: #00b14f;
+            border-radius: 100px;
+            color: #fff;
+            font-size: 16px;
+            position: absolute;
+            right: 7px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            outline: none;
+            padding: 6px 8px !important;
+          }
+        }
+      }
+
+      .box-img {
+        width: 272px;
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
+
+  .section-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+
+    &__header-title {
+      color: #333;
+      font-size: 24px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    &__content {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+
+      .box-company {
+        background: #fff 0 0 no-repeat padding-box;
+        border-radius: 5px;
+        box-shadow: -1px 1px 4px rgba(0, 0, 0, 0.051);
+        height: 400px;
+        margin-bottom: 15px;
+        overflow: hidden;
+
+        &:hover {
+          box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.07) !important;
+        }
+
+        .company-banner {
+          height: 180px;
+          margin-bottom: 16px;
+          overflow: hidden;
+          position: relative;
+
+          .cover-wrapper {
+            cursor: pointer;
+            height: 150px;
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+
+          .company-logo {
+            cursor: pointer;
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            bottom: 0;
+            height: 64px;
+            left: 16px;
+            position: absolute;
+            width: 64px;
+
+            img {
+              height: 100%;
+              width: 100%;
+              object-fit: cover;
+            }
+          }
+        }
+
+        .company-infor {
+          padding: 0 16px;
+
+          a {
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 500;
+            color: #555 !important;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+
+          .company-description {
+            color: #555;
+            font-size: 14px;
+            letter-spacing: 0;
+            padding-top: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .section-content {
+    width: 1320px;
+  }
+
+  .section-header__container {
+    width: 1320px;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+  .section-content {
+    width: 1140px;
+  }
+
+  .section-header__container {
+    width: 1140px;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  .section-content {
+    width: 960px;
+  }
+
+  .section-header__container {
+    width: 960px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .section-content {
+    width: 720px;
+  }
+
+  .section-header__container {
+    width: 720px;
+  }
+}

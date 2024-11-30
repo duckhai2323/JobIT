@@ -1,5 +1,5 @@
 import LayoutCandidate from '@/candidate/components/layout';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoIosArrowForward, IoMdAdd } from 'react-icons/io';
 import style from './company_infor.module.scss';
 import classNames from 'classnames/bind';
@@ -8,8 +8,30 @@ import { MdApartment, MdOutlineEmail, MdLocalPhone } from 'react-icons/md';
 import JobItemHight from '@/candidate/components/jobItemHight';
 import { FaLocationDot } from 'react-icons/fa6';
 import FooterHome from '../home/footer';
+import { useParams } from 'react-router-dom';
+import { getInforCompany, getListJobsOfCompany } from '@/services/companyService';
 const cx = classNames.bind(style);
 const CompanyInforPageCandidate = () => {
+  const { company_id } = useParams();
+  const [companyInfor, setCompanyInfor] = useState(null);
+  const [jobs, setListJobs] = useState(null);
+  useEffect(() => {
+    const getInfor = async () => {
+      const companyInforResponse = await getInforCompany(company_id);
+      const listJobsResponse = await getListJobsOfCompany(company_id);
+      if (companyInforResponse.success && listJobsResponse.success) {
+        setCompanyInfor(companyInforResponse.data);
+        setListJobs(listJobsResponse.data);
+      }
+      return null;
+    };
+
+    if (company_id) {
+      getInfor();
+      window.scrollTo(0, 0);
+    }
+  }, [company_id]);
+
   return (
     <LayoutCandidate>
       <div className={cx('section-header-banner')}>
@@ -18,29 +40,29 @@ const CompanyInforPageCandidate = () => {
             <span className={cx('repage')}>Danh sách Công ty</span>
             <IoIosArrowForward />
             <span className={cx('repage')}>
-              Thông tin công ty & tin tuyển dụng từ Công ty cổ phần Công nghệ Bekisoft
+              Thông tin công ty & tin tuyển dụng từ {companyInfor && companyInfor.company_name}
             </span>
           </div>
 
           <div className={cx('header-banner-group__content')}>
             <div className={cx('company-avatar-group')}>
-              <img src='https://play-lh.googleusercontent.com/FJJ10LTK4KUtPxAaf-kBzQSfYMf9yfdRKU8dRR1d6EWsltN6ZKYPE8jWLQc99PRZ52Q' />
+              <img src={companyInfor && companyInfor.company_image} />
             </div>
             <div className={cx('image-banner')}>
               <img src='https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/normal-company/cover/company_cover_1.jpg' />
             </div>
             <div className={cx('company-infor-group')}>
               <div className={cx('company-name-group')}>
-                <span className={cx('text-name')}>Công ty cổ phần Công nghệ Bekisoft</span>
+                <span className={cx('text-name')}>{companyInfor && companyInfor.company_name}</span>
                 <div className={cx('company-name-group__subname')}>
                   <div className={cx('subname')}>
                     <AiOutlineGlobal style={{ color: '#fff', fontSize: '20px' }} />
-                    <a className={cx('content')}>https://www.facebook.com/BekisoftJSC</a>
+                    <a className={cx('content')}>{companyInfor && companyInfor.company_link}</a>
                   </div>
 
                   <div className={cx('subname')}>
                     <MdApartment style={{ color: '#fff', fontSize: '20px' }} />
-                    <span className={cx('content')}>25-99 nhân viên</span>
+                    <span className={cx('content')}>{companyInfor && companyInfor.company_scale}</span>
                   </div>
                 </div>
               </div>
@@ -58,15 +80,7 @@ const CompanyInforPageCandidate = () => {
                   <span>Giới thiệu công ty</span>
                 </div>
                 <div className={cx('company-intro-group__content')}>
-                  <p>
-                    Bekisoft JSC là công ty sản xuất và phát triển phần mềm cho thị trường Nhật Bản, Việt Nam và thị
-                    trường các nước nói tiếng Anh. Với đội ngũ nhân sự trẻ nhiệt huyết và chuyên môn cao, chúng tôi sẵn
-                    sàng đáp ứng mọi yêu cầu khó khăn và mang đến những giải pháp công nghệ tối ưu cho khách hàng. Sứ
-                    mệnh của chúng tôi là tận dụng sự năng động và sự sáng tạo của đội ngũ trẻ, cùng với sức mạnh của
-                    công nghệ để giúp khách hàng đạt được thành công. Chúng tôi cam kết đồng hành, hợp tác chặt chẽ với
-                    khách hàng của mình để hiểu nhu cầu và những thách thức riêng của họ, từ đó phát triển các giải pháp
-                    công nghệ phù hợp và tạo ra giá trị bền vững cho doanh nghiệp.
-                  </p>
+                  <p>{companyInfor && companyInfor.company_intro}</p>
                 </div>
               </div>
               <div className={cx('company-intro-group')}>
@@ -77,11 +91,7 @@ const CompanyInforPageCandidate = () => {
                   className={cx('company-intro-group__content')}
                   style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
                 >
-                  <JobItemHight />
-                  <JobItemHight />
-                  <JobItemHight />
-                  <JobItemHight />
-                  <JobItemHight />
+                  {jobs && jobs.map((job) => <JobItemHight jobDetail={job} />)}
                 </div>
               </div>
             </div>
@@ -96,24 +106,21 @@ const CompanyInforPageCandidate = () => {
                     <span>Địa chỉ công ty</span>
                   </div>
 
-                  <span className={cx('content')}>
-                    Tầng 4 tòa Mai Linh Đông Đô, 499 Lương Thế Vinh, Phường Mễ Trì, Quận Nam Từ Liêm, Thành phố Hà Nội,
-                    Việt Nam
-                  </span>
+                  <span className={cx('content')}>{companyInfor && companyInfor.company_location}</span>
 
                   <div className={cx('title-icon')}>
                     <MdOutlineEmail style={{ color: '#00b14f', fontSize: '20px' }} />
                     <span>Email</span>
                   </div>
 
-                  <span className={cx('content')}>rikkia.edu@gmail.com</span>
+                  <span className={cx('content')}>{companyInfor && companyInfor.email}</span>
 
                   <div className={cx('title-icon')}>
                     <MdLocalPhone style={{ color: '#00b14f', fontSize: '20px' }} />
                     <span>Hotline</span>
                   </div>
 
-                  <span className={cx('content')}>09876786688</span>
+                  <span className={cx('content')}>{companyInfor && companyInfor.telephone}</span>
                 </div>
               </div>
             </div>
