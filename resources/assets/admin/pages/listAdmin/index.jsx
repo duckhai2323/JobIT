@@ -19,6 +19,7 @@ const ListAdmin = () => {
   const [displayModalAdd, setDisplayModalAdd] = useState('none');
   const [loading, setLoading] = useState(true);
   const [listAdmins, setListAdmins] = useState([]);
+  const [currentAdmin, setCurrentAdmin] = useState({});
   useEffect(() => {
     dispatch(Actions.getUsersRequest());
   }, [dispatch]);
@@ -26,15 +27,17 @@ const ListAdmin = () => {
     console.log(userState.loading);
     if (userState.users && userState.users.length > 0) {
       setLoading(false);
+      console.log(userState.users);
       const admins = userState.users.filter((user) => user.role === "1");
       setListAdmins(admins);
     }
   }, [userState]);
-  const onClickHandleDisplayModal = () => {
+  const onClickHandleDisplayModal = (admin) => {
     if (displayModal === 'flex') {
       setDisplayModal('none');
     } else {
       setDisplayModal('flex');
+      setCurrentAdmin(admin);
     }
   };
   const onClickHandleDisplayModalAdd = () => {
@@ -75,8 +78,8 @@ const ListAdmin = () => {
           <div className={cx("content")}>
             <div className={cx("admin-list")}>
               {listAdmins && listAdmins.map((admin) => (
-                <button key={admin}>
-                  <AdminItem onClickHandle={onClickHandleDisplayModal} onClickDelete={() => deleteAdmin(admin)} />
+                <button key={admin.id}>
+                  <AdminItem onClickHandle={() => onClickHandleDisplayModal(admin)} adminData={admin} />
                 </button>
               ))}
             </div>
@@ -113,8 +116,9 @@ const ListAdmin = () => {
         </div>
       </div>
       <AdminInfoModal
-        onClickHandle={onClickHandleDisplayModal}
+        onClickHandle={() => onClickHandleDisplayModal({})}
         displayModal={displayModal}
+        currentAdmin={currentAdmin}
       />
       <AddAdminModal 
         onClickHandle={onClickHandleDisplayModalAdd}

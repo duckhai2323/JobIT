@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './candidateItem.module.scss';
 import classNames from 'classnames/bind';
 import { MdMarkEmailUnread } from "react-icons/md";
@@ -7,8 +7,11 @@ import { AiOutlineStop, AiOutlineReload } from "react-icons/ai";
 
 const cx = classNames.bind(styles);
 
-const CandidateItem = ({ onClickHandle }) => {
+const CandidateItem = ({ onClickHandle, candidateData }) => {
   const [isActive, setIsActive] = useState(true);
+  useEffect(() => {
+    setIsActive(candidateData.actived);
+  }, [candidateData]);
   const suspendAccount = () => {
     setIsActive(false);
   }
@@ -26,11 +29,11 @@ const CandidateItem = ({ onClickHandle }) => {
       </div>
       <div className={cx("candidate-info")}>
         <div className={cx("candidate-name")}>
-          Trần Đức Khải
+          {candidateData.name}
         </div>
         <div className={cx("candidate-contact")}>
           <MdMarkEmailUnread />
-          <p>tranduckhai26112003@gmail.com</p>
+          <p>{candidateData.email}</p>
         </div>
         {
           isActive ? (
