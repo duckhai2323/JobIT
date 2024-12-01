@@ -109,7 +109,7 @@ const ListAdmin = () => {
           </div>
         </div>
       </AdminLayout>
-      <div style={{ display: loading ? 'flex' : 'none' }} className={cx('loading')}>
+      <div style={{ display: userState.loading ? 'flex' : 'none' }} className={cx('loading')}>
         <div>
           <FadeLoader color='rgba(255, 255, 255, 1)' height='10' width='6' />
           <span style={{ fontWeight: '500', color: 'white', fontSize: '18px' }}>Loading...</span>
@@ -119,6 +119,7 @@ const ListAdmin = () => {
         onClickHandle={() => onClickHandleDisplayModal({})}
         displayModal={displayModal}
         currentAdmin={currentAdmin}
+        setLoading={setLoading}
       />
       <AddAdminModal 
         onClickHandle={onClickHandleDisplayModalAdd}

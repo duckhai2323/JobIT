@@ -48,10 +48,18 @@ class UserEloquentRepository extends EloquentRepository implements UserRepositor
     }
   }
 
-  public function editUser(Request $request){
-    $user = $this->_model->where('user_id', $request->user_id)->first();
+  public function editUser(Request $request) {
+    $user = $this->_model->where('id', $request->id)->first();
+    $temp = $request->all();
+    if($request->filled('password')) {
+      if($request->password != $request->repassword) {
+        throw new Exception('password not match');
+      }
+      $user->password = Hash::make($request->password);
+      unset($temp['repassword']);
+      unset($temp['password']);
+    }
     if($user) {
-      $temp = $request->all();
       $data = $user->update($temp);
       return $temp;
     } else {
@@ -59,8 +67,21 @@ class UserEloquentRepository extends EloquentRepository implements UserRepositor
     }
   }
 
+  public function editActiveUser(Request $request){
+    $user = $this->_model->where('id', $request->id)->first();
+    if($user) {
+      $temp = $request->all();
+      $data = $user->update($temp);
+      $user->password = Hash::make($request->password);
+      $user->save();
+      return $temp;
+    } else {
+      return throw new Exception('users not found');
+    }
+  }
+
   public function getDetailOfUser(Request $request) {
-    $user = $this->_model->where('user_id', $request->user_id)->first();
+    $user = $this->_model->where('id', $request->id)->first();
     if($user) {
       return $user;
     } else {

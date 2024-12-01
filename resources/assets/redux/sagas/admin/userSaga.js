@@ -1,4 +1,4 @@
-import { getListUsers } from '@/services/userService';
+import { getListUsers, updateUserAccount } from '@/services/userService';
 import { Actions } from '@/redux/reducers/admin/userReducer';
 import { call, put, takeLatest, delay } from 'redux-saga/effects';
 
@@ -16,6 +16,21 @@ function* getListUsersSaga(action) {
   }
 }
 
+function* updateUserSaga(action) {
+  try {
+    yield delay(1000);
+    const response = yield call(updateUserAccount, action.payload.userId, action.payload.data);
+    if (response.success) {
+      yield put(Actions.updateUserSuccess(response));
+    } else {
+      yield put(Actions.updateUserFailure({ error: response.message || "Vui lòng kiểm tra lại thông tin" }));
+    }
+  } catch (error) {
+    yield put(Actions.updateUserFailure({ error: response.message || "Vui lòng kiểm tra lại thông tin" }));
+  }
+}
+
 export function* watchUsersRequest() {
   yield takeLatest(Actions.getUsersRequest.type, getListUsersSaga);
+  yield takeLatest(Actions.updateUserRequest, updateUserSaga);
 }

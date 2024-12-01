@@ -105,11 +105,12 @@ class UserController extends Controller
         try {
             $request->validate([
                 'name' => 'required|string|max:50',
-                'email' => 'required|string|email|max:50|unique:'.User::class,
-                'password' => 'required|string|min:8',
-                'repassword' =>  'required|same:password',
             ]);
-
+            if($request->filled('email')) {
+                $request->validate([
+                    'email' => 'required|string|email|max:50|unique:'.User::class,
+                ]);
+            }
             $data = $this->userRepository->editUser($request);
             if ($data) {
                 return response()->json(
@@ -134,7 +135,7 @@ class UserController extends Controller
 
     public function updateActive(Request $request) {
         try {
-            $data = $this->userRepository->editUser($request);
+            $data = $this->userRepository->editActiveUser($request);
             if ($data) {
                 return response()->json(
                     [

@@ -33,6 +33,34 @@ const userSlice = createSlice({
         error: action.payload.error,
       };
     },
+
+    updateUserRequest: (state) => {
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    },
+
+    updateUserSuccess: (state, action) => {
+      const updatedUser = action.payload.data;
+
+      return {
+        ...state,
+        loading: false,
+        users: state.users.map((user) =>
+          user.id === updatedUser.id ? updatedUser : user
+        ),
+      };
+    },
+
+    updateUserFailure: (state, action) => {
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error,
+      };
+    },
   },
 });
 
