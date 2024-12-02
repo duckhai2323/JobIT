@@ -98,7 +98,7 @@
 
         .info-item {
           width: 100%;
-          max-height: 100px;
+          max-height: 1000px;
           display: flex;
           justify-content: space-between;
 
@@ -110,9 +110,9 @@
           .info-content {
             width: 65%;
             display: -webkit-box;
-            -webkit-line-clamp: 4;
+            -webkit-line-clamp: 15;
             -webkit-box-orient: vertical;
-            line-clamp: 4;
+            line-clamp: 15;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: normal;
