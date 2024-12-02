@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './adminItem.module.scss';
 import classNames from 'classnames/bind';
 import { MdMarkEmailUnread, MdDelete } from "react-icons/md";
@@ -7,8 +7,11 @@ import { AiOutlineStop, AiOutlineReload } from "react-icons/ai";
 
 const cx = classNames.bind(styles);
 
-const AdminItem = ({ onClickHandle, onClickDelete }) => {
+const AdminItem = ({ onClickHandle, adminData }) => {
   const [isActive, setIsActive] = useState(true);
+  useEffect(() => {
+    setIsActive(adminData.actived);
+  }, [adminData]);
   const suspendAccount = () => {
     setIsActive(false);
   }
@@ -26,11 +29,11 @@ const AdminItem = ({ onClickHandle, onClickDelete }) => {
       </div>
       <div className={cx("admin-info")}>
         <div className={cx("admin-name")}>
-          Admin01
+          {adminData.name}
         </div>
         <div className={cx("admin-contact")}>
           <MdMarkEmailUnread />
-          <p>admin1@gmail.com</p>
+          <p>{adminData.email}</p>
         </div>
         {
           isActive ? (

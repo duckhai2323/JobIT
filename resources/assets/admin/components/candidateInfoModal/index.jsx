@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import styles from './adminInfoModal.module.scss';
+import styles from './candidateInfoModal.module.scss';
 import classNames from 'classnames/bind';
 import { IoMdClose } from 'react-icons/io';
 import { FaEdit, FaAddressBook } from "react-icons/fa";
 
 const cx = classNames.bind(styles);
 
-const AdminInfoModal = ({ displayModal, onClickHandle, currentAdmin }) => {
+const CandidateInfoModal = ({ displayModal, onClickHandle, currentCandidate }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState("Admin01");
+  const [name, setName] = useState("Candidate01");
   const [email, setEmail] = useState("company1@gmail.com");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -28,28 +28,28 @@ const AdminInfoModal = ({ displayModal, onClickHandle, currentAdmin }) => {
     if(displayModal === 'none') {
       setIsEditing(false);
       setError("");
-    } else if(currentAdmin) {
-      console.log(currentAdmin);
-      setName(currentAdmin.name);
-      setEmail(currentAdmin.email);
+    } else if(currentCandidate) {
+      console.log(currentCandidate);
+      setName(currentCandidate.name);
+      setEmail(currentCandidate.email);
       setPassword("");
       setConfirmPassword("");
     }
   }, [displayModal, isEditing])
 
   return (
-    <div style={{ display: displayModal }} className={cx('admin-info-modal')}>
+    <div style={{ display: displayModal }} className={cx('candidate-info-modal')}>
       <div className={cx('modal-background')}>
         <div className={cx('modal-container')}>
           <div className={cx('modal-header')}>
-            <div className={cx('tabs')}><span className={cx('modal-title')}>Thông tin quản trị viên</span></div>
+            <div className={cx('tabs')}><span className={cx('modal-title')}>Thông tin ứng viên</span></div>
             <button onClick={onClickHandle} className={cx('close-button')}>
               <IoMdClose />
             </button>
           </div>
           {isEditing ? (
             <div className={cx('modal-body')}>
-              <div className={cx("admin-logo")}>
+              <div className={cx("candidate-logo")}>
                 <img 
                   src="https://cdn-icons-png.flaticon.com/512/219/219986.png" 
                   alt="company-logo" 
@@ -58,13 +58,13 @@ const AdminInfoModal = ({ displayModal, onClickHandle, currentAdmin }) => {
               </div>
               <form onSubmit={updateAccount}>
                 <div className={cx('info-item')}>
-                  <label for="admin-name" className={cx('info-label')}>
-                    Tên quản trị viên<i style={{ color: 'red' }}>*</i> : 
+                  <label for="candidate-name" className={cx('info-label')}>
+                    Tên ứng viên<i style={{ color: 'red' }}>*</i> : 
                   </label>
                   <input
                     type="text"
-                    name="admin-name"
-                    id="admin-name"
+                    name="candidate-name"
+                    id="candidate-name"
                     placeholder=""
                     className={cx('info-content')}
                     value={name}
@@ -72,13 +72,13 @@ const AdminInfoModal = ({ displayModal, onClickHandle, currentAdmin }) => {
                   />
                 </div>
                 <div className={cx('info-item')}>
-                  <label for="admin-email" className={cx('info-label')}>
+                  <label for="candidate-email" className={cx('info-label')}>
                     Email<i style={{ color: 'red' }}>*</i> : 
                   </label>
                   <input
                     type="text"
-                    name="admin-email"
-                    id="admin-email"
+                    name="candidate-email"
+                    id="candidate-email"
                     placeholder="" 
                     className={cx('info-content')}
                     value={email}
@@ -123,15 +123,15 @@ const AdminInfoModal = ({ displayModal, onClickHandle, currentAdmin }) => {
             </div>
           ) : (
             <div className={cx('modal-body')}>
-              <div className={cx("admin-logo")}>
+              <div className={cx("candidate-logo")}>
                 <img 
                   src="https://cdn-icons-png.flaticon.com/512/219/219986.png" 
-                  alt="admin-logo" 
+                  alt="candidate-logo" 
                   className={cx("logo")} 
                 />
               </div>
               <div className={cx('info-item')}>
-                <div className={cx('info-label')}>Tên quản trị viên: </div>
+                <div className={cx('info-label')}>Tên ứng viên: </div>
                 <div className={cx('info-content')}>{name}</div>
               </div>
               <div className={cx('info-item')}>
@@ -154,4 +154,4 @@ const AdminInfoModal = ({ displayModal, onClickHandle, currentAdmin }) => {
   )
 }
 
-export default AdminInfoModal;
+export default CandidateInfoModal;

@@ -1,24 +1,41 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Actions } from '@/redux/reducers/user/userReducer';
 import AdminLayout from '../../components/layout/index';
 import CandidateItem from '../../components/candidateItem/index';
+import CandidateInfoModal from '../../components/candidateInfoModal/index';
 import styles from './listCandidate.module.scss';
 import classNames from 'classnames/bind';
 import { FaRegUser } from "react-icons/fa6";
-// import CandidateInfoModal from '../../components/candidateInfoModal/index';
+import FadeLoader from 'react-spinners/FadeLoader';
 
 const cx = classNames.bind(styles);
 
 const ListCandidate = () => {
+  const dispatch = useDispatch();
+  const userState = useSelector((state) => state.user);
   const [displayModal, setDisplayModal] = useState('none');
   const [listCandidates, setListCandidates] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [currentCandidate, setCurrentCandidate] = useState({});
   useEffect(() => {
-    setListCandidates([1, 2, 3, 4, 5]);
-  }, []);
-  const onClickHandleDisplayModal = () => {
+    dispatch(Actions.getUsersRequest());
+  }, [dispatch]);
+  useEffect(() => {
+    console.log(userState.loading);
+    if (userState.users && userState.users.length > 0) {
+      setLoading(false);
+      console.log(userState.users);
+      const candidates = userState.users.filter((user) => user.role === "0");
+      setListCandidates(candidates);
+    }
+  }, [userState]);
+  const onClickHandleDisplayModal = (candidate) => {
     if (displayModal === 'flex') {
       setDisplayModal('none');
     } else {
       setDisplayModal('flex');
+      setCurrentCandidate(candidate);
     }
   };
   const deleteCandidate = (candidate) => {
@@ -49,8 +66,8 @@ const ListCandidate = () => {
           <div className={cx("content")}>
             <div className={cx("candidate-list")}>
               {listCandidates && listCandidates.map((candidate) => (
-                <button key={candidate}>
-                  <CandidateItem onClickHandle={onClickHandleDisplayModal} onClickDelete={() => deleteCandidate(candidate)} />
+                <button key={candidate.id}>
+                  <CandidateItem onClickHandle={() => onClickHandleDisplayModal(candidate)} candidateData={candidate} />
                 </button>
               ))}
             </div>
@@ -69,10 +86,17 @@ const ListCandidate = () => {
           </div>
         </div>
       </AdminLayout>
-      {/* <CandidateInfoModal
-        onClickHandle={onClickHandleDisplayModal}
+      <div style={{ display: loading ? 'flex' : 'none' }} className={cx('loading')}>
+        <div>
+          <FadeLoader color='rgba(255, 255, 255, 1)' height='10' width='6' />
+          <span style={{ fontWeight: '500', color: 'white', fontSize: '18px' }}>Loading...</span>
+        </div>
+      </div>
+      <CandidateInfoModal
+        onClickHandle={() => onClickHandleDisplayModal({})}
         displayModal={displayModal}
-      /> */}
+        currentCandidate={currentCandidate}
+      />
     </div>
   )
 }
