@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { Actions } from '@/redux/reducers/user/userReducer';
+import { Actions } from '@/redux/reducers/admin/userReducer';
 import AdminLayout from '../../components/layout/index';
 import AdminItem from '../../components/adminItem/index';
 import styles from './listAdmin.module.scss';

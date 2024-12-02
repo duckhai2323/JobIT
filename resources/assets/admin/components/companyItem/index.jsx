@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './companyItem.module.scss';
 import classNames from 'classnames/bind';
 import { MdMarkEmailUnread, MdDelete } from "react-icons/md";
@@ -12,8 +12,11 @@ import { AiOutlineStop, AiOutlineReload } from "react-icons/ai";
 
 const cx = classNames.bind(styles);
 
-const CompanyItem = ({ onClickHandle }) => {
-  const [isActive, setIsActive] = useState(true);
+const CompanyItem = ({ onClickHandle, companyData }) => {
+  const [isActive, setIsActive] = useState(false);
+  useEffect(() => {
+    companyData.status ? setIsActive(true) : setIsActive(false);
+  }, [companyData]);
   const suspendAccount = () => {
     setIsActive(false);
   }
@@ -31,18 +34,14 @@ const CompanyItem = ({ onClickHandle }) => {
       </div>
       <div className={cx("company-info")}>
         <div className={cx("company-name")}>
-          CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ
+          {companyData.company_name}
         </div>
         <div className={cx("company-intro")}>
-          Là công ty hoạt động trong lĩnh vực cung cấp các phần mềm quản lý nhập hàng và logistics. 
-          Sau gần 03 năm phát triển, xây dựng bởi đội ngũ sáng lập dày dặn kinh nghiệm đến từ nhiều 
-          tập đoàn công nghệ hàng đầu như Tima, VCCorp, Sapo,… Gobiz chính thức được thành lập vào 
-          năm 2018. Gobiz được thành lập với tham vọng thay đổi và số hoá phương thức quản lý và kinh 
-          doanh trong ngành thương mại điện tử xuyên biên giới tại Việt Nam.
+          {companyData.company_intro}
         </div>
         <div className={cx("company-contact")}>
           <MdMarkEmailUnread />
-          <p>gobiz.inc@gobiz.com</p>
+          <p>{companyData.email}</p>
           <a href="#" target="blank" className={cx("company-link")}>
             <FaLink />
           </a>

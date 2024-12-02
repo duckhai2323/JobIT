@@ -1,5 +1,5 @@
 import { getListUsers } from '@/services/userService';
-import { Actions } from '@/redux/reducers/user/userReducer';
+import { Actions } from '@/redux/reducers/admin/userReducer';
 import { call, put, takeLatest, delay } from 'redux-saga/effects';
 
 function* getListUsersSaga(action) {

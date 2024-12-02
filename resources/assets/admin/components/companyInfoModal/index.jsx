@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import styles from './companyInfoModal.module.scss';
 import classNames from 'classnames/bind';
 import { IoMdClose } from 'react-icons/io';
@@ -8,6 +9,7 @@ import JobItem from '../jobItem';
 const cx = classNames.bind(styles);
 
 const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
+  const companyState = useSelector((state) => state.adminCompanies);
   const [currentTab, setCurrentTab] = useState(1);
   const [displayTab1, setDisplayTab1] = useState('flex');
   const [displayTab2, setDisplayTab2] = useState('none');
@@ -16,15 +18,21 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
   const [isEditingTab2, setIsEditingTab2] = useState(false);
   const [companyName, setCompanyName] = useState("CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ");
   const [companyEmail, setCompanyEmail] = useState("gobiz.inc@gobiz.com");
+  const [companyLink, setCompanyLink] = useState("https://gobiz.vn/");
   const [employeeScale, setEmployeeScale] = useState("1000");
   const [companyIntro, setCompanyIntro] = useState("Là công ty hoạt động trong lĩnh vực cung cấp các phần mềm quản lý nhập hàng và logistics. Sau gần 03 năm phát triển, xây dựng bởi đội ngũ sáng lập dày dặn kinh nghiệm đến từ nhiều tập đoàn công nghệ hàng đầu như Tima, VCCorp, Sapo,… Gobiz chính thức được thành lập vào năm 2018. Gobiz được thành lập với tham vọng thay đổi và số hoá phương thức quản lý và kinh doanh trong ngành thương mại điện tử xuyên biên giới tại Việt Nam.");
   const [companyLocation, setCompanyLocation] = useState("Tầng 5, Tòa nhà Viglacera số 1 Đại lộ Thăng Long, Nam Từ Liêm, Hà Nội");
   const [companyField, setCompanyField] = useState("Cung cấp các phần mềm quản lý nhập hàng và logistics");
   const [companyOrganize, setCompanyOrganize] = useState("2018-09-01");
+  const [companyTaxCode, setCompanyTaxCode] = useState("0108368751");
   const [email, setEmail] = useState("company1@gmail.com");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const formatDate = (dateString) => {
+    const [year, month, day] = dateString.split("-");
+    return `${day}-${month}-${year}`;
+  };
   const onChangeTab = (tab) => {
     setCurrentTab(tab);
     if(tab === 1) {
@@ -66,8 +74,20 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
       setIsEditingTab1(false);
       setIsEditingTab2(false);
       setError("");
+    } else if(companyState.selectCompanyId) {
+      const company = companyState.companies.find(company => company.company_id === companyState.selectCompanyId);
+      console.log(companyState.selectCompanyId);
+      setCompanyName(company.company_name);
+      setCompanyEmail(company.email);
+      setCompanyLink(company.company_link);
+      setEmployeeScale(company.employee_scale);
+      setCompanyIntro(company.company_intro);
+      setCompanyLocation(company.company_location);
+      setCompanyField(company.company_filed);
+      setCompanyOrganize(company.company_organize);
+      setCompanyTaxCode(company.tax_code);
     }
-  }, [displayModal])
+  }, [displayModal, companyState]);
   return (
     <div style={{ display: displayModal }} className={cx('company-info-modal')}>
       <div className={cx('modal-background')}>
@@ -119,6 +139,20 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
                   />
                 </div>
                 <div className={cx('info-item')}>
+                  <label for="company-link" className={cx('info-label')}>
+                    Link công ty: 
+                  </label>
+                  <input
+                    type="text"
+                    name="company-link"
+                    id="company-link"
+                    placeholder="" 
+                    className={cx('info-content')}
+                    value={companyLink}
+                    onChange={(e) => setCompanyLink(e.target.value)}
+                  />
+                </div>
+                <div className={cx('info-item')}>
                   <label for="employee-scale" className={cx('info-label')}>
                     Nhân sự: 
                   </label>
@@ -142,7 +176,7 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
                     className={cx('info-content')}
                     value={companyIntro} 
                     onChange={(e) => setCompanyIntro(e.target.value)}
-                    rows="4"
+                    rows="15"
                     cols="50"
                   />
                 </div>
@@ -188,6 +222,20 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
                     onChange={(e) => setCompanyOrganize(e.target.value)}
                   />
                 </div>
+                <div className={cx('info-item')}>
+                  <label for="company-tax-code" className={cx('info-label')}>
+                    Mã số thuế: 
+                  </label>
+                  <input
+                    type="text"
+                    name="company-tax-code"
+                    id="company-tax-code"
+                    placeholder="" 
+                    className={cx('info-content')}
+                    value={companyTaxCode}
+                    onChange={(e) => setCompanyTaxCode(e.target.value)}
+                  />
+                </div>
                 <div className={cx("submit-button")}>
                   <button style={{ border: 'none' }} className={cx('button-green')} type="submit">
                     <FaAddressBook className={cx('icon')} />
@@ -220,6 +268,10 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
                 <div className={cx('info-content')}>{companyEmail}</div>
               </div>
               <div className={cx('info-item')}>
+                <div className={cx('info-label')}>Link công ty: </div>
+                <div className={cx('info-content')}>{companyLink}</div>
+              </div>
+              <div className={cx('info-item')}>
                 <div className={cx('info-label')}>Nhân sự: </div>
                 <div className={cx('info-content')}>{employeeScale}</div>
               </div>
@@ -241,7 +293,11 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
               </div>
               <div className={cx('info-item')}>
                 <div className={cx('info-label')}>Thành lập: </div>
-                <div className={cx('info-content')}>{companyOrganize}</div>
+                <div className={cx('info-content')}>{formatDate(companyOrganize)}</div>
+              </div>
+              <div className={cx('info-item')}>
+                <div className={cx('info-label')}>Mã số thuế: </div>
+                <div className={cx('info-content')}>{companyTaxCode}</div>
               </div>
             </div>
           )}
