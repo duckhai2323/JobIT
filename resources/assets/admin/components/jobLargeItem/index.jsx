@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './jobLargeItem.module.scss';
 import classNames from 'classnames/bind';
 import { MdMarkEmailUnread, MdDelete } from "react-icons/md";
@@ -13,7 +13,7 @@ import { CgSandClock } from "react-icons/cg";
 
 const cx = classNames.bind(styles);
 
-const JobLargeItem = ({ onClickHandle, onClickDelete }) => {
+const JobLargeItem = ({ onClickHandle, jobData }) => {
   return (
     <div className={cx("job-card")}>
       <div className={cx("job-image")}>
@@ -25,14 +25,14 @@ const JobLargeItem = ({ onClickHandle, onClickDelete }) => {
       </div>
       <div className={cx("job-info")}>
         <div className={cx("job-name")}>
-          Nhân Viên Phát Triển Thị Trường
+          {jobData.job_title}
         </div>
         <div className={cx("job-from-company")}>
-          Công ty Cổ phần Truyền thông Vàng châu Á
+          {jobData.company_name}
         </div>
         <div className={cx("job-contact")}>
           <AiOutlineGlobal />
-          <p>http://goldenasia.vn</p>
+          <p>{jobData.company_link}</p>
           <a href="#" target="blank" className={cx("job-link")}>
             <FaLink />
           </a>
@@ -42,27 +42,27 @@ const JobLargeItem = ({ onClickHandle, onClickDelete }) => {
         <div className={cx("job-detail")}>
           <FaLocationDot />
           <div className={cx("job-location")}>
-            Hà Nội
+            {jobData.job_location}
           </div>
         </div>
         <div className={cx("job-detail")}>
           <CgSandClock />
-          <p>Dưới 1 năm</p>
+          <p>{jobData.experience_require}</p>
         </div>
         <div className={cx("job-detail")}>
           <FaSackDollar />
-          <p>11-15 triệu</p>
+          <p>{jobData.salary}</p>
         </div>
         <div className={cx("job-detail")}>
           <IoPerson />
-          <p>1 người</p>
+          <p>{jobData.candidate_number} người</p>
         </div>
       </div>
       <div className={cx("job-options")}>
         <button className={cx('view-button')} onClick={onClickHandle}>
           <IoMdEye /> Xem chi tiết
         </button>
-        <button className={cx('delete-button')} onClick={onClickDelete}>
+        <button className={cx('delete-button')}>
           <MdDelete /> Xóa
         </button>
       </div>

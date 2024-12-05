@@ -98,6 +98,28 @@ class JobDetailController extends Controller
         }
     }
 
+    public function getAllJobs(Request $request) {
+        try {
+            $data = $this->JobDetailRepository->getAllJobs($request);
+            if ($data) {
+                return response()->json(
+                    [
+                        'data' => $data,
+                        'message' => 'get info of jobdetail',
+                        'success' => 1,
+                    ], 200
+                );
+            } else {
+                throw new Exception('task not found');
+            }
+        } catch (Exception $err) {
+            return response()->json([
+                'success' => 0,
+                'message' => $err->getMessage(),
+            ]);
+        }
+    }
+
     public function listJobsOfCompany(Request $request)
     {
         try {

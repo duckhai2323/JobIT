@@ -1,24 +1,33 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { Actions } from '@/redux/reducers/admin/adminJobsReducer';
 import AdminLayout from '../../components/layout/index';
 import JobItem from '../../components/jobItem/index';
 import JobLargeItem from '../../components/jobLargeItem/index';
 import styles from './listJob.module.scss';
 import classNames from 'classnames/bind';
 import { FaBuildingCircleCheck } from "react-icons/fa6";
-import CompanyInfoModal from '../../components/companyInfoModal/index';
-import AddCompanyModal from '../../components/addCompanyModal/index';
 import { useNavigate } from 'react-router-dom';
+import FadeLoader from 'react-spinners/FadeLoader';
 
 const cx = classNames.bind(styles);
 
 const ListJob = () => {
+  const dispatch = useDispatch();
+  const jobState = useSelector((state) => state.adminJobs);
   const [displayModal, setDisplayModal] = useState('none');
   const [displayModalAdd, setDisplayModalAdd] = useState('none');
   const [listJobs, setListJobs] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    setListJobs([1, 2, 3, 4, 5]);
-  }, []);
+    dispatch(Actions.getJobsRequest());
+  }, [dispatch]);
+  useEffect(() => {
+    console.log(jobState.jobs);
+    if (jobState.jobs && jobState.jobs.length > 0) {
+      setListJobs(jobState.jobs);
+    }
+  }, [jobState])
   const onClickHandleDisplayModal = () => {
     if (displayModal === 'flex') {
       setDisplayModal('none');
@@ -67,8 +76,8 @@ const ListJob = () => {
           <div className={cx("content")}>
             <div className={cx("job-list")}>
               {listJobs && listJobs.map((job) => (
-                <button key={job} onClick={() => handleNavigate(job)}>
-                  <JobLargeItem onClickHandle={onClickHandleDisplayModal} onClickDelete={() => deleteJob(job)} />
+                <button key={job.job_id}>
+                  <JobLargeItem onClickHandle={() => handleNavigate(job.job_id)} jobData={job} />
                 </button>
               ))}
             </div>
@@ -95,15 +104,12 @@ const ListJob = () => {
           </div>
         </div>
       </AdminLayout>
-      <CompanyInfoModal
-        onClickHandle={onClickHandleDisplayModal}
-        displayModal={displayModal}
-      />
-      <AddCompanyModal 
-        onClickHandle={onClickHandleDisplayModalAdd}
-        displayModal={displayModalAdd}
-        onSubmit={addJob}
-      />
+      <div style={{ display: jobState.loading ? 'flex' : 'none' }} className={cx('loading')}>
+        <div>
+          <FadeLoader color='rgba(255, 255, 255, 1)' height='10' width='6' />
+          <span style={{ fontWeight: '500', color: 'white', fontSize: '18px' }}>Loading...</span>
+        </div>
+      </div>
     </div>
   )
 }

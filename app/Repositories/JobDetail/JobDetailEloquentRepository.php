@@ -72,6 +72,19 @@ class JobDetailEloquentRepository extends EloquentRepository implements JobDetai
       }
     }
 
+    public function getAllJobs(Request $request) {
+      $jobs = DB::table('job_details')
+                    ->orderBy('job_details.updated_at', 'desc')
+                    ->join('companies', 'job_details.company_id','=', 'companies.company_id')
+                    ->select('companies.company_image','companies.company_name','companies.company_id','job_details.job_id','job_details.job_title','job_details.job_location','job_details.experience_require','job_details.salary','job_details.deadline_job','job_details.status','job_details.candidate_number', 'job_details.level', 'job_details.sex', 'companies.company_link')
+                    ->get();
+      if($jobs) {
+        return $jobs;
+      }else {
+        throw new Exception('jobs not found');
+      }
+    }
+
     public function getListJobsOfCompany (Request $request) {
       $jobs = DB::table('job_details')
                     ->join('companies', 'job_details.company_id','=', 'companies.company_id')
@@ -88,8 +101,18 @@ class JobDetailEloquentRepository extends EloquentRepository implements JobDetai
 
     public function editJobDetail (Request $request) {
       $data = $request->all();
+      $company = DB::table('companies')
+                        ->where('company_name', $data["company_name"])
+                        ->select('company_id')
+                        ->first();
+      unset($data["company_filed"]);
+      unset($data["company_id"]);
+      unset($data["company_image"]);
+      unset($data["company_location"]);
+      unset($data["company_name"]);
+      $data["company_id"] = $company->company_id;
       $job = DB::table('job_details')->where('job_details.job_id', $request->job_id)
                       ->update($data);
-      return $jobs;
+      return $job;
     }
 }

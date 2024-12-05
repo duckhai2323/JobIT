@@ -50,8 +50,9 @@ Route::prefix('jobdetail')->group(function () {
     Route::post('/new', [JobDetailController::class, 'createNewJobDetail']);
     Route::get('/infor/{job_id}', [JobDetailController::class, 'infor']);
     Route::get('/list-jobs', [JobDetailController::class, 'getListJobs']);
+    Route::get('/all-jobs', [JobDetailController::class, 'getAllJobs']);
     Route::get('/list-jobs-company/{company_id}', [JobDetailController::class, 'listJobsOfCompany']);
-    Route::put('/edit-job/{job_id}', [JobDetailController::class, 'editJobDetail']);
+    Route::put('/edit-job/{job_id}', [JobDetailController::class, 'updateJobDetail']);
     // Route::get('/infor/{company_id}',[CompanyController::class,'getInforCompany']);
     // Route::get('/all', [CompanyController::class, 'getListCompanies']);
     // Route::put('/update/{company_id}', [CompanyController::class, 'update']);

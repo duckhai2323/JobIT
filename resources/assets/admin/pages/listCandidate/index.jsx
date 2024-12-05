@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Actions } from '@/redux/reducers/user/userReducer';
+import { Actions } from '@/redux/reducers/admin/userReducer';
 import AdminLayout from '../../components/layout/index';
 import CandidateItem from '../../components/candidateItem/index';
 import CandidateInfoModal from '../../components/candidateInfoModal/index';
@@ -57,11 +57,6 @@ const ListCandidate = () => {
                 <p className={cx("candidate-count")}>{listCandidates.length} ứng viên</p> 
               </div>
             </div>
-            {/* <div className={cx("add-candidate-button")}>
-              <button className={cx("add-button")} onClick={onClickHandleDisplayModalAdd}>
-                + Thêm ứng viên
-              </button>
-            </div> */}
           </div>
           <div className={cx("content")}>
             <div className={cx("candidate-list")}>
