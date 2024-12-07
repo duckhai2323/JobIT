@@ -47,9 +47,6 @@ const ListAdmin = () => {
       setDisplayModalAdd('flex');
     }
   };
-  const addAdmin = () => {
-    setListAdmins((prevAdmins) => [...prevAdmins, listAdmins.length + 1]);
-  }
   const deleteAdmin = (admin) => {
     if(listAdmins) {
       const newListAdmins = listAdmins.filter((index) => index !== admin);
@@ -124,7 +121,6 @@ const ListAdmin = () => {
       <AddAdminModal 
         onClickHandle={onClickHandleDisplayModalAdd}
         displayModal={displayModalAdd}
-        onSubmit={addAdmin}
       />
     </div>
   )

@@ -1,5 +1,5 @@
 import { Actions } from '@/redux/reducers/admin/adminCompaniesReducer';
-import { getListCompanies, updateInforCompany } from '@/services/companyService';
+import { getListCompanies, updateInforCompany, createNewCompany } from '@/services/companyService';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 function* getListCompaniesAdminSaga() {
@@ -28,7 +28,21 @@ function* updateAdminCompanySaga(action) {
   }
 }
 
+function* createNewCompanySaga(action) {
+  try {
+    const response = yield call(createNewCompany, action.payload.data);
+    if (response.success) {
+      yield put(Actions.createCompanySuccess(response));
+    } else {
+      yield put(Actions.createCompanyFailure({ error: response.message || "Vui lòng kiểm tra lại thông tin" }));
+    }
+  } catch (error) {
+    yield put(Actions.createCompanyFailure({ error: error.message || "Vui lòng kiểm tra lại thông tin" }));
+  }
+}
+
 export function* watchCompaniesAdminSagas() {
   yield takeLatest(Actions.getCompaniesRequest.type, getListCompaniesAdminSaga);
   yield takeLatest(Actions.updateCompanyRequest.type, updateAdminCompanySaga);
+  yield takeLatest(Actions.createCompanyRequest.type, createNewCompanySaga);
 }

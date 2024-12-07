@@ -89,4 +89,13 @@ class UserEloquentRepository extends EloquentRepository implements UserRepositor
     }
   }
 
+  public function deleteUser(Request $request) {
+    $user = $this->_model->where('id', $request->user_id)->first();
+    if (!$user) {
+        return throw new Exception('user not found');
+    }
+    $this->_model->where('id', $request->user_id)->delete();
+    return true;
+  }
+
 } 

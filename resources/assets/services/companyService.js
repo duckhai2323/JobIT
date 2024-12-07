@@ -35,3 +35,12 @@ export const updateInforCompany = async (company_id, data) => {
     return error.message;
   }
 }
+
+export const createNewCompany = async (data) => {
+  try {
+    const response = await axios.post('/api/company/new', data);
+    return response;
+  } catch (error) {
+    return error.message;
+  }
+}

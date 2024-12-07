@@ -5,6 +5,7 @@ const initAdminCompaniesState = {
   loading: false,
   error: null,
   selectCompanyId: null,
+  newCompany: null,
   currentPage: null,
 };
 
@@ -84,6 +85,30 @@ const adminCompaniesSlice = createSlice({
     },
 
     updateCompanyFailure: (state, action) => {
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error,
+      };
+    },
+
+    createCompanyRequest: (state) => {
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    },
+
+    createCompanySuccess: (state, action) => {
+      return {
+        ...state,
+        loading: false,
+        newCompany: action.payload.data,
+      }
+    },
+
+    createCompanyFailure: (state, action) => {
       return {
         ...state,
         loading: false,

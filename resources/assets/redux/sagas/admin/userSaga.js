@@ -1,4 +1,5 @@
 import { getListUsers, updateUserAccount } from '@/services/userService';
+import { signUpService } from '@/services/authService';
 import { Actions } from '@/redux/reducers/admin/userReducer';
 import { call, put, takeLatest, delay } from 'redux-saga/effects';
 
@@ -30,7 +31,21 @@ function* updateUserSaga(action) {
   }
 }
 
+function* createNewUserSaga(action) {
+  try {
+    const response = yield call(signUpService, action.payload.data);
+    if (response.success) {
+      yield put(Actions.createUserSuccess(response));
+    } else {
+      yield put(Actions.createUserFailure({ error: response.message || "Vui lòng kiểm tra lại thông tin" }));
+    }
+  } catch (error) {
+    yield put(Actions.createUserFailure({ error: error.message || "Vui lòng kiểm tra lại thông tin" }));
+  }
+}
+
 export function* watchUsersRequest() {
   yield takeLatest(Actions.getUsersRequest.type, getListUsersSaga);
   yield takeLatest(Actions.updateUserRequest, updateUserSaga);
+  yield takeLatest(Actions.createUserRequest.type, createNewUserSaga);
 }

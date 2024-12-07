@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteUser } from '@/services/userService';
+import { Actions } from '@/redux/reducers/admin/userReducer';
 import styles from './adminItem.module.scss';
 import classNames from 'classnames/bind';
 import { MdMarkEmailUnread, MdDelete } from "react-icons/md";
@@ -8,6 +11,7 @@ import { AiOutlineStop, AiOutlineReload } from "react-icons/ai";
 const cx = classNames.bind(styles);
 
 const AdminItem = ({ onClickHandle, adminData }) => {
+  const dispatch = useDispatch();
   const [isActive, setIsActive] = useState(true);
   useEffect(() => {
     setIsActive(adminData.actived);
@@ -17,6 +21,24 @@ const AdminItem = ({ onClickHandle, adminData }) => {
   }
   const activateAccount = () => {
     setIsActive(true);
+  }
+  const deleteAccount = () => {
+    const deleteAcc = async () => {
+      console.log(adminData.id);
+      const response = await deleteUser(adminData.id, { id: adminData.id });
+      if (response.success) {
+        console.log(response.message);
+      }
+      return null;
+    };
+    if(adminData.id) {
+      deleteAcc();
+      const timer = setTimeout(() => {
+        dispatch(Actions.getUsersRequest());
+      }, 500);
+      window.scrollTo(0, 0);
+      return () => clearTimeout(timer);
+    }
   }
   return (
     <div className={cx("admin-card")}>
@@ -47,22 +69,27 @@ const AdminItem = ({ onClickHandle, adminData }) => {
           )
         }
       </div>
-      <div className={cx("admin-options")}>
-        <button className={cx('view-button')} onClick={onClickHandle}>
-          <IoMdEye /> Xem chi tiết
-        </button>
-        {
-          isActive ? (
+      {
+        isActive ? (
+          <div className={cx("admin-options")}>
+            <button className={cx('view-button')} onClick={onClickHandle}>
+              <IoMdEye /> Xem chi tiết
+            </button>
             <button className={cx('delete-button')} onClick={suspendAccount}>
               <AiOutlineStop /> Đóng tài khoản
             </button>
-          ) : (
+          </div>
+        ) : (
+          <div className={cx("admin-options")}>
+            <button className={cx('delete-button')} onClick={deleteAccount}>
+              <MdDelete /> Xóa
+            </button>
             <button className={cx('active-button')} onClick={activateAccount}>
               <AiOutlineReload /> Mở tài khoản
             </button>
-          )
-        }
-      </div>
+          </div>
+        )
+      }
     </div>
   );
 }

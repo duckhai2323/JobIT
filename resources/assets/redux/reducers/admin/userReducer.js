@@ -4,6 +4,7 @@ const initUserState = {
   users: [],
   loading: false,
   error: null,
+  newUser: null,
 };
 
 const userSlice = createSlice({
@@ -55,6 +56,30 @@ const userSlice = createSlice({
     },
 
     updateUserFailure: (state, action) => {
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error,
+      };
+    },
+
+    createUserRequest: (state, action) => {
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    },
+
+    createUserSuccess: (state, action) => {
+      return {
+        ...state,
+        loading: false,
+        newUser: action.payload.data,
+      }
+    },
+
+    createUserFailure: (state, action) => {
       return {
         ...state,
         loading: false,

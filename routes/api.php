@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\JobDetailController;
 use App\Http\Controllers\JobFairController;
+use App\Http\Controllers\ReferenceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,7 @@ Route::prefix('user')->group(function () {
     Route::get('/infor/{user_id}', [UserController::class, 'getInforUser']);
     Route::put('/update/{user_id}', [UserController::class, 'update']);
     Route::put('/activate/{user_id}', [UserController::class, 'updateActive']);
+    Route::delete('/delete/{user_id}', [UserController::class, 'deleteUser']);
 });
 
 Route::prefix('auth')->group(function () {
@@ -65,6 +67,10 @@ Route::prefix('jobfair')->group(function () {
     Route::put('/update-status/{job_fair_id}', [JobFairController::class, 'updateStatusJobFairFunc']);
     Route::put('/update-offer-status/{job_fair_id}', [JobFairController::class, 'updateOfferStatusFunc']);
     Route::get('/list-candidate/{job_id}', [JobFairController::class, 'getListCandidates']);
+});
+
+Route::prefix('reference')->group(function () {
+    Route::post('/new', [ReferenceController::class, 'createNewReference']);
 });
 
 
