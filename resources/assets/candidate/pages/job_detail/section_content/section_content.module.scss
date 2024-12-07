@@ -116,10 +116,28 @@
             }
           }
 
+          .apply-btn-ed {
+            align-items: center;
+            background: #ffffff;
+            border: unset;
+            border-radius: 6px;
+            color: #00b14f;
+            display: flex;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            height: 40px;
+            justify-content: center;
+            letter-spacing: 0.175px;
+            line-height: 22px;
+            padding: 8px 16px;
+            border: 1px solid #00b14f;
+          }
+
           .save-btn {
             align-items: center;
             background: #fff;
-            border: 1px solid #99e0b9;
+            border: 1px solid #00b14f;
             border-radius: 6px;
             color: #00b14f;
             display: flex;

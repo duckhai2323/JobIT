@@ -10,20 +10,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage, faEye } from '@fortawesome/free-solid-svg-icons';
 import FooterHome from '../home/footer';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import useJobsApplyRoleCandidate from '@/hooks/candidate/useApplyJobs';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(style);
 
-const ItemJobApply = () => {
+const ItemJobApply = (props) => {
+  const { company_image, company_name, job_title, salary, job_id } = props;
+  const navigate = useNavigate();
+
   return (
-    <div className={cx('item-job-group')}>
+    <div
+      className={cx('item-job-group')}
+      onClick={() => {
+        navigate(`/jobdetail/${job_id}`);
+      }}
+    >
       <div className={cx('card', 'd-flex')}>
         {/* Logo của công ty */}
         <div className={cx('company-logo')}>
-          <img
-            src='https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/company_logos/cong-ty-co-phan-atomi-digital-62f5d0dae0d35.jpg'
-            alt='Company Logo'
-            style={{ maxHeight: '100%' }}
-          />
+          <img src={company_image} alt='Company Logo' style={{ maxHeight: '100%' }} />
         </div>
 
         {/* Thông tin chi tiết */}
@@ -31,14 +38,14 @@ const ItemJobApply = () => {
           {/* Tiêu đề công việc */}
           <div className={cx('title-block')}>
             <div className={cx('job-title')}>
-              <span className={cx('job-link')}>Thực Tập Sinh Mobile Developers</span>
+              <span className={cx('job-link')}>{job_title}</span>
             </div>
-            <label className={cx('title-salary')}>Thoả thuận</label>
+            <label className={cx('title-salary')}>{salary}</label>
           </div>
 
           {/* Tên công ty */}
           <div className={cx('company-name', 'text-gray')}>
-            <span className={cx('text-gray')}>Công ty Cổ phần Atomi Digital</span>
+            <span className={cx('text-gray')}>{company_name}</span>
           </div>
 
           {/* Thời gian ứng tuyển */}
@@ -124,6 +131,12 @@ const ApplyJobsPage = () => {
   const handleChange = (event) => {
     setFilter(event.target.value);
   };
+  const { applyJobsState, nextToPage, revertToPage } = useJobsApplyRoleCandidate();
+  const jobsPerPage = 6;
+  const startIndex = (applyJobsState.currentPage - 1) * jobsPerPage;
+  const endIndex = startIndex + jobsPerPage;
+  const currentJobs = applyJobsState.jobsApply?.slice(startIndex, endIndex);
+
   return (
     <LayoutCandidate>
       <div className={cx('section-apply-page')}>
@@ -172,13 +185,35 @@ const ApplyJobsPage = () => {
             </div>
 
             <div className={cx('list-jobs-group')}>
-              <ItemJobApply />
-              <ItemJobApply />
-              <ItemJobApply />
-              <ItemJobApply />
-              <ItemJobApply />
-              <ItemJobApply />
-              <ItemJobApply />
+              {currentJobs &&
+                currentJobs.length > 0 &&
+                currentJobs.map((job) => (
+                  <ItemJobApply
+                    key={job.job_fair_id}
+                    company_image={job.company_image}
+                    company_name={job.company_name}
+                    job_title={job.job_title}
+                    salary={job.salary}
+                    job_id={job.job_id}
+                  />
+                ))}
+            </div>
+
+            <div className={cx('list-jobs-group__navigate')}>
+              <div className={cx('arrow-button')} onClick={revertToPage}>
+                <IoIosArrowBack className={cx('icon-arrow')} />
+              </div>
+              <div className={cx('page-number-group')}>
+                <span className={cx('page-number-left')} style={{ color: '#74d86b' }}>
+                  {applyJobsState.currentPage}
+                </span>
+                <span className={cx('page-number-right')} style={{ color: '#6f7882' }}>
+                  /{applyJobsState.jobsApply && Math.ceil(applyJobsState.jobsApply.length / jobsPerPage)}
+                </span>
+              </div>
+              <div className={cx('arrow-button')} onClick={nextToPage}>
+                <IoIosArrowForward className={cx('icon-arrow')} />
+              </div>
             </div>
           </div>
           <div className={cx('section-content-right')}>

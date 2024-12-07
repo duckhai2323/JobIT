@@ -6,7 +6,7 @@ import JobItemHight from '@/candidate/components/jobItemHight';
 const cx = classNames.bind(style);
 
 const SectionContent = (props) => {
-  const { jobDetail, jobsState } = props;
+  const { jobDetail, jobsState, contant, handleApply, applyJobsState, authState, getListJobs } = props;
   return (
     <div className={cx('section-content')}>
       <div className={cx('section-content-group')}>
@@ -95,7 +95,13 @@ const SectionContent = (props) => {
             </div>
 
             <div className={cx('btn-apply-group')}>
-              <button className={cx('apply-btn')}>Ứng tuyển ngay</button>
+              {!contant ? (
+                <button className={cx('apply-btn')} onClick={handleApply}>
+                  Ứng tuyển ngay
+                </button>
+              ) : (
+                <button className={cx('apply-btn-ed')}>Đã ứng tuyển</button>
+              )}
               <button className={cx('save-btn')}>Lưu tin</button>
             </div>
 
@@ -105,7 +111,17 @@ const SectionContent = (props) => {
                 {jobsState &&
                   jobsState.jobs?.length > 0 &&
                   jobDetail &&
-                  jobsState.jobs.map((job) => jobDetail.job_id !== job.job_id && <JobItemHight jobDetail={job} />)}
+                  jobsState.jobs.map(
+                    (job) =>
+                      jobDetail.job_id !== job.job_id && (
+                        <JobItemHight
+                          jobDetail={job}
+                          applyJobsState={applyJobsState}
+                          authState={authState}
+                          getListJobs={getListJobs}
+                        />
+                      )
+                  )}
               </div>
             </div>
           </div>

@@ -132,9 +132,7 @@
 
         button {
           align-items: center;
-          background: #00b14f;
           border-radius: 3px;
-          color: #fff;
           display: flex;
           font-size: 12px;
           font-weight: 400;
@@ -143,6 +141,20 @@
           outline: none;
           padding: 6px 16px;
           border: none;
+          width: 115px;
+          justify-content: center;
+        }
+
+        .apply {
+          cursor: pointer;
+          background: #00b14f;
+          color: #fff;
+        }
+
+        .apply-ed {
+          color: #00b14f;
+          background: #fff;
+          border: 1px solid #00b14f;
         }
 
         .icon-heart {
