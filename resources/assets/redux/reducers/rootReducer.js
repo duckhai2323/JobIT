@@ -4,6 +4,7 @@ import userReducer from './admin/userReducer';
 import jobsReducer from './candidate/jobsReducer';
 import companiesReducer from './candidate/companiesReducer';
 import adminCompaniesReducer from './admin/adminCompaniesReducer';
+import adminJobsReducer from './admin/adminJobsReducer';
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   jobs: jobsReducer,
   companies: companiesReducer,
   adminCompanies: adminCompaniesReducer,
+  adminJobs: adminJobsReducer,
 });
 
 export default rootReducer;

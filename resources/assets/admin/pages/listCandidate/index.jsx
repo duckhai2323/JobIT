@@ -57,11 +57,6 @@ const ListCandidate = () => {
                 <p className={cx("candidate-count")}>{listCandidates.length} ứng viên</p> 
               </div>
             </div>
-            {/* <div className={cx("add-candidate-button")}>
-              <button className={cx("add-button")} onClick={onClickHandleDisplayModalAdd}>
-                + Thêm ứng viên
-              </button>
-            </div> */}
           </div>
           <div className={cx("content")}>
             <div className={cx("candidate-list")}>

@@ -21,4 +21,6 @@ interface JobDetailRepositoryInterface
     public function getListJobsOfCompany (Request $request);
 
     public function index();
+
+    public function getAllJobs(Request $request);
 }
