@@ -13,7 +13,7 @@ import { MdLocationOn } from 'react-icons/md';
 const cx = classNames.bind(style);
 
 const SectionJobInfor = (props) => {
-  const { jobDetail } = props;
+  const { jobDetail, contant, handleApply } = props;
   const navigate = useNavigate();
   return (
     <div className={cx('section-infor')}>
@@ -66,10 +66,17 @@ const SectionJobInfor = (props) => {
               </div>
 
               <div className={cx('btn-apply-group')}>
-                <div className={cx('btn-apply-group__btn')}>
-                  <FaRegPaperPlane />
-                  <span>Ứng tuyển ngay</span>
-                </div>
+                {!contant ? (
+                  <div className={cx('btn-apply-group__btn')} onClick={handleApply}>
+                    <FaRegPaperPlane />
+                    <span>Ứng tuyển ngay</span>
+                  </div>
+                ) : (
+                  <div className={cx('btn-apply-group__btn-apply')}>
+                    <FaRegPaperPlane />
+                    <span>Đã ứng tuyển</span>
+                  </div>
+                )}
                 <div className={cx('btn-apply-group__save')}>
                   <FaRegHeart />
                   <span>Lưu tin</span>
