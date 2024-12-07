@@ -6,6 +6,7 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\JobDetailController;
+use App\Http\Controllers\JobFairController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,6 +57,14 @@ Route::prefix('jobdetail')->group(function () {
     // Route::get('/infor/{company_id}',[CompanyController::class,'getInforCompany']);
     // Route::get('/all', [CompanyController::class, 'getListCompanies']);
     // Route::put('/update/{company_id}', [CompanyController::class, 'update']);
+});
+
+Route::prefix('jobfair')->group(function () {
+    Route::post('/apply', [JobFairController::class, 'applyJobFairFunc']);
+    Route::get('/apply-jobs/{user_id}', [JobFairController::class, 'getApplyJobs']);
+    Route::put('/update-status/{job_fair_id}', [JobFairController::class, 'updateStatusJobFairFunc']);
+    Route::put('/update-offer-status/{job_fair_id}', [JobFairController::class, 'updateOfferStatusFunc']);
+    Route::get('/list-candidate/{job_id}', [JobFairController::class, 'getListCandidates']);
 });
 
 
