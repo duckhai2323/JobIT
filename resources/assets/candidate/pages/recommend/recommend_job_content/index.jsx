@@ -19,12 +19,12 @@ const RecommendContentJob = () => {
             </div>
             <div className={cx('section-left-group__other-jobs')}>
               <div className={cx('list-other-jobs')}>
+                {/* <JobItemHight />
                 <JobItemHight />
                 <JobItemHight />
                 <JobItemHight />
                 <JobItemHight />
-                <JobItemHight />
-                <JobItemHight />
+                <JobItemHight /> */}
               </div>
             </div>
           </div>
