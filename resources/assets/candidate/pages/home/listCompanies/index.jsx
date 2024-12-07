@@ -3,9 +3,11 @@ import style from './listCompanies.module.scss';
 import classNames from 'classnames/bind';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import useCompaniesRoleCandidate from '@/hooks/candidate/useCompany';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(style);
 const ListCompanies = () => {
+  const navigate = useNavigate();
   const { companiesState, nextToPage, revertToPage } = useCompaniesRoleCandidate();
   const companiesPerPage = 4;
   const startIndex = (companiesState.currentPage - 1) * companiesPerPage;
@@ -30,7 +32,13 @@ const ListCompanies = () => {
           {currentCompanies &&
             currentCompanies.length > 0 &&
             currentCompanies.map((company) => (
-              <div className={cx('item-company')} key={company.company_id}>
+              <div
+                className={cx('item-company')}
+                key={company.company_id}
+                onClick={() => {
+                  navigate(`/company-infor/${company.company_id}`);
+                }}
+              >
                 <div className={cx('image-company')}>
                   <img src={company.company_image} />
                 </div>

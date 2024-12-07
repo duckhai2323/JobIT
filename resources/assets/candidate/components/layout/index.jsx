@@ -49,60 +49,79 @@ const LayoutCandidate = ({ children }) => {
             <BiSolidMessageDetail size={'24px'} />
           </div>
           <div
-            className={cx('navigate-bar-right__avatar')}
-            onClick={() => {
-              setOpenOptionProfile(!openOptionProfile);
+            onMouseEnter={() => {
+              setOpenOptionProfile(true);
+            }}
+            onMouseLeave={() => {
+              setOpenOptionProfile(false);
             }}
           >
-            <img src={'https://static.topcv.vn/avatars/1anT8P94WjH0kTjcOtOR_645a8d798b2e6_cvtpl.jpg'} />
-          </div>
-
-          <div className={cx('container-option')} style={{ display: openOptionProfile && 'flex' }}>
-            <div className={cx('profile-image-group')}>
-              <div className={cx('profile-image-group__image')}>
-                <img src={'https://static.topcv.vn/avatars/1anT8P94WjH0kTjcOtOR_645a8d798b2e6_cvtpl.jpg'} />
-              </div>
-              <div className={cx('profile-image-group__infor')}>
-                <span className={cx('user-name')}>Tran Duc Khai</span>
-                <span className={cx('user-id')}>Mã ứng viên: #4966876</span>
-                <span className={cx('user-email')}>tranduckhai26112003@gmail.com</span>
-              </div>
+            <div className={cx('navigate-bar-right__avatar')}>
+              <img src={'https://static.topcv.vn/avatars/1anT8P94WjH0kTjcOtOR_645a8d798b2e6_cvtpl.jpg'} />
             </div>
 
-            <div className={cx('item-option-group')}>
-              <div className={cx('item-option-group__item')}>
-                <FaRegEdit style={{ fontSize: '20px', color: '#00b14f' }} />
-                <span>Cài đặt thông tin hồ sơ</span>
-              </div>
-              <div className={cx('item-option-group__item')}>
-                <FaRegArrowAltCircleUp style={{ fontSize: '20px', color: '#00b14f' }} />
-                <span>Công việc ứng tuyển</span>
-              </div>
-              <div className={cx('item-option-group__item')}>
-                <MdBookmarkBorder style={{ fontSize: '20px', color: '#00b14f' }} />
-                <span>Công việc đã lưu</span>
-              </div>
-              <div className={cx('item-option-group__item')}>
-                <MdApartment style={{ fontSize: '20px', color: '#00b14f' }} />
-                <span>Danh sách công ty theo dõi</span>
-              </div>
-              <div className={cx('item-option-group__item')}>
-                <MdOutlineSettings style={{ fontSize: '20px', color: '#00b14f' }} />
-                <span>Cài đặt gợi ý việc làm</span>
-              </div>
-              <div className={cx('item-option-group__item')}>
-                <MdOutlineLock style={{ fontSize: '20px', color: '#00b14f' }} />
-                <span>Đổi mật khẩu</span>
-              </div>
-              <div className={cx('item-option-group__item')}>
-                <MdLogout style={{ fontSize: '20px', color: '#00b14f' }} />
-                <span style={{ color: '#e74c3c' }}>Đăng xuất</span>
-              </div>
-            </div>
+            <NavBarMenuProfile openOptionProfile={openOptionProfile} />
           </div>
         </div>
       </div>
       <div className={cx('content-section')}>{children}</div>
+    </div>
+  );
+};
+
+const NavBarMenuProfile = (props) => {
+  const { openOptionProfile } = props;
+  const navigate = useNavigate();
+  return (
+    <div className={cx('navbar-menu')}>
+      <div className={cx('container-option')} style={{ display: openOptionProfile && 'flex' }}>
+        <div className={cx('profile-image-group')}>
+          <div className={cx('profile-image-group__image')}>
+            <img src={'https://static.topcv.vn/avatars/1anT8P94WjH0kTjcOtOR_645a8d798b2e6_cvtpl.jpg'} />
+          </div>
+          <div className={cx('profile-image-group__infor')}>
+            <span className={cx('user-name')}>Tran Duc Khai</span>
+            <span className={cx('user-id')}>Mã ứng viên: #4966876</span>
+            <span className={cx('user-email')}>tranduckhai26112003@gmail.com</span>
+          </div>
+        </div>
+
+        <div className={cx('item-option-group')}>
+          <div className={cx('item-option-group__item')}>
+            <FaRegEdit style={{ fontSize: '20px', color: '#00b14f' }} />
+            <span>Cài đặt thông tin hồ sơ</span>
+          </div>
+          <div
+            className={cx('item-option-group__item')}
+            onClick={() => {
+              navigate('/apply-jobs');
+            }}
+          >
+            <FaRegArrowAltCircleUp style={{ fontSize: '20px', color: '#00b14f' }} />
+            <span>Công việc ứng tuyển</span>
+          </div>
+          <div className={cx('item-option-group__item')}>
+            <MdBookmarkBorder style={{ fontSize: '20px', color: '#00b14f' }} />
+            <span>Công việc đã lưu</span>
+          </div>
+          <div className={cx('item-option-group__item')}>
+            <MdApartment style={{ fontSize: '20px', color: '#00b14f' }} />
+            <span>Danh sách công ty theo dõi</span>
+          </div>
+          <div className={cx('item-option-group__item')}>
+            <MdOutlineSettings style={{ fontSize: '20px', color: '#00b14f' }} />
+            <span>Cài đặt gợi ý việc làm</span>
+          </div>
+          <div className={cx('item-option-group__item')}>
+            <MdOutlineLock style={{ fontSize: '20px', color: '#00b14f' }} />
+            <span>Đổi mật khẩu</span>
+          </div>
+          <div className={cx('item-option-group__item')}>
+            <MdLogout style={{ fontSize: '20px', color: '#00b14f' }} />
+            <span style={{ color: '#e74c3c' }}>Đăng xuất</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

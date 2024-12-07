@@ -7,6 +7,8 @@ import { FaRegPaperPlane, FaRegHeart } from 'react-icons/fa';
 import { IoMdPeople } from 'react-icons/io';
 import { LuExternalLink } from 'react-icons/lu';
 import { useNavigate } from 'react-router-dom';
+import { RiMoneyDollarCircleLine } from 'react-icons/ri';
+import { MdLocationOn } from 'react-icons/md';
 
 const cx = classNames.bind(style);
 
@@ -30,7 +32,9 @@ const SectionJobInfor = (props) => {
               <span className={cx('job-name')}>{jobDetail && jobDetail.job_title}</span>
               <div className={cx('icon-container')}>
                 <div className={cx('icon-group')}>
-                  <div className={cx('icon')}></div>
+                  <div className={cx('icon')}>
+                    <RiMoneyDollarCircleLine style={{ fontSize: '35px', color: 'white' }} />
+                  </div>
                   <div className={cx('infor-subtitle-group')}>
                     <span className={cx('title')}>Mức lương</span>
                     <span className={cx('subtitle')}>{jobDetail && jobDetail.salary}</span>
@@ -38,7 +42,9 @@ const SectionJobInfor = (props) => {
                 </div>
 
                 <div className={cx('icon-group')}>
-                  <div className={cx('icon')}></div>
+                  <div className={cx('icon')}>
+                    <MdLocationOn style={{ fontSize: '35px', color: 'white' }} />
+                  </div>
                   <div className={cx('infor-subtitle-group')}>
                     <span className={cx('title')}>Địa điểm</span>
                     <span className={cx('subtitle')}>{jobDetail && jobDetail.job_location}</span>
