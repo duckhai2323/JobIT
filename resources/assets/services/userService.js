@@ -17,3 +17,13 @@ export const updateUserAccount = async (id, data) => {
     return error.message;
   }
 }
+
+export const deleteUser = async (id, data) => {
+  try {
+    const response = await axios.delete(`/api/user/delete/${id}`, data);
+    console.log(`call deleteUser api with ${data.id}`);
+    return response;
+  } catch (error) {
+    return error.message;
+  }
+}

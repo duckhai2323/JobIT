@@ -32,6 +32,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\JobFair\JobFairRepositoryInterface::class,
             \App\Repositories\JobFair\JobFairEloquentRepository::class,
         );
+
+        $this->app->singleton(
+            \App\Repositories\Reference\ReferenceRepositoryInterface::class,
+            \App\Repositories\Reference\ReferenceEloquentRepository::class,
+        );
     }
 
     /**

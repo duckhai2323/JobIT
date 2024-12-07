@@ -1,40 +1,127 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import useUserRoleAdmin from '@/hooks/admin/useUser';
+import useCompaniesRoleAdmin from '@/hooks/admin/useAdminCompany';
 import styles from './addCompanyModal.module.scss';
 import classNames from 'classnames/bind';
 import { IoMdClose } from 'react-icons/io';
 import { FaAddressBook } from "react-icons/fa";
+import { createNewReference } from '@/services/referenceService';
+import { createNewCompany } from '@/services/companyService';
+import { signUpService } from '@/services/authService';
 
 const cx = classNames.bind(styles);
 
-const AddCompanyModal = ({ displayModal, onClickHandle, onSubmit }) => {
+const AddCompanyModal = ({ displayModal, onClickHandle, loader }) => {
+  const { companiesState, getListCompanies } = useCompaniesRoleAdmin();
+  const { userState, getListUsers } = useUserRoleAdmin();
   const [companyName, setCompanyName] = useState("");
   const [companyEmail, setCompanyEmail] = useState("");
+  const [companyLink, setCompanyLink] = useState("");
   const [employeeScale, setEmployeeScale] = useState("");
   const [companyIntro, setCompanyIntro] = useState("");
   const [companyLocation, setCompanyLocation] = useState("");
   const [companyField, setCompanyField] = useState("");
   const [companyOrganize, setCompanyOrganize] = useState("");
+  const [companyTaxCode, setCompanyTaxCode] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
-  const addCompany = (e) => {
+  const addCompany = async (e) => {
     e.preventDefault();
-    if(password === confirmPassword) {
+  
+    if (password === confirmPassword && password !== "") {
       setError("");
-      onSubmit();
-      onClickHandle();
+  
+      const companyData = {
+        company_name: companyName,
+        email: companyEmail,
+        employee_scale: employeeScale,
+        company_intro: companyIntro,
+        company_link: companyLink,
+        company_location: companyLocation,
+        company_organize: companyOrganize,
+        company_filed: companyField,
+        status: 1,
+        tax_code: companyTaxCode,
+      };
+  
+      const userData = {
+        name: name,
+        email: email,
+        password: password,
+        repassword: confirmPassword,
+        role: "2",
+      };
+  
+      try {
+        // Tạo công ty và người dùng
+        console.log("Creating company and user...");
+        let newUser = null;
+        let newCompany = null;
+        const addCompany = async () => {
+          loader(true);
+          const response = await createNewCompany(companyData);
+          if (response.success) {
+            newCompany = response.data;
+          }
+          getListCompanies();
+          const response2 = await signUpService(userData);
+          if (response2) {
+            newUser = response2;
+          } else {
+            console.log(response2);
+          }
+          loader(false);
+          console.log(newUser);
+          console.log(newCompany);
+          const timer = setTimeout(() => {
+            if (newUser && newCompany) {
+              console.log("Creating reference...");
+              // Tạo reference
+              createNewReference({
+                user_id: newUser.id,
+                company_id: newCompany.company_id,
+                role: 1,
+              });
+              console.log("Reference created successfully!");
+            } else {
+              console.error("Error: Unable to find new user or company!");
+            }
+          }, 2000);
+        }
+        addCompany();
+        onClickHandle();
+      } catch (err) {
+        console.error("Error occurred:", err);
+        setError("Đã xảy ra lỗi trong quá trình xử lý.");
+      }
     } else {
-      setError("Mật khẩu và nhập lại mật khẩu không khớp.")
+      setError("Mật khẩu và nhập lại mật khẩu không khớp.");
     }
-  }
+  };
 
   useEffect(() => {
     if(displayModal === 'none') {
       setError("");
+    } else {
+      setCompanyName("");
+      setCompanyEmail("");
+      setCompanyLink("");
+      setEmployeeScale("");
+      setCompanyIntro("");
+      setCompanyLocation("");
+      setCompanyField("");
+      setCompanyOrganize("");
+      setCompanyTaxCode("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
     }
-  }, [displayModal])
+  }, [displayModal]);
 
   return (
     <div style={{ display: displayModal }} className={cx('company-info-modal')}>
@@ -53,6 +140,20 @@ const AddCompanyModal = ({ displayModal, onClickHandle, onSubmit }) => {
             {error && (<div className={cx('error-message')}>
               <i style={{ color: 'red' }}>*</i> <span style={{ color: 'red' }}>{error}</span>
             </div>)}
+            <div className={cx('info-item')}>
+              <label for="name" className={cx('info-label')}>
+                Tên đăng nhập<i style={{ color: 'red' }}>*</i> : 
+              </label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="" 
+                className={cx('info-content')}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
             <div className={cx('info-item')}>
               <label for="email" className={cx('info-label')}>
                 Email đăng nhập<i style={{ color: 'red' }}>*</i> : 
@@ -140,6 +241,20 @@ const AddCompanyModal = ({ displayModal, onClickHandle, onSubmit }) => {
               />
             </div>
             <div className={cx('info-item')}>
+              <label for="company-link" className={cx('info-label')}>
+                Link công ty: 
+              </label>
+              <input
+                type="text"
+                name="company-link"
+                id="company-link"
+                placeholder="" 
+                className={cx('info-content')}
+                value={companyLink}
+                onChange={(e) => setCompanyLink(e.target.value)}
+              />
+            </div>
+            <div className={cx('info-item')}>
               <label for="employee-scale" className={cx('info-label')}>
                 Nhân sự: 
               </label>
@@ -207,6 +322,20 @@ const AddCompanyModal = ({ displayModal, onClickHandle, onSubmit }) => {
                 className={cx('info-content')}
                 value={companyOrganize}
                 onChange={(e) => setCompanyOrganize(e.target.value)}
+              />
+            </div>
+            <div className={cx('info-item')}>
+              <label for="company-tax-code" className={cx('info-label')}>
+                Mã số thuế: 
+              </label>
+              <input
+                type="text"
+                name="company-tax-code"
+                id="company-tax-code"
+                placeholder="" 
+                className={cx('info-content')}
+                value={companyTaxCode}
+                onChange={(e) => setCompanyTaxCode(e.target.value)}
               />
             </div>
             <div className={cx("submit-button")}>

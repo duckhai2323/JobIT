@@ -17,7 +17,7 @@ const ListCompany = () => {
   const companyState = useSelector((state) => state.adminCompanies);
   const [displayModal, setDisplayModal] = useState('none');
   const [displayModalAdd, setDisplayModalAdd] = useState('none');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [listCompanies, setListCompanies] = useState([]);
   useEffect(() => {
     dispatch(Actions.getCompaniesRequest());
@@ -102,7 +102,7 @@ const ListCompany = () => {
           </div>
         </div>
       </AdminLayout>
-      <div style={{ display: companyState.loading ? 'flex' : 'none' }} className={cx('loading')}>
+      <div style={{ display: (companyState.loading || loading) ? 'flex' : 'none' }} className={cx('loading')}>
         <div>
           <FadeLoader color='rgba(255, 255, 255, 1)' height='10' width='6' />
           <span style={{ fontWeight: '500', color: 'white', fontSize: '18px' }}>Loading...</span>
@@ -115,7 +115,7 @@ const ListCompany = () => {
       <AddCompanyModal 
         onClickHandle={onClickHandleDisplayModalAdd}
         displayModal={displayModalAdd}
-        onSubmit={addCompany}
+        loader={setLoading}
       />
     </div>
   )

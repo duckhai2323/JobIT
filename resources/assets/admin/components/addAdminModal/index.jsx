@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Actions } from '@/redux/reducers/admin/userReducer';
 import styles from './addAdminModal.module.scss';
 import classNames from 'classnames/bind';
 import { IoMdClose } from 'react-icons/io';
@@ -6,7 +8,8 @@ import { FaAddressBook } from "react-icons/fa";
 
 const cx = classNames.bind(styles);
 
-const AddAdminModal = ({ displayModal, onClickHandle, onSubmit }) => {
+const AddAdminModal = ({ displayModal, onClickHandle }) => {
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,10 +18,24 @@ const AddAdminModal = ({ displayModal, onClickHandle, onSubmit }) => {
 
   const addAdmin = (e) => {
     e.preventDefault();
-    if(password === confirmPassword) {
+    if(password === confirmPassword && password !== "") {
+      const inputData = {
+        name: name,
+        email: email,
+        password: password,
+        repassword: confirmPassword,
+        role: "1",
+      };
+      console.log(inputData);
+      dispatch(Actions.createUserRequest({
+        data: inputData,
+      }));
+      const timer = setTimeout(() => {
+        dispatch(Actions.getUsersRequest());
+        onClickHandle();
+      }, 500);
       setError("");
-      onSubmit();
-      onClickHandle();
+      return () => clearTimeout(timer);
     } else {
       setError("Mật khẩu và nhập lại mật khẩu không khớp.")
     }

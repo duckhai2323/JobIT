@@ -20,4 +20,6 @@ interface UserRepositoryInterface
     public function editUser(Request $request);
 
     public function getDetailOfUser(Request $request);
+
+    public function deleteUser(Request $request);
 }

@@ -156,4 +156,19 @@ class UserController extends Controller
             );
         }
     }
+
+    public function deleteUser(Request $request) {
+        try {
+            $this->userRepository->deleteUser($request);
+            return response()->json([
+                'message' => 'user deleted',
+                'success' => 1,
+            ], 200);
+        } catch (Exception $err) {
+            return response()->json([
+                'message' => $err->getMessage(),
+                'success' => 0,
+            ]);
+        }
+    }
 }

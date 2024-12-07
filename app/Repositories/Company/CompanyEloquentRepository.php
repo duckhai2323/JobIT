@@ -26,6 +26,11 @@ class CompanyEloquentRepository extends EloquentRepository implements CompanyRep
                 $data = $this->_model->create([
                   'company_name' =>$temp['company_name'],
                   'email' => $temp['email'],
+                  'employee_scale' => $temp['employee_scale'],
+                  'company_intro' => $temp['company_intro'],
+                  'company_location' => $temp['company_location'],
+                  'company_organize' => $temp['company_organize'],
+                  'company_filed' => $temp['company_filed'],
                   'company_link' =>  $temp['company_link'],
                   'tax_code' => $temp['tax_code'],
                   'status' => $temp['status']
