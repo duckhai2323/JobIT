@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { Actions } from '@/redux/reducers/admin/userReducer';
 import styles from './adminInfoModal.module.scss';
 import classNames from 'classnames/bind';
 import { IoMdClose } from 'react-icons/io';
@@ -7,6 +9,8 @@ import { FaEdit, FaAddressBook } from "react-icons/fa";
 const cx = classNames.bind(styles);
 
 const AdminInfoModal = ({ displayModal, onClickHandle, currentAdmin }) => {
+  const dispatch = useDispatch();
+  const userState = useSelector((state) => state.user);
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState("Admin01");
   const [email, setEmail] = useState("company1@gmail.com");
@@ -16,11 +20,31 @@ const AdminInfoModal = ({ displayModal, onClickHandle, currentAdmin }) => {
 
   const updateAccount = (e) => {
     e.preventDefault();
-    if(password === confirmPassword) {
+    if (password === confirmPassword) {
+      const payload = {
+        id: currentAdmin.id,
+        name: name,
+      };
+      if (email !== currentAdmin.email) {
+        payload.email = email;
+      }
+      if (password.length >= 8) {
+        payload.password = password;
+        payload.repassword = confirmPassword;
+      }
+      console.log(payload);
+      dispatch(
+        Actions.updateUserRequest({
+          userId: currentAdmin.id,
+          data: payload,
+        })
+      );
       setIsEditing(false);
+      setPassword("");
+      setConfirmPassword("");
       setError("");
     } else {
-      setError("Mật khẩu và nhập lại mật khẩu không khớp.")
+      setError("Mật khẩu và nhập lại mật khẩu không khớp.");
     }
   }
 
@@ -63,8 +87,8 @@ const AdminInfoModal = ({ displayModal, onClickHandle, currentAdmin }) => {
                   </label>
                   <input
                     type="text"
-                    name="admin-name"
-                    id="admin-name"
+                    name="name"
+                    id="name"
                     placeholder=""
                     className={cx('info-content')}
                     value={name}
@@ -77,8 +101,8 @@ const AdminInfoModal = ({ displayModal, onClickHandle, currentAdmin }) => {
                   </label>
                   <input
                     type="text"
-                    name="admin-email"
-                    id="admin-email"
+                    name="email"
+                    id="email"
                     placeholder="" 
                     className={cx('info-content')}
                     value={email}
@@ -105,8 +129,8 @@ const AdminInfoModal = ({ displayModal, onClickHandle, currentAdmin }) => {
                   </label>
                   <input
                     type="text"
-                    name="confirm-password"
-                    id="confirm-password"
+                    name="repassword"
+                    id="repassword"
                     placeholder="" 
                     className={cx('info-content')}
                     value={confirmPassword}

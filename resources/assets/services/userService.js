@@ -8,3 +8,12 @@ export const getListUsers = async () => {
     return error.message;
   }
 };
+
+export const updateUserAccount = async (id, data) => {
+  try {
+    const response = await axios.put(`/api/user/update/${id}`, data);
+    return response;
+  } catch (error) {
+    return error.message;
+  }
+}
