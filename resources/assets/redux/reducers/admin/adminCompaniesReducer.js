@@ -62,6 +62,34 @@ const adminCompaniesSlice = createSlice({
         selectCompanyId: action.payload,
       };
     },
+
+    updateCompanyRequest: (state) => {
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    },
+
+    updateCompanySuccess: (state, action) => {
+      const updatedCompany = action.payload.data;
+
+      return {
+        ...state,
+        loading: false,
+        companies: state.companies.map((company) =>
+          company.company_id === updatedCompany.company_id ? updatedCompany : company
+        ),
+      };
+    },
+
+    updateCompanyFailure: (state, action) => {
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error,
+      };
+    },
   },
 });
 

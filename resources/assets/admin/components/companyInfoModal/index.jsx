@@ -1,14 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import { Actions } from '@/redux/reducers/admin/adminCompaniesReducer';
 import styles from './companyInfoModal.module.scss';
 import classNames from 'classnames/bind';
 import { IoMdClose } from 'react-icons/io';
 import { FaEdit, FaAddressBook } from "react-icons/fa";
 import JobItem from '../jobItem';
+import { getListJobsOfCompany } from '@/services/companyService';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleNavigate = (jobId) => {
+    navigate(`/jobs/${jobId}`);
+  }
+  const modalBodyRef = useRef(null);
   const companyState = useSelector((state) => state.adminCompanies);
   const [currentTab, setCurrentTab] = useState(1);
   const [displayTab1, setDisplayTab1] = useState('flex');
@@ -28,10 +37,11 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
   const [email, setEmail] = useState("company1@gmail.com");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [listJobsOfCompany, setListJobsOfCompany] = useState([]);
   const [error, setError] = useState("");
   const formatDate = (dateString) => {
     const [year, month, day] = dateString.split("-");
-    return `${day}-${month}-${year}`;
+    return `${day}/${month}/${year}`;
   };
   const onChangeTab = (tab) => {
     setCurrentTab(tab);
@@ -52,6 +62,24 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
 
   const updateCompany = (e) => {
     e.preventDefault();
+    const inputData = {
+      company_name: companyName,
+      company_email: companyEmail,
+      company_link: companyLink,
+      employee_scale: employeeScale,
+      company_intro: companyIntro,
+      company_location: companyLocation,
+      company_filed: companyField,
+      company_organize: companyOrganize,
+      tax_code: companyTaxCode,
+    };
+    dispatch(Actions.updateCompanyRequest({
+      companyId: companyState.selectCompanyId,
+      data: inputData,
+    }));
+    const timer = setTimeout(() => {
+      dispatch(Actions.getCompaniesRequest());
+    }, 500);
     setIsEditingTab1(false);
   }
 
@@ -75,6 +103,14 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
       setIsEditingTab2(false);
       setError("");
     } else if(companyState.selectCompanyId) {
+      const getListJobsById = async () => {
+        const response = await getListJobsOfCompany(companyState.selectCompanyId);
+        if (response.success) {
+          console.log(response.data);
+          setListJobsOfCompany(response.data);
+        }
+        return null;
+      };
       const company = companyState.companies.find(company => company.company_id === companyState.selectCompanyId);
       console.log(companyState.selectCompanyId);
       setCompanyName(company.company_name);
@@ -86,8 +122,10 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
       setCompanyField(company.company_filed);
       setCompanyOrganize(company.company_organize);
       setCompanyTaxCode(company.tax_code);
+      getListJobsById();
+      modalBodyRef.current.scrollTop = 0;
     }
-  }, [displayModal, companyState]);
+  }, [displayModal]);
   return (
     <div style={{ display: displayModal }} className={cx('company-info-modal')}>
       <div className={cx('modal-background')}>
@@ -245,7 +283,7 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
               </form>
             </div>
           ) : (
-            <div style={{ display: displayTab1 }} className={cx('modal-body')}>
+            <div style={{ display: displayTab1 }} className={cx('modal-body')} ref={modalBodyRef}>
               <div className={cx("first-row")}>
                 <div className={cx("company-logo")}>
                   <img 
@@ -374,21 +412,15 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
             </div>
           )}
           <div style={{ display: displayTab3 }} className={cx('modal-body-2')}>
-            <JobItem 
-              jobTitle="Chuyên Viên Kinh Doanh Xuất Nhập Khẩu/Order Hàng Trung Quốc - Taobao,1688 - Thưởng 2 Triệu Khi Nhận Việc" 
-              companyName="CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ" 
-              location="Hà Nội"
-            />
-            <JobItem 
-              jobTitle="Chuyên Viên Kinh Doanh Xuất Nhập Khẩu/Order Hàng Trung Quốc - Taobao,1688 - Thưởng 2 Triệu Khi Nhận Việc" 
-              companyName="CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ" 
-              location="Hà Nội"
-            />
-            <JobItem 
-              jobTitle="Chuyên Viên Kinh Doanh Xuất Nhập Khẩu/Order Hàng Trung Quốc - Taobao,1688 - Thưởng 2 Triệu Khi Nhận Việc" 
-              companyName="CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ" 
-              location="Hà Nội"
-            />
+            {listJobsOfCompany && listJobsOfCompany.map((job) => (
+              <button key={job.job_id} onClick={() => handleNavigate(job.job_id)}>
+                <JobItem
+                  jobTitle={job.job_title}
+                  companyName={companyName}
+                  location={job.job_location} 
+                />
+              </button>
+            ))}
           </div>
         </div>
       </div>

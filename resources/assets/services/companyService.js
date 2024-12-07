@@ -26,3 +26,12 @@ export const getListJobsOfCompany = async (company_id) => {
     return error.message;
   }
 };
+
+export const updateInforCompany = async (company_id, data) => {
+  try {
+    const response = await axios.put(`/api/company/update/${company_id}`, data);
+    return response;
+  } catch (error) {
+    return error.message;
+  }
+}
