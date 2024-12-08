@@ -8,6 +8,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\JobDetailController;
 use App\Http\Controllers\JobFairController;
 use App\Http\Controllers\ReferenceController;
+use App\Http\Controllers\SaveJobController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -71,6 +72,12 @@ Route::prefix('jobfair')->group(function () {
 
 Route::prefix('reference')->group(function () {
     Route::post('/new', [ReferenceController::class, 'createNewReference']);
+});
+
+Route::prefix('save-job')->group(function () {
+    Route::post('/create', [SaveJobController::class, 'saveJobFunc']);
+    Route::delete('/{job_id}/{user_id}', [SaveJobController::class, 'deleteSaveJobFunc']);
+    Route::get('/list-jobs/{user_id}', [SaveJobController::class, 'getListSaveJobs']);
 });
 
 

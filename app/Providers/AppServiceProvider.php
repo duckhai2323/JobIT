@@ -37,6 +37,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Reference\ReferenceRepositoryInterface::class,
             \App\Repositories\Reference\ReferenceEloquentRepository::class,
         );
+
+        $this->app->singleton(
+            \App\Repositories\SaveJob\SaveJobRepositoryInterface::class,
+            \App\Repositories\SaveJob\SaveJobEloquentRepository::class,
+        );
     }
 
     /**

@@ -5,7 +5,7 @@ import { IoMdNotifications } from 'react-icons/io';
 import { BiSolidMessageDetail } from 'react-icons/bi';
 import { FaRegEdit, FaRegArrowAltCircleUp } from 'react-icons/fa';
 import { MdLogout, MdOutlineLock, MdBookmarkBorder, MdOutlineSettings, MdApartment } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -34,7 +34,9 @@ const LayoutCandidate = ({ children }) => {
             <span>Hồ sơ & CV</span>
           </div>
           <div className={cx('header-item')}>
-            <span>Công ty</span>
+            <NavLink to={'/list-companies'} style={{ textDecoration: 'none', color: '#333' }}>
+              <span>Công ty</span>
+            </NavLink>
           </div>
           <div className={cx('header-item')}>
             <span>Phỏng vấn</span>
