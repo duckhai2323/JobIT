@@ -7,11 +7,12 @@ import { IoMdClose } from 'react-icons/io';
 import { FaEdit, FaAddressBook } from "react-icons/fa";
 import JobItem from '../jobItem';
 import { getListJobsOfCompany } from '@/services/companyService';
+import { getCompanyAccount, updateUserAccount } from '@/services/userService';
 import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
+const CompanyInfoModal = ({ displayModal, onClickHandle, loader }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleNavigate = (jobId) => {
@@ -25,6 +26,7 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
   const [displayTab3, setDisplayTab3] = useState('none');
   const [isEditingTab1, setIsEditingTab1] = useState(false);
   const [isEditingTab2, setIsEditingTab2] = useState(false);
+  const [companyImage, setCompanyImage] = useState("");
   const [companyName, setCompanyName] = useState("CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ");
   const [companyEmail, setCompanyEmail] = useState("gobiz.inc@gobiz.com");
   const [companyLink, setCompanyLink] = useState("https://gobiz.vn/");
@@ -34,6 +36,9 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
   const [companyField, setCompanyField] = useState("Cung cấp các phần mềm quản lý nhập hàng và logistics");
   const [companyOrganize, setCompanyOrganize] = useState("2018-09-01");
   const [companyTaxCode, setCompanyTaxCode] = useState("0108368751");
+  const [id, setId] = useState("");
+  const [initialEmail, setInitialEmail] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("company1@gmail.com");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -46,17 +51,38 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
   const onChangeTab = (tab) => {
     setCurrentTab(tab);
     if(tab === 1) {
+      loader(true);
+      const timer = setTimeout(() => {
+        loader(false);
+      }, 3000);
       setDisplayTab1('flex');
       setDisplayTab2('none');
       setDisplayTab3('none');
+      setIsEditingTab2(false);
+      setPassword("");
+      setConfirmPassword("");
+      return () => clearTimeout(timer);
     } else if(tab === 2) {
       setDisplayTab2('flex');
       setDisplayTab1('none');
       setDisplayTab3('none');
+      setIsEditingTab1(false);
+      loader(true);
+      const timer = setTimeout(() => {
+        loader(false);
+      }, 3000);
+      return () => clearTimeout(timer);
     } else if(tab === 3) {
       setDisplayTab3('flex');
       setDisplayTab1('none');
       setDisplayTab2('none');
+      setIsEditingTab2(false);
+      setIsEditingTab1(false);
+      loader(true);
+      const timer = setTimeout(() => {
+        loader(false);
+      }, 3000);
+      return () => clearTimeout(timer);
     }
   }
 
@@ -81,13 +107,44 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
       dispatch(Actions.getCompaniesRequest());
     }, 500);
     setIsEditingTab1(false);
+    return () => clearTimeout(timer);
   }
 
   const updateAccount = (e) => {
     e.preventDefault();
     if(password === confirmPassword) {
+      const payload = {
+        id: id,
+        name: name,
+      };
+      if (email !== initialEmail) {
+        payload.email = email;
+      }
+      if (password.length >= 8) {
+        payload.password = password;
+        payload.repassword = confirmPassword;
+      } else {
+        setError("Mật khẩu quá ngắn.")
+      }
+      console.log(payload);
+      loader(true);
+      const updateCompanyAccount = async () => {
+        const response = await updateUserAccount(id, payload);
+        if(response.success) {
+          console.log("update company account successful");
+        }
+        return null;
+      }
+      updateCompanyAccount();
+      const timer = setTimeout(() => {
+        loader(false);
+      }, 3000);
       setIsEditingTab2(false);
+      setInitialEmail(email);
+      setPassword("");
+      setConfirmPassword("");
       setError("");
+      return () => clearTimeout(timer);
     } else {
       setError("Mật khẩu và nhập lại mật khẩu không khớp.")
     }
@@ -111,6 +168,18 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
         }
         return null;
       };
+      const getCompanyInfor = async () => {
+        const response2 = await getCompanyAccount(companyState.selectCompanyId);
+        if (response2.success) {
+          console.log(response2.data);
+          setId(response2.data.id);
+          setName(response2.data.name);
+          setInitialEmail(response2.data.email);
+          setEmail(response2.data.email);
+          setPassword("");
+          setConfirmPassword("");
+        }
+      };
       const company = companyState.companies.find(company => company.company_id === companyState.selectCompanyId);
       console.log(companyState.selectCompanyId);
       setCompanyName(company.company_name);
@@ -122,7 +191,9 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
       setCompanyField(company.company_filed);
       setCompanyOrganize(company.company_organize);
       setCompanyTaxCode(company.tax_code);
+      setCompanyImage(company.company_image);
       getListJobsById();
+      getCompanyInfor();
       modalBodyRef.current.scrollTop = 0;
     }
   }, [displayModal]);
@@ -142,11 +213,14 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
             <div style={{ display: displayTab1 }} className={cx('modal-body')}>
               <div className={cx("company-logo")}>
                 <img 
-                  src="https://avatars.githubusercontent.com/u/2322183?s=200&v=4" 
+                  src={companyImage ? companyImage : "https://avatars.githubusercontent.com/u/2322183?s=200&v=4"}
                   alt="company-logo" 
                   className={cx("logo")} 
                 />
               </div>
+              {error && (<div className={cx('error-message')}>
+                <i style={{ color: 'red' }}>*</i> <span style={{ color: 'red' }}>{error}</span>
+              </div>)}
               <form onSubmit={updateCompany}>
                 <div className={cx('info-item')}>
                   <label for="company-name" className={cx('info-label')}>
@@ -287,7 +361,7 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
               <div className={cx("first-row")}>
                 <div className={cx("company-logo")}>
                   <img 
-                    src="https://avatars.githubusercontent.com/u/2322183?s=200&v=4" 
+                    src={companyImage ? companyImage : "https://avatars.githubusercontent.com/u/2322183?s=200&v=4"} 
                     alt="company-logo" 
                     className={cx("logo")} 
                   />
@@ -346,6 +420,20 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
               </div>)}
               <div className={cx('info-item')}>
                 <label for="email" className={cx('info-label')}>
+                  Tên đăng nhập<i style={{ color: 'red' }}>*</i> : 
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="" 
+                  className={cx('info-content')}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div className={cx('info-item')}>
+                <label for="email" className={cx('info-label')}>
                   Email đăng nhập<i style={{ color: 'red' }}>*</i> : 
                 </label>
                 <input
@@ -396,6 +484,10 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
           ) : (
             <div style={{ display: displayTab2 }} className={cx('modal-body')}>
               <div className={cx('info-item')}>
+                <div className={cx('info-label')}>Tên đăng nhập: </div>
+                <div className={cx('info-content')}>{name}</div>
+              </div>
+              <div className={cx('info-item')}>
                 <div className={cx('info-label')}>Email đăng nhập: </div>
                 <div className={cx('info-content')}>{email}</div>
               </div>
@@ -417,6 +509,7 @@ const CompanyInfoModal = ({ displayModal, onClickHandle }) => {
                 <JobItem
                   jobTitle={job.job_title}
                   companyName={companyName}
+                  companyImage={companyImage}
                   location={job.job_location} 
                 />
               </button>

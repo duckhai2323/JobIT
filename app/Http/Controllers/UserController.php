@@ -171,4 +171,24 @@ class UserController extends Controller
             ]);
         }
     }
+
+    public function getCompanyAccount(Request $request) {
+        try {
+            $data = $this->userRepository->getCompanyAccount($request);
+            if ($data) {
+                return response()->json([
+                    'data' => $data,
+                    'message' => 'get company account successful',
+                    'success' => 1,
+                ], 200);
+            } else {
+                throw new Exception('account not found');
+            }
+        } catch (Exception $err) {
+            return response()->json([
+                'message' => $err->getMessage(),
+                'success' => 0,
+            ]);
+        }
+    }
 }

@@ -85,7 +85,7 @@ const AddCompanyModal = ({ displayModal, onClickHandle, loader }) => {
               createNewReference({
                 user_id: newUser.id,
                 company_id: newCompany.company_id,
-                role: 1,
+                role: "2",
               });
               console.log("Reference created successfully!");
             } else {

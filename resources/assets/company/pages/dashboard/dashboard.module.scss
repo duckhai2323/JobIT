@@ -1,0 +1,171 @@
+@import '../../../shared/layout/variables.scss';
+.dashboard {
+	width: 100%;
+  margin-top: 80px;
+  border-radius: 8px;
+
+  &__header {
+    height: 56px;
+    padding: 12px 24px;
+    position: relative;
+
+    h3 {
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 32px;
+    }
+
+    span {
+      color: $primaryColor;
+    }
+  }
+
+  &__content {
+    display: flex;
+		flex-direction: column;
+    gap: 20px;
+    padding: 21px;
+
+    .newest-job {
+      width: 100%;
+			padding-left: 10px;
+			margin-top: 20px;
+
+			&__img {
+				height: 128px;
+				margin-bottom: 22px;
+				object-fit: contain;
+				width: 100%;
+			}
+
+			.scroll-bar {
+				position: relative;
+			}
+
+			&__title {
+				font-size: 18px;
+				font-style: normal;
+				font-weight: 600;
+				line-height: 20px;
+			}
+
+			.slider {
+				height: 400px;
+				margin-top: 10px;
+				overflow-y: hidden;
+				position: relative;
+				transition: all 0.5s;
+				display: flex;
+				flex-direction: column;
+				gap: 10px;
+			}
+    }
+
+		.statistics-job {
+			width: 100%;
+
+			.work-market {
+				width: 100%;
+				display: flex;
+				gap: 12px;
+				justify-content: space-between;
+			}
+
+			.icon {
+				background-color: $primaryColor;
+				border-radius: 50%;
+				display: inline-flex;
+				padding: 5px;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.chart {
+				display: flex;
+				flex-direction: column;
+				gap: 12px;
+				margin-top: 12px;
+			}
+
+			.item-chart {
+				padding: 14px 16px;
+				width: 100%;
+			}
+
+			.caption {
+				font-size: 18px;
+				font-weight: 600;
+				line-height: 20px;
+				margin-left: 5px;
+			}
+
+			.box-chart {
+				height: 220px;
+				padding: 14px 16px;
+			}
+
+			.bottom-chart {
+				margin-top: 15px;
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				grid-gap: 5px;
+				&__item {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					.color {
+						background: #00f75f;
+						border-radius: 2px;
+						height: 4px;
+						margin-right: 8px;
+						width: 12px;
+					}
+					.color2 {
+						background: #3c45bd;
+						border-radius: 2px;
+						height: 4px;
+						margin-right: 8px;
+						width: 12px;
+					}
+					.color3 {
+						background: #f76f00;
+						border-radius: 2px;
+						height: 4px;
+						margin-right: 8px;
+						width: 12px;
+					}
+					.color4 {
+						background: #00f7e9;
+						border-radius: 2px;
+						height: 4px;
+						margin-right: 8px;
+						width: 12px;
+					}
+					.color5 {
+						background: #f7f100;
+						border-radius: 2px;
+						height: 4px;
+						margin-right: 8px;
+						width: 12px;
+					}
+					span {
+						display: block;
+						font-size: 13px;
+						font-style: normal;
+						font-weight: 500;
+						line-height: 16px;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						width: 80%;
+					}
+				}
+			}
+
+		}
+
+	}
+
+}
+

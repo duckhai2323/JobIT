@@ -67,11 +67,11 @@ const ListJob = () => {
                 <p className={cx("job-count")}>{listJobs.length} công việc</p> 
               </div>
             </div>	
-            <div className={cx("add-job-button")}>
+            {/* <div className={cx("add-job-button")}>
               <button className={cx("add-button")} onClick={onClickHandleDisplayModalAdd}>
                 + Thêm công việc
               </button>
-            </div>
+            </div> */}
           </div>
           <div className={cx("content")}>
             <div className={cx("job-list")}>

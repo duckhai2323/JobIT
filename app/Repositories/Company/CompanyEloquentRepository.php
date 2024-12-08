@@ -63,7 +63,7 @@ class CompanyEloquentRepository extends EloquentRepository implements CompanyRep
     }
 
     public function editCompany(Request $request){
-    $company = $this->_model->where('company_id', $request->company_id)->first();
+        $company = $this->_model->where('company_id', $request->company_id)->first();
         if ($company) {
             $temp = $request->all();
             $data = $company->update($temp);

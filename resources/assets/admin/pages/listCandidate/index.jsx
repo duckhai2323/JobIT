@@ -16,7 +16,7 @@ const ListCandidate = () => {
   const userState = useSelector((state) => state.user);
   const [displayModal, setDisplayModal] = useState('none');
   const [listCandidates, setListCandidates] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [currentCandidate, setCurrentCandidate] = useState({});
   useEffect(() => {
     dispatch(Actions.getUsersRequest());
@@ -62,7 +62,7 @@ const ListCandidate = () => {
             <div className={cx("candidate-list")}>
               {listCandidates && listCandidates.map((candidate) => (
                 <button key={candidate.id}>
-                  <CandidateItem onClickHandle={() => onClickHandleDisplayModal(candidate)} candidateData={candidate} />
+                  <CandidateItem onClickHandle={() => onClickHandleDisplayModal(candidate)} candidateData={candidate} loader={setLoading} />
                 </button>
               ))}
             </div>
@@ -81,7 +81,7 @@ const ListCandidate = () => {
           </div>
         </div>
       </AdminLayout>
-      <div style={{ display: loading ? 'flex' : 'none' }} className={cx('loading')}>
+      <div style={{ display: (userState.loading || loading) ? 'flex' : 'none' }} className={cx('loading')}>
         <div>
           <FadeLoader color='rgba(255, 255, 255, 1)' height='10' width='6' />
           <span style={{ fontWeight: '500', color: 'white', fontSize: '18px' }}>Loading...</span>

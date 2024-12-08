@@ -9,6 +9,15 @@ export const getListUsers = async () => {
   }
 };
 
+export const getCompanyAccount = async (company_id) => {
+  try {
+    const response = await axios.get(`/api/user/company-infor/${company_id}`);
+    return response;
+  } catch (error) {
+    return error.message;
+  }
+}
+
 export const updateUserAccount = async (id, data) => {
   try {
     const response = await axios.put(`/api/user/update/${id}`, data);

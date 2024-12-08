@@ -69,7 +69,7 @@ const ListCompany = () => {
             <div className={cx("company-list")}>
               {listCompanies && listCompanies.map((company) => (
                 <button key={company.company_id}>
-                  <CompanyItem onClickHandle={() => onClickHandleDisplayModal(company.company_id)} companyData={company} />
+                  <CompanyItem onClickHandle={() => onClickHandleDisplayModal(company.company_id)} companyData={company} loader={setLoading} />
                 </button>
               ))}
             </div>
@@ -111,6 +111,7 @@ const ListCompany = () => {
       <CompanyInfoModal
         onClickHandle={() => onClickHandleDisplayModal("")}
         displayModal={displayModal}
+        loader={setLoading}
       />
       <AddCompanyModal 
         onClickHandle={onClickHandleDisplayModalAdd}

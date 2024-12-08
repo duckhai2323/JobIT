@@ -98,4 +98,18 @@ class UserEloquentRepository extends EloquentRepository implements UserRepositor
     return true;
   }
 
+  public function getCompanyAccount(Request $request) {
+    $user = $this->_model->join('references', 'users.id', '=', 'references.user_id')
+                        ->where('users.role', "2")
+                        ->where('references.company_id', $request->company_id)
+                        ->select('users.*')
+                        ->first();
+
+    if ($user) {
+      return $user;
+    } else {
+      throw new Exception('User not found');
+    }
+  }
+
 } 

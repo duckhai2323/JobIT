@@ -18,6 +18,7 @@ const JobDetail = () => {
   const [isEditingTab1, setIsEditingTab1] = useState(false);
   const [jobTitle, setJobTitle] = useState("");
   const [companyName, setCompanyName] = useState("");
+  const [companyImage, setCompanyImage] = useState("");
   const [jobDetails, setJobDetails] = useState("");
   const [jobRequire, setJobRequire] = useState("");
   const [jobBenefit, setJobBenefit] = useState("");
@@ -36,6 +37,7 @@ const JobDetail = () => {
     if (response.success) {
       const jobData = response.data;
       console.log(jobData);
+      setCompanyImage(jobData.company_image);
       setJobTitle(jobData.job_title);
       setCompanyName(jobData.company_name);
       setJobDetails(jobData.job_details);
@@ -103,7 +105,7 @@ const JobDetail = () => {
               <div className={cx('modal-body')}>
                 <div className={cx("job-logo")}>
                   <img 
-                    src="https://cdn-new.topcv.vn/unsafe/80x/https://static.topcv.vn/company_logos/fOM2T6tdoG3BCqPFfeyECPl8GyJ8eUNH_1676606887____9363a8785daf420770652efc1338dd72.png" 
+                    src={companyImage ? companyImage : "https://avatars.githubusercontent.com/u/2322183?s=200&v=4"}
                     alt="job-logo" 
                     className={cx("logo")} 
                   />
@@ -112,6 +114,9 @@ const JobDetail = () => {
                   <div className={cx('form-header')}>
                     <h2>Thông tin chung</h2>
                   </div>
+                  {error && (<div className={cx('error-message')}>
+                    <i style={{ color: 'red' }}>*</i> <span style={{ color: 'red' }}>{error}</span>
+                  </div>)}
                   <div className={cx('info-item')}>
                     <label htmlFor="job-title" className={cx('info-label')}>
                       Tên công việc<i style={{ color: 'red' }}>*</i> : 
@@ -317,7 +322,7 @@ const JobDetail = () => {
                 <div className={cx("first-row")}>
                   <div className={cx("job-logo")}>
                     <img 
-                      src="https://cdn-new.topcv.vn/unsafe/80x/https://static.topcv.vn/company_logos/fOM2T6tdoG3BCqPFfeyECPl8GyJ8eUNH_1676606887____9363a8785daf420770652efc1338dd72.png" 
+                      src={companyImage ? companyImage : "https://avatars.githubusercontent.com/u/2322183?s=200&v=4"} 
                       alt="job-logo" 
                       className={cx("logo")} 
                     />

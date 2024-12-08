@@ -18,7 +18,7 @@ const JobLargeItem = ({ onClickHandle, jobData }) => {
     <div className={cx("job-card")}>
       <div className={cx("job-image")}>
         <img 
-          src="https://cdn-new.topcv.vn/unsafe/80x/https://static.topcv.vn/company_logos/fOM2T6tdoG3BCqPFfeyECPl8GyJ8eUNH_1676606887____9363a8785daf420770652efc1338dd72.png" 
+          src={jobData.company_image ? jobData.company_image : "https://avatars.githubusercontent.com/u/2322183?s=200&v=4"}
           alt="job-image" 
           className={cx("image")} 
         />

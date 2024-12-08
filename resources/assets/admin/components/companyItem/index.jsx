@@ -12,22 +12,32 @@ import { AiOutlineStop, AiOutlineReload } from "react-icons/ai";
 
 const cx = classNames.bind(styles);
 
-const CompanyItem = ({ onClickHandle, companyData }) => {
+const CompanyItem = ({ onClickHandle, companyData, loader }) => {
   const [isActive, setIsActive] = useState(false);
   useEffect(() => {
     companyData.status ? setIsActive(true) : setIsActive(false);
   }, [companyData]);
   const suspendAccount = () => {
     setIsActive(false);
+    loader(true);
+    const timer = setTimeout(() => {
+      loader(false);
+    }, 2000);
+    return () => clearTimeout(timer);
   }
   const activateAccount = () => {
     setIsActive(true);
+    loader(true);
+    const timer = setTimeout(() => {
+      loader(false);
+    }, 2000);
+    return () => clearTimeout(timer);
   }
   return (
     <div className={cx("company-card")}>
       <div className={cx("company-image")}>
         <img 
-          src="https://avatars.githubusercontent.com/u/2322183?s=200&v=4" 
+          src={companyData.company_image ? companyData.company_image : "https://avatars.githubusercontent.com/u/2322183?s=200&v=4"}
           alt="company-image" 
           className={cx("image")} 
         />
@@ -78,22 +88,27 @@ const CompanyItem = ({ onClickHandle, companyData }) => {
           <p>1000+</p>
         </div>
       </div>
-      <div className={cx("company-options")}>
-        <button className={cx('view-button')} onClick={onClickHandle}>
-          <IoMdEye /> Xem chi tiết
-        </button>
-        {
-          isActive ? (
+      {
+        isActive ? (
+          <div className={cx("company-options")}>
+            <button className={cx('view-button')} onClick={onClickHandle}>
+              <IoMdEye /> Xem chi tiết
+            </button>
             <button className={cx('delete-button')} onClick={suspendAccount}>
               <AiOutlineStop /> Đóng tài khoản
             </button>
-          ) : (
+          </div>
+        ) : (
+          <div className={cx("company-options")}>
+            <button className={cx('delete-button')}>
+              <MdDelete /> Xóa
+            </button>
             <button className={cx('active-button')} onClick={activateAccount}>
               <AiOutlineReload /> Mở tài khoản
             </button>
-          )
-        }
-      </div>
+          </div>
+        )
+      }
     </div>
   );
 }

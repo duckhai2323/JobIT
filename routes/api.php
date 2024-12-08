@@ -34,6 +34,7 @@ Route::prefix('user')->group(function () {
     Route::put('/update/{user_id}', [UserController::class, 'update']);
     Route::put('/activate/{user_id}', [UserController::class, 'updateActive']);
     Route::delete('/delete/{user_id}', [UserController::class, 'deleteUser']);
+    Route::get('/company-infor/{company_id}', [UserController::class, 'getCompanyAccount']);
 });
 
 Route::prefix('auth')->group(function () {
