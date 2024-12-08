@@ -150,6 +150,9 @@
             line-height: 22px;
             padding: 8px 16px;
             width: 118px;
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
 
             &:hover {
               cursor: pointer;

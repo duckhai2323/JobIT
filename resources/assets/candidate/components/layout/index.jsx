@@ -102,7 +102,12 @@ const NavBarMenuProfile = (props) => {
             <FaRegArrowAltCircleUp style={{ fontSize: '20px', color: '#00b14f' }} />
             <span>Công việc ứng tuyển</span>
           </div>
-          <div className={cx('item-option-group__item')}>
+          <div
+            className={cx('item-option-group__item')}
+            onClick={() => {
+              navigate('/save-jobs');
+            }}
+          >
             <MdBookmarkBorder style={{ fontSize: '20px', color: '#00b14f' }} />
             <span>Công việc đã lưu</span>
           </div>

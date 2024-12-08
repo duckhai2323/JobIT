@@ -9,11 +9,12 @@ import { LuExternalLink } from 'react-icons/lu';
 import { useNavigate } from 'react-router-dom';
 import { RiMoneyDollarCircleLine } from 'react-icons/ri';
 import { MdLocationOn } from 'react-icons/md';
+import { FaHeart } from 'react-icons/fa6';
 
 const cx = classNames.bind(style);
 
 const SectionJobInfor = (props) => {
-  const { jobDetail, contant, handleApply } = props;
+  const { jobDetail, contant, handleApply, contantSaveJob, handleSaveJob } = props;
   const navigate = useNavigate();
   return (
     <div className={cx('section-infor')}>
@@ -77,8 +78,8 @@ const SectionJobInfor = (props) => {
                     <span>Đã ứng tuyển</span>
                   </div>
                 )}
-                <div className={cx('btn-apply-group__save')}>
-                  <FaRegHeart />
+                <div className={cx('btn-apply-group__save')} onClick={handleSaveJob}>
+                  {contantSaveJob ? <FaHeart /> : <FaRegHeart />}
                   <span>Lưu tin</span>
                 </div>
               </div>

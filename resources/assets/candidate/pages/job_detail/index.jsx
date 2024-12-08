@@ -10,6 +10,9 @@ import { getInforJobDetail } from '@/services/jobDetailService';
 import useJobsApplyRoleCandidate from '@/hooks/candidate/useApplyJobs';
 import { applyJobAction } from '@/services/jobfairService';
 import { useSelector } from 'react-redux';
+import { useToast } from '@/candidate/components/Toast';
+import useSaveJobsRoleCandidate from '@/hooks/candidate/useSaveJobs';
+import { deleteSaveJob, saveJob } from '@/services/saveJobService';
 
 const JobDetailsPageCandidate = () => {
   const { job_id } = useParams();
@@ -33,9 +36,15 @@ const JobDetailsPageCandidate = () => {
   }, [job_id]);
 
   const { applyJobsState, getListJobs } = useJobsApplyRoleCandidate();
+  const { saveJobsState, getListSaveJobs } = useSaveJobsRoleCandidate();
+
   const contant =
     jobDetail && applyJobsState.jobsApply && applyJobsState.jobsApply.find((item) => item.job_id === jobDetail.job_id);
 
+  const contantSaveJob =
+    jobDetail && saveJobsState.saveJobs && saveJobsState.saveJobs.find((item) => item.job_id === jobDetail.job_id);
+
+  const toast = useToast();
   const handleApply = async () => {
     const response = await applyJobAction({
       job_id,
@@ -45,13 +54,39 @@ const JobDetailsPageCandidate = () => {
       status_offer: 0,
     });
     if (response.success) {
+      toast.success('Bạn đã ứng tuyển thành công');
       getListJobs();
+    } else {
+      toast.error('Ứng tuyển thất bại');
     }
   };
+
+  const handleSaveJob = async () => {
+    const response = contantSaveJob
+      ? await deleteSaveJob(job_id, authState.data.data.id)
+      : await saveJob({
+          job_id,
+          user_id: authState.data.data.id,
+        });
+
+    if (response.success) {
+      !contantSaveJob ? toast.success('Bạn đã lưu tin thành công') : toast.success('Bỏ Lưu thành công');
+      getListSaveJobs();
+    } else {
+      toast.error('Lưu tin thất bại');
+    }
+  };
+
   return (
     <LayoutCandidate>
       <HeaderSearchJobDetail />
-      <SectionJobInfor jobDetail={jobDetail} contant={contant} handleApply={handleApply} />
+      <SectionJobInfor
+        jobDetail={jobDetail}
+        contant={contant}
+        handleApply={handleApply}
+        contantSaveJob={contantSaveJob}
+        handleSaveJob={handleSaveJob}
+      />
       <SectionContent
         jobDetail={jobDetail}
         jobsState={jobsState}
@@ -60,6 +95,10 @@ const JobDetailsPageCandidate = () => {
         applyJobsState={applyJobsState}
         authState={authState}
         getListJobs={getListJobs}
+        saveJobsState={saveJobsState}
+        handleSaveJob={handleSaveJob}
+        contantSaveJob={contantSaveJob}
+        getListSaveJobs={getListSaveJobs}
       />
       <FooterHome background={'white'} />
     </LayoutCandidate>

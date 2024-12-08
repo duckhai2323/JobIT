@@ -6,6 +6,7 @@ import { watchCompaniesSagas } from './candidate/companiesSaga';
 import { watchCompaniesAdminSagas } from './admin/adminCompaniesSaga';
 import { watchJobsAdminSagas } from './admin/adminJobsSaga';
 import { watchJobsApplySagas } from './candidate/applyJobsSaga';
+import { watchSaveJobsSagas } from './candidate/saveJobsSaga';
 
 const rootSaga = function* () {
   yield all([fork(watchSignInRequest)]);
@@ -15,6 +16,7 @@ const rootSaga = function* () {
   yield all([fork(watchCompaniesAdminSagas)]);
   yield all([fork(watchJobsAdminSagas)]);
   yield all([fork(watchJobsApplySagas)]);
+  yield all([fork(watchSaveJobsSagas)]);
 };
 
 export default rootSaga;

@@ -76,7 +76,7 @@ Route::prefix('reference')->group(function () {
 
 Route::prefix('save-job')->group(function () {
     Route::post('/create', [SaveJobController::class, 'saveJobFunc']);
-    Route::delete('/{job_id}/{user_id}', [SaveJobController::class, 'deleteSaveJobFunc']);
+    Route::delete('/delete-job/{job_id}/{user_id}', [SaveJobController::class, 'deleteSaveJobFunc']);
     Route::get('/list-jobs/{user_id}', [SaveJobController::class, 'getListSaveJobs']);
 });
 

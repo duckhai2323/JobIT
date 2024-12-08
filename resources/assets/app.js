@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import useAuth from './hooks/useAuth';
 import AdminComponent from './admin';
 import CandidateComponent from './candidate';
+import { ToastProvider } from './candidate/components/Toast';
 
 const App = () => {
   const { authState, remember_token, dataSaveSession } = useAuth();
@@ -23,7 +24,11 @@ const App = () => {
         content = <CandidateComponent />;
     }
   } else content = <div>Loading...</div>;
-  return <BrowserRouter>{content}</BrowserRouter>;
+  return (
+    <ToastProvider>
+      <BrowserRouter>{content}</BrowserRouter>
+    </ToastProvider>
+  );
 };
 
 export default App;

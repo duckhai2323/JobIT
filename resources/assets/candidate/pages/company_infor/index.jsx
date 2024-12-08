@@ -10,11 +10,17 @@ import { FaLocationDot } from 'react-icons/fa6';
 import FooterHome from '../home/footer';
 import { useParams } from 'react-router-dom';
 import { getInforCompany, getListJobsOfCompany } from '@/services/companyService';
+import useJobsApplyRoleCandidate from '@/hooks/candidate/useApplyJobs';
+import useSaveJobsRoleCandidate from '@/hooks/candidate/useSaveJobs';
 const cx = classNames.bind(style);
 const CompanyInforPageCandidate = () => {
   const { company_id } = useParams();
   const [companyInfor, setCompanyInfor] = useState(null);
   const [jobs, setListJobs] = useState(null);
+
+  const { applyJobsState, getListJobs } = useJobsApplyRoleCandidate();
+  const { saveJobsState, getListSaveJobs, authState } = useSaveJobsRoleCandidate();
+
   useEffect(() => {
     const getInfor = async () => {
       const companyInforResponse = await getInforCompany(company_id);
@@ -91,7 +97,17 @@ const CompanyInforPageCandidate = () => {
                   className={cx('company-intro-group__content')}
                   style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
                 >
-                  {jobs && jobs.map((job) => <JobItemHight jobDetail={job} />)}
+                  {jobs &&
+                    jobs.map((job) => (
+                      <JobItemHight
+                        jobDetail={job}
+                        applyJobsState={applyJobsState}
+                        saveJobsState={saveJobsState}
+                        authState={authState}
+                        getListJobs={getListJobs}
+                        getListSaveJobs={getListSaveJobs}
+                      />
+                    ))}
                 </div>
               </div>
             </div>

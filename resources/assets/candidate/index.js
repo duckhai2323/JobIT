@@ -6,6 +6,7 @@ import CompanyInforPageCandidate from './pages/company_infor';
 import RecommendJobPage from './pages/recommend';
 import ListCompaniesPage from './pages/list-companies';
 import ApplyJobsPage from './pages/apply_jobs';
+import SaveJobsPage from './pages/save_jobs';
 
 const CandidateComponent = () => {
   return (
@@ -16,6 +17,7 @@ const CandidateComponent = () => {
       <Route path='/recommend' element={<RecommendJobPage />} />
       <Route path='/list-companies' element={<ListCompaniesPage />} />
       <Route path='/apply-jobs' element={<ApplyJobsPage />} />
+      <Route path='/save-jobs' element={<SaveJobsPage />} />
       <Route path='/*' element={<Navigate to='/' />} />
     </Routes>
   );

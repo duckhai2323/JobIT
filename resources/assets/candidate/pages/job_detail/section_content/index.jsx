@@ -3,10 +3,26 @@ import style from './section_content.module.scss';
 import classNames from 'classnames/bind';
 import { WiMoonFull } from 'react-icons/wi';
 import JobItemHight from '@/candidate/components/jobItemHight';
+import { FaRegHeart } from 'react-icons/fa';
+import { FaHeart } from 'react-icons/fa6';
+
 const cx = classNames.bind(style);
 
 const SectionContent = (props) => {
-  const { jobDetail, jobsState, contant, handleApply, applyJobsState, authState, getListJobs } = props;
+  const {
+    jobDetail,
+    jobsState,
+    contant,
+    handleApply,
+    applyJobsState,
+    authState,
+    getListJobs,
+    saveJobsState,
+    handleSaveJob,
+    contantSaveJob,
+    getListSaveJobs,
+  } = props;
+
   return (
     <div className={cx('section-content')}>
       <div className={cx('section-content-group')}>
@@ -102,7 +118,10 @@ const SectionContent = (props) => {
               ) : (
                 <button className={cx('apply-btn-ed')}>Đã ứng tuyển</button>
               )}
-              <button className={cx('save-btn')}>Lưu tin</button>
+              <button className={cx('save-btn')} onClick={handleSaveJob}>
+                {contantSaveJob ? <FaHeart /> : <FaRegHeart />}
+                <span>Lưu tin</span>
+              </button>
             </div>
 
             <div className={cx('section-left-group__other-jobs')}>
@@ -117,8 +136,10 @@ const SectionContent = (props) => {
                         <JobItemHight
                           jobDetail={job}
                           applyJobsState={applyJobsState}
+                          saveJobsState={saveJobsState}
                           authState={authState}
                           getListJobs={getListJobs}
+                          getListSaveJobs={getListSaveJobs}
                         />
                       )
                   )}

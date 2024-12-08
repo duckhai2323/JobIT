@@ -4,13 +4,19 @@ import classNames from 'classnames/bind';
 import { FaRegHeart } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { applyJobAction } from '@/services/jobfairService';
+import { useToast } from '../Toast';
+import { deleteSaveJob, saveJob } from '@/services/saveJobService';
+import { FaHeart } from 'react-icons/fa6';
 
 const cx = classNames.bind(style);
 
 const JobItemHight = (props) => {
-  const { jobDetail, applyJobsState, authState, getListJobs } = props;
+  const { jobDetail, applyJobsState, authState, getListJobs, saveJobsState, getListSaveJobs } = props;
   const contant =
     jobDetail && applyJobsState.jobsApply && applyJobsState.jobsApply.find((item) => item.job_id === jobDetail.job_id);
+  const toast = useToast();
+  const contantSaveJob =
+    jobDetail && saveJobsState.saveJobs && saveJobsState.saveJobs.find((item) => item.job_id === jobDetail.job_id);
 
   const handleApply = async (event) => {
     event.stopPropagation();
@@ -22,9 +28,30 @@ const JobItemHight = (props) => {
       status_offer: 0,
     });
     if (response.success) {
+      toast.success('Bạn đã ứng tuyển thành công');
       getListJobs();
+    } else {
+      toast.error('Ứng tuyển thất bại');
     }
   };
+
+  const handleSaveJob = async (event) => {
+    event.stopPropagation();
+    const response = contantSaveJob
+      ? await deleteSaveJob(jobDetail.job_id, authState.data.data.id)
+      : await saveJob({
+          job_id: jobDetail.job_id,
+          user_id: authState.data.data.id,
+        });
+
+    if (response.success) {
+      !contantSaveJob ? toast.success('Bạn đã lưu tin thành công') : toast.success('Bỏ Lưu thành công');
+      getListSaveJobs();
+    } else {
+      toast.error('Lưu tin thất bại');
+    }
+  };
+
   const navigate = useNavigate();
 
   return (
@@ -65,8 +92,12 @@ const JobItemHight = (props) => {
             ) : (
               <button className={cx('apply-ed')}>Đã Ứng tuyển</button>
             )}
-            <div className={cx('icon-heart')}>
-              <FaRegHeart style={{ color: '#00b14f', fontSize: '16px', cursor: 'pointer' }} />
+            <div className={cx('icon-heart')} onClick={(e) => handleSaveJob(e)}>
+              {contantSaveJob ? (
+                <FaHeart style={{ color: '#00b14f', fontSize: '16px', cursor: 'pointer' }} />
+              ) : (
+                <FaRegHeart style={{ color: '#00b14f', fontSize: '16px', cursor: 'pointer' }} />
+              )}
             </div>
           </div>
         </div>
