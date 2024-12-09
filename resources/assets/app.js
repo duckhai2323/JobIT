@@ -5,6 +5,7 @@ import useAuth from './hooks/useAuth';
 import AdminComponent from './admin';
 import CandidateComponent from './candidate';
 import { ToastProvider } from './candidate/components/Toast';
+import CompanyComponent from './company';
 
 const App = () => {
   const { authState, remember_token, dataSaveSession } = useAuth();
@@ -19,6 +20,9 @@ const App = () => {
         break;
       case '1':
         content = <AdminComponent />;
+        break;
+      case '2':
+        content = <CompanyComponent />;
         break;
       default:
         content = <CandidateComponent />;

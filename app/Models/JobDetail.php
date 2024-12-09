@@ -27,6 +27,8 @@ class JobDetail extends Model
         'work_form',
         'deadline_job',
         'status',
+        'level',
+        'sex',
     ];
 
     protected $casts = [

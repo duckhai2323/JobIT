@@ -4,6 +4,7 @@ import { Actions } from '@/redux/reducers/admin/adminJobsReducer';
 import AdminLayout from '../../components/layout/index';
 import JobItem from '../../components/jobItem/index';
 import JobLargeItem from '../../components/jobLargeItem/index';
+import AddJobModal from '@/admin/components/addJobModal';
 import styles from './listJob.module.scss';
 import classNames from 'classnames/bind';
 import { FaBuildingCircleCheck } from "react-icons/fa6";
@@ -18,6 +19,7 @@ const ListJob = () => {
   const [displayModal, setDisplayModal] = useState('none');
   const [displayModalAdd, setDisplayModalAdd] = useState('none');
   const [listJobs, setListJobs] = useState([]);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     dispatch(Actions.getJobsRequest());
@@ -77,39 +79,37 @@ const ListJob = () => {
             <div className={cx("job-list")}>
               {listJobs && listJobs.map((job) => (
                 <button key={job.job_id}>
-                  <JobLargeItem onClickHandle={() => handleNavigate(job.job_id)} jobData={job} />
+                  <JobLargeItem onClickHandle={() => handleNavigate(job.job_id)} jobData={job} loader={setLoading} />
                 </button>
               ))}
             </div>
             <div className={cx("recent-jobs-box")}>
               <h1 className={cx("recent-title")}>Các công việc gần đây</h1>
               <div className={cx("recent-jobs")}>
-                <JobItem 
-                  jobTitle="Chuyên Viên Kinh Doanh Xuất Nhập Khẩu/Order Hàng Trung Quốc - Taobao,1688 - Thưởng 2 Triệu Khi Nhận Việc" 
-                  companyName="CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ" 
-                  location="Hà Nội"
-                />
-                <JobItem 
-                  jobTitle="Chuyên Viên Kinh Doanh Xuất Nhập Khẩu/Order Hàng Trung Quốc - Taobao,1688 - Thưởng 2 Triệu Khi Nhận Việc" 
-                  companyName="CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ" 
-                  location="Hà Nội"
-                />
-                <JobItem 
-                  jobTitle="Chuyên Viên Kinh Doanh Xuất Nhập Khẩu/Order Hàng Trung Quốc - Taobao,1688 - Thưởng 2 Triệu Khi Nhận Việc" 
-                  companyName="CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ" 
-                  location="Hà Nội"
-                />
+                {listJobs && listJobs.slice(0, 3).map((job) => (
+                  <JobItem
+                    jobTitle={job.job_title}
+                    companyName={job.company_name}
+                    location={job.job_location} 
+                    companyImage={job.company_image}
+                  />
+                ))}
               </div>
             </div>
           </div>
         </div>
       </AdminLayout>
-      <div style={{ display: jobState.loading ? 'flex' : 'none' }} className={cx('loading')}>
+      <div style={{ display: (jobState.loading || loading) ? 'flex' : 'none' }} className={cx('loading')}>
         <div>
           <FadeLoader color='rgba(255, 255, 255, 1)' height='10' width='6' />
           <span style={{ fontWeight: '500', color: 'white', fontSize: '18px' }}>Loading...</span>
         </div>
       </div>
+      <AddJobModal 
+        onClickHandle={onClickHandleDisplayModalAdd}
+        displayModal={displayModalAdd}
+        loader={setLoading}
+      />
     </div>
   )
 }

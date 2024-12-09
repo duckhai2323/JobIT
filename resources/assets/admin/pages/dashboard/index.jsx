@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Actions } from '@/redux/reducers/admin/adminJobsReducer';
 import AdminLayout from '../../components/layout/index';
 import styles from './dashboard.module.scss';
 import classNames from 'classnames/bind';
@@ -7,10 +9,23 @@ import MarketItem from '@/admin/components/marketItem';
 import { FaA, FaArrowTrendUp } from "react-icons/fa6";
 import { LineChart } from '@/admin/components/lineChart';
 import { BarChart } from '@/admin/components/barChart';
+import { FadeLoader } from 'react-spinners';
 
 const cx = classNames.bind(styles);
 
 function Dashboard() {
+  const dispatch = useDispatch();
+  const jobState = useSelector((state) => state.adminJobs);
+  const [listJobs, setListJobs] = useState([]);
+  useEffect(() => {
+    dispatch(Actions.getJobsRequest());
+  }, [dispatch]);
+  useEffect(() => {
+    console.log(jobState.jobs);
+    if (jobState.jobs && jobState.jobs.length > 0) {
+      setListJobs(jobState.jobs);
+    }
+  }, [jobState])
   const [currentDate, setCurrentDate] = useState('');
   useEffect(() => {
     const today = new Date();
@@ -89,21 +104,14 @@ function Dashboard() {
                     Việc làm mới nhất
                   </p>
                   <div className={cx('slider')}>
-                    <JobItem 
-                      jobTitle="Chuyên Viên Kinh Doanh Xuất Nhập Khẩu/Order Hàng Trung Quốc - Taobao,1688 - Thưởng 2 Triệu Khi Nhận Việc" 
-                      companyName="CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ" 
-                      location="Hà Nội"
+                  {listJobs && listJobs.slice(0, 3).map((job) => (
+                    <JobItem
+                      jobTitle={job.job_title}
+                      companyName={job.company_name}
+                      location={job.job_location} 
+                      companyImage={job.company_image}
                     />
-                    <JobItem 
-                      jobTitle="Chuyên Viên Kinh Doanh Xuất Nhập Khẩu/Order Hàng Trung Quốc - Taobao,1688 - Thưởng 2 Triệu Khi Nhận Việc" 
-                      companyName="CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ" 
-                      location="Hà Nội"
-                    />
-                    <JobItem 
-                      jobTitle="Chuyên Viên Kinh Doanh Xuất Nhập Khẩu/Order Hàng Trung Quốc - Taobao,1688 - Thưởng 2 Triệu Khi Nhận Việc" 
-                      companyName="CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ" 
-                      location="Hà Nội"
-                    />
+                  ))}
                   </div>
                 </div>
               </div>
@@ -111,6 +119,12 @@ function Dashboard() {
           </div>
         </div>
       </AdminLayout>
+      <div style={{ display: jobState.loading ? 'flex' : 'none' }} className={cx('loading')}>
+        <div>
+          <FadeLoader color='rgba(255, 255, 255, 1)' height='10' width='6' />
+          <span style={{ fontWeight: '500', color: 'white', fontSize: '18px' }}>Loading...</span>
+        </div>
+      </div>
     </div>
   );
 }

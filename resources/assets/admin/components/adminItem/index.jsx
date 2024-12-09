@@ -10,7 +10,7 @@ import { AiOutlineStop, AiOutlineReload } from "react-icons/ai";
 
 const cx = classNames.bind(styles);
 
-const AdminItem = ({ onClickHandle, adminData }) => {
+const AdminItem = ({ onClickHandle, adminData, loader }) => {
   const dispatch = useDispatch();
   const [isActive, setIsActive] = useState(true);
   useEffect(() => {
@@ -18,9 +18,19 @@ const AdminItem = ({ onClickHandle, adminData }) => {
   }, [adminData]);
   const suspendAccount = () => {
     setIsActive(false);
+    loader(true);
+    const timer = setTimeout(() => {
+      loader(false);
+    }, 2000);
+    return () => clearTimeout(timer);
   }
   const activateAccount = () => {
     setIsActive(true);
+    loader(true);
+    const timer = setTimeout(() => {
+      loader(false);
+    }, 2000);
+    return () => clearTimeout(timer);
   }
   const deleteAccount = () => {
     const deleteAcc = async () => {

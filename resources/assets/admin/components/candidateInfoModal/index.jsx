@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { Actions } from '@/redux/reducers/admin/userReducer';
 import styles from './candidateInfoModal.module.scss';
 import classNames from 'classnames/bind';
 import { IoMdClose } from 'react-icons/io';
@@ -7,22 +9,61 @@ import { FaEdit, FaAddressBook } from "react-icons/fa";
 const cx = classNames.bind(styles);
 
 const CandidateInfoModal = ({ displayModal, onClickHandle, currentCandidate }) => {
+  const dispatch = useDispatch();
+  const userState = useSelector((state) => state.user);
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState("Candidate01");
+  const [initialEmail, setInitialEmail] = useState("");
   const [email, setEmail] = useState("company1@gmail.com");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  useEffect(() => {
+    if (currentCandidate) {
+      setName(currentCandidate.name);
+      setInitialEmail(currentCandidate.email);
+      setEmail(currentCandidate.email);
+    }
+  }, [currentCandidate]);
 
   const updateAccount = (e) => {
     e.preventDefault();
-    if(password === confirmPassword) {
-      setIsEditing(false);
+    if (password === confirmPassword) {
+      const payload = {
+        id: currentCandidate.id,
+        name: name,
+      };
+      if (email !== initialEmail) {
+        payload.email = email;
+      }
+      if (password.length >= 8) {
+        payload.password = password;
+        payload.repassword = confirmPassword;
+      } else {
+        setError("Mật khẩu quá ngắn.")
+      }
+      console.log(payload);
+      dispatch(
+        Actions.updateUserRequest({
+          userId: currentCandidate.id,
+          data: payload,
+        })
+      );
+      const timer = setTimeout(() => {
+        dispatch(Actions.getUsersRequest());
+      }, 1000);
+      setInitialEmail(email);
+      setPassword("");
+      setConfirmPassword("");
       setError("");
+      setIsEditing(false);
+      return () => {
+        clearTimeout(timer);
+      }
     } else {
-      setError("Mật khẩu và nhập lại mật khẩu không khớp.")
+      setError("Mật khẩu và nhập lại mật khẩu không khớp.");
     }
-  }
+  };
 
   useEffect(() => {
     if(displayModal === 'none') {
@@ -31,11 +72,12 @@ const CandidateInfoModal = ({ displayModal, onClickHandle, currentCandidate }) =
     } else if(currentCandidate) {
       console.log(currentCandidate);
       setName(currentCandidate.name);
+      setInitialEmail(currentCandidate.email);
       setEmail(currentCandidate.email);
       setPassword("");
       setConfirmPassword("");
     }
-  }, [displayModal, isEditing])
+  }, [displayModal]);
 
   return (
     <div style={{ display: displayModal }} className={cx('candidate-info-modal')}>
@@ -56,6 +98,9 @@ const CandidateInfoModal = ({ displayModal, onClickHandle, currentCandidate }) =
                   className={cx("logo")} 
                 />
               </div>
+              {error && (<div className={cx('error-message')}>
+                <i style={{ color: 'red' }}>*</i> <span style={{ color: 'red' }}>{error}</span>
+              </div>)}
               <form onSubmit={updateAccount}>
                 <div className={cx('info-item')}>
                   <label for="candidate-name" className={cx('info-label')}>

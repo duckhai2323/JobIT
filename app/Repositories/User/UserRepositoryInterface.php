@@ -22,4 +22,8 @@ interface UserRepositoryInterface
     public function getDetailOfUser(Request $request);
 
     public function deleteUser(Request $request);
+
+    public function getCompanyAccount(Request $request);
+
+    public function getHrAccount(Request $request);
 }

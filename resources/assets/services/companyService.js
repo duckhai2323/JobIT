@@ -18,6 +18,15 @@ export const getInforCompany = async (company_id) => {
   }
 };
 
+export const getInforCompanyByUser = async (id) => {
+  try {
+    const response = await axios.get(`/api/company/infor-by-user/${id}`);
+    return response;
+  } catch (error) {
+    return error.message;
+  }
+};
+
 export const getListJobsOfCompany = async (company_id) => {
   try {
     const response = await axios.get(`/api/jobdetail/list-jobs-company/${company_id}`);

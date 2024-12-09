@@ -17,7 +17,7 @@ const ListAdmin = () => {
   const userState = useSelector((state) => state.user);
   const [displayModal, setDisplayModal] = useState('none');
   const [displayModalAdd, setDisplayModalAdd] = useState('none');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [listAdmins, setListAdmins] = useState([]);
   const [currentAdmin, setCurrentAdmin] = useState({});
   useEffect(() => {
@@ -76,37 +76,28 @@ const ListAdmin = () => {
             <div className={cx("admin-list")}>
               {listAdmins && listAdmins.map((admin) => (
                 <button key={admin.id}>
-                  <AdminItem onClickHandle={() => onClickHandleDisplayModal(admin)} adminData={admin} />
+                  <AdminItem onClickHandle={() => onClickHandleDisplayModal(admin)} adminData={admin} loader={setLoading} />
                 </button>
               ))}
             </div>
             <div className={cx("recent-admins-box")}>
               <h1 className={cx("recent-title")}>Danh sách quản trị viên đăng nhập gần nhất</h1>
               <div className={cx("recent-admins")}>
-                <div className={cx("admin-card")}>
-                  <img src="https://cdn-icons-png.flaticon.com/512/219/219986.png" alt="" className={cx("admin-logo")} />
-                  <div className={cx("admin-info")}>
-                    <p className={cx("admin-name")}>Admin01</p>
+                {listAdmins && listAdmins.slice(0, 3).map((admin) => (
+                  <div className={cx("admin-card")}>
+                    <img src="https://cdn-icons-png.flaticon.com/512/219/219986.png" alt="" className={cx("admin-logo")} />
+                    <div className={cx("admin-info")}>
+                      <p className={cx("admin-name")}>{admin.name}</p>
+                      <p className={cx("admin-email")}>{admin.email}</p>
+                    </div>
                   </div>
-                </div>
-                <div className={cx("admin-card")}>
-                  <img src="https://cdn-icons-png.flaticon.com/512/219/219986.png" alt="" className={cx("admin-logo")} />
-                  <div className={cx("admin-info")}>
-                    <p className={cx("admin-name")}>Admin01</p>
-                  </div>
-                </div>
-                <div className={cx("admin-card")}>
-                  <img src="https://cdn-icons-png.flaticon.com/512/219/219986.png" alt="" className={cx("admin-logo")} />
-                  <div className={cx("admin-info")}>
-                    <p className={cx("admin-name")}>Admin01</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
       </AdminLayout>
-      <div style={{ display: userState.loading ? 'flex' : 'none' }} className={cx('loading')}>
+      <div style={{ display: (userState.loading || loading) ? 'flex' : 'none' }} className={cx('loading')}>
         <div>
           <FadeLoader color='rgba(255, 255, 255, 1)' height='10' width='6' />
           <span style={{ fontWeight: '500', color: 'white', fontSize: '18px' }}>Loading...</span>

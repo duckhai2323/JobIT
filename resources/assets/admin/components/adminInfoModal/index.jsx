@@ -13,6 +13,7 @@ const AdminInfoModal = ({ displayModal, onClickHandle, currentAdmin }) => {
   const userState = useSelector((state) => state.user);
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState("Admin01");
+  const [initialEmail, setInitialEmail] = useState("");
   const [email, setEmail] = useState("company1@gmail.com");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -25,12 +26,14 @@ const AdminInfoModal = ({ displayModal, onClickHandle, currentAdmin }) => {
         id: currentAdmin.id,
         name: name,
       };
-      if (email !== currentAdmin.email) {
+      if (email !== initialEmail) {
         payload.email = email;
       }
       if (password.length >= 8) {
         payload.password = password;
         payload.repassword = confirmPassword;
+      } else {
+        setError("Mật khẩu quá ngắn.")
       }
       console.log(payload);
       dispatch(
@@ -39,14 +42,19 @@ const AdminInfoModal = ({ displayModal, onClickHandle, currentAdmin }) => {
           data: payload,
         })
       );
+      const timer = setTimeout(() => {
+        dispatch(Actions.getUsersRequest());
+      }, 1000);
       setIsEditing(false);
+      setInitialEmail(email);
       setPassword("");
       setConfirmPassword("");
       setError("");
+      return () => clearTimeout(timer);
     } else {
       setError("Mật khẩu và nhập lại mật khẩu không khớp.");
     }
-  }
+  };
 
   useEffect(() => {
     if(displayModal === 'none') {
@@ -55,11 +63,12 @@ const AdminInfoModal = ({ displayModal, onClickHandle, currentAdmin }) => {
     } else if(currentAdmin) {
       console.log(currentAdmin);
       setName(currentAdmin.name);
+      setInitialEmail(currentAdmin.email);
       setEmail(currentAdmin.email);
       setPassword("");
       setConfirmPassword("");
     }
-  }, [displayModal, isEditing])
+  }, [displayModal]);
 
   return (
     <div style={{ display: displayModal }} className={cx('admin-info-modal')}>
@@ -80,6 +89,9 @@ const AdminInfoModal = ({ displayModal, onClickHandle, currentAdmin }) => {
                   className={cx("logo")} 
                 />
               </div>
+              {error && (<div className={cx('error-message')}>
+                <i style={{ color: 'red' }}>*</i> <span style={{ color: 'red' }}>{error}</span>
+              </div>)}
               <form onSubmit={updateAccount}>
                 <div className={cx('info-item')}>
                   <label for="admin-name" className={cx('info-label')}>

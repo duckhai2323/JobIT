@@ -21,6 +21,8 @@ interface CompanyRepositoryInterface
 
     public function editCompany(Request $request);
 
+    public function getCompanyByUserId(Request $request);
+
     // public function acceptHr(Request $request);
 
     // public function hrOfCompany(Request $request);

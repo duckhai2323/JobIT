@@ -5,13 +5,13 @@ import { NavLink } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-const JobItem = ({ jobTitle, companyName, location }) => {
+const JobItem = ({ jobTitle, companyName, location, companyImage }) => {
   return (
     <div className={cx('job-item')}>
       <div className={cx('job-item__company-logo')}>
         <img 
           className={cx('job-item__company-logo__img')} 
-          src="https://avatars.githubusercontent.com/u/2322183?s=200&v=4" 
+          src={companyImage ? companyImage : "https://avatars.githubusercontent.com/u/2322183?s=200&v=4"} 
         />
       </div>
       <div className={cx('job-item__content')}>

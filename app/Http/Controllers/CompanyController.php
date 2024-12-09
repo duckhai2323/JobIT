@@ -120,4 +120,24 @@ class CompanyController extends Controller
             );
         }
     }
+
+    public function getCompanyByUserId(Request $request) {
+        try {
+            $data = $this->companyRepository->getCompanyByUserId($request);
+            if ($data) {
+                return response()->json([
+                    'data' => $data,
+                    'message' => 'get company infor successful',
+                    'success' => 1,
+                ], 200);
+            } else {
+                throw new Exception('company not found');
+            }
+        } catch (Exception $err) {
+            return response()->json([
+                'message' => $err->getMessage(),
+                'success' => 0,
+            ]);
+        }
+    }
 }

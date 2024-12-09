@@ -34,6 +34,8 @@ Route::prefix('user')->group(function () {
     Route::put('/update/{user_id}', [UserController::class, 'update']);
     Route::put('/activate/{user_id}', [UserController::class, 'updateActive']);
     Route::delete('/delete/{user_id}', [UserController::class, 'deleteUser']);
+    Route::get('/company-infor/{company_id}', [UserController::class, 'getCompanyAccount']);
+    Route::get('/hr-infor/{company_id}', [UserController::class, 'getHrAccount']);
 });
 
 Route::prefix('auth')->group(function () {
@@ -47,6 +49,7 @@ Route::prefix('company')->group(function () {
     Route::post('/new', [CompanyController::class, 'createNewCompany']);
     Route::get('/infor/{company_id}',[CompanyController::class,'getInforCompany']);
     Route::get('/all', [CompanyController::class, 'getListCompanies']);
+    Route::get('/infor-by-user/{id}', [CompanyController::class, 'getCompanyByUserId']);
     Route::put('/update/{company_id}', [CompanyController::class, 'update']);
 });
 
@@ -57,6 +60,7 @@ Route::prefix('jobdetail')->group(function () {
     Route::get('/all-jobs', [JobDetailController::class, 'getAllJobs']);
     Route::get('/list-jobs-company/{company_id}', [JobDetailController::class, 'listJobsOfCompany']);
     Route::put('/edit-job/{job_id}', [JobDetailController::class, 'updateJobDetail']);
+    Route::delete('/delete-job/{job_id}', [JobDetailController::class, 'deleteJob']);
     // Route::get('/infor/{company_id}',[CompanyController::class,'getInforCompany']);
     // Route::get('/all', [CompanyController::class, 'getListCompanies']);
     // Route::put('/update/{company_id}', [CompanyController::class, 'update']);
