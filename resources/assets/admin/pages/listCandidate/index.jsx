@@ -4,6 +4,7 @@ import { Actions } from '@/redux/reducers/admin/userReducer';
 import AdminLayout from '../../components/layout/index';
 import CandidateItem from '../../components/candidateItem/index';
 import CandidateInfoModal from '../../components/candidateInfoModal/index';
+import AddCandidateModal from '@/admin/components/addCandidateModal';
 import styles from './listCandidate.module.scss';
 import classNames from 'classnames/bind';
 import { FaRegUser } from "react-icons/fa6";
@@ -15,6 +16,7 @@ const ListCandidate = () => {
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.user);
   const [displayModal, setDisplayModal] = useState('none');
+  const [displayModalAdd, setDisplayModalAdd] = useState('none');
   const [listCandidates, setListCandidates] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentCandidate, setCurrentCandidate] = useState({});
@@ -38,6 +40,13 @@ const ListCandidate = () => {
       setCurrentCandidate(candidate);
     }
   };
+  const onClickHandleDisplayModalAdd = () => {
+    if (displayModalAdd === 'flex') {
+      setDisplayModalAdd('none');
+    } else {
+      setDisplayModalAdd('flex');
+    }
+  };
   const deleteCandidate = (candidate) => {
     if(listCandidates) {
       const newListCandidates = listCandidates.filter((index) => index !== candidate);
@@ -57,6 +66,11 @@ const ListCandidate = () => {
                 <p className={cx("candidate-count")}>{listCandidates.length} ứng viên</p> 
               </div>
             </div>
+            <div className={cx("add-candidate-button")}>
+              <button className={cx("add-button")} onClick={onClickHandleDisplayModalAdd}>
+                + Thêm ứng viên mới
+              </button>
+            </div>
           </div>
           <div className={cx("content")}>
             <div className={cx("candidate-list")}>
@@ -69,13 +83,15 @@ const ListCandidate = () => {
             <div className={cx("recent-candidates-box")}>
               <h1 className={cx("recent-title")}>Ứng viên mới gần đây</h1>
               <div className={cx("recent-candidates")}>
-              <div className={cx("candidate-card")}>
-                  <img src="https://cdn-icons-png.flaticon.com/512/219/219986.png" alt="" className={cx("candidate-logo")} />
-                  <div className={cx("candidate-info")}>
-                    <p className={cx("candidate-name")}>Trần Đức Khải</p>
-                    <p className={cx("candidate-email")}>tranduckhai26112003@gmail.com</p>
+                {listCandidates && listCandidates.slice(0, 3).map((candidate) => (
+                  <div className={cx("candidate-card")}>
+                    <img src="https://cdn-icons-png.flaticon.com/512/219/219986.png" alt="" className={cx("candidate-logo")} />
+                    <div className={cx("candidate-info")}>
+                      <p className={cx("candidate-name")}>{candidate.name}</p>
+                      <p className={cx("candidate-email")}>{candidate.email}</p>
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
@@ -91,6 +107,10 @@ const ListCandidate = () => {
         onClickHandle={() => onClickHandleDisplayModal({})}
         displayModal={displayModal}
         currentCandidate={currentCandidate}
+      />
+      <AddCandidateModal 
+        onClickHandle={onClickHandleDisplayModalAdd}
+        displayModal={displayModalAdd}
       />
     </div>
   )

@@ -76,27 +76,15 @@ const ListCompany = () => {
             <div className={cx("recent-companies-box")}>
               <h1 className={cx("recent-title")}>Các công ty gần đây</h1>
               <div className={cx("recent-companies")}>
-                <div className={cx("company-card")}>
-                  <img src="https://avatars.githubusercontent.com/u/2322183?s=200&v=4" alt="" className={cx("company-logo")} />
-                  <div className={cx("company-info")}>
-                    <p className={cx("company-name")}>CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ</p>
-                    <p className={cx("company-location")}>Hà Nội</p>
+                {listCompanies && listCompanies.slice(0, 3).map((company) => (
+                  <div className={cx("company-card")}>
+                    <img src="https://cdn-icons-png.flaticon.com/512/219/219986.png" alt="" className={cx("company-logo")} />
+                    <div className={cx("company-info")}>
+                      <p className={cx("company-name")}>{company.company_name}</p>
+                      <p className={cx("company-email")}>{company.company_link}</p>
+                    </div>
                   </div>
-                </div>
-                <div className={cx("company-card")}>
-                  <img src="https://avatars.githubusercontent.com/u/2322183?s=200&v=4" alt="" className={cx("company-logo")} />
-                  <div className={cx("company-info")}>
-                    <p className={cx("company-name")}>CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ</p>
-                    <p className={cx("company-location")}>Hà Nội</p>
-                  </div>
-                </div>
-                <div className={cx("company-card")}>
-                  <img src="https://avatars.githubusercontent.com/u/2322183?s=200&v=4" alt="" className={cx("company-logo")} />
-                  <div className={cx("company-info")}>
-                    <p className={cx("company-name")}>CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ</p>
-                    <p className={cx("company-location")}>Hà Nội</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>

@@ -29,6 +29,8 @@ class JobDetailController extends Controller
             'experience_require' => 'required|string|max:255',
             'work_form' => 'required|string|max:255',
             'deadline_job' => 'required|string|max:255',
+            'level' => 'required|string|max:255',
+            'sex' => 'required|string|max:255',
             ]);
             $data = $this->JobDetailRepository->createJobDetail($request);
             if ($data) {
@@ -178,4 +180,19 @@ class JobDetailController extends Controller
         }
     }
 
+
+    public function deleteJob(Request $request) {
+        try {
+            $this->JobDetailRepository->deleteJob($request);
+            return response()->json([
+                'message' => 'job deleted',
+                'success' => 1,
+            ], 200);
+        } catch (Exception $err) {
+            return response()->json([
+                'message' => $err->getMessage(),
+                'success' => 0,
+            ]);
+        }
+    }
 }

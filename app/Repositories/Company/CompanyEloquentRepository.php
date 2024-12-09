@@ -72,4 +72,17 @@ class CompanyEloquentRepository extends EloquentRepository implements CompanyRep
             return throw new Exception('companies not found');
         }
     }
+
+    public function getCompanyByUserId(Request $request) {
+        $company = $this->_model->join('references', 'companies.company_id', '=', 'references.company_id')
+                            ->where('references.user_id', $request->id)
+                            ->select('companies.*')
+                            ->first();
+    
+        if ($company) {
+            return $company;
+        } else {
+            throw new Exception('User not found');
+        }
+    }
 }

@@ -36,3 +36,12 @@ export const deleteUser = async (id, data) => {
     return error.message;
   }
 }
+
+export const getHrAccount = async (company_id) => {
+  try {
+    const response = await axios.get(`/api/user/hr-infor/${company_id}`);
+    return response;
+  } catch (error) {
+    return error.message;
+  }
+}

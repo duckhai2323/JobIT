@@ -1,0 +1,167 @@
+@import '../../../shared/layout/variables.scss';
+.admin-card {
+	width: 98%;
+	height: 148px;
+	margin-bottom: 1rem;
+	padding: 1rem;
+	background-color: white;
+	display: flex;
+	align-items: center;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	border-radius: 0.375rem;
+	border: 1px solid transparent;
+	transition: border 0.3s ease;
+}
+
+.admin-card:hover {
+	border-color: #00c853;
+	cursor: pointer;
+}
+
+.admin-image {
+	width: 100px;
+	height: 100px;
+}
+
+.image {
+	width: 100px;
+	height: 100px;
+	object-fit: contain;
+	border-radius: 4px;
+}
+
+.admin-info {
+	margin-left: 1.5rem;
+	display: flex;
+	flex-direction: column;
+  align-items: flex-start;
+	gap: 10px;
+	width: 50%;
+}
+
+@media (max-width: 1488px) {
+	.admin-info {
+		width: 40%;
+	}
+}
+
+@media (max-width: 1274px) {
+	.admin-info {
+		width: 35%;
+	}
+}
+
+.admin-name {
+	width: 100%;
+	font-weight: bold;
+	font-size: 1.125rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+  text-align: left;
+}
+
+.admin-intro {
+	width: 100%;
+	color: #757575;
+	font-size: 0.875rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.admin-contact {
+	display: flex;
+	gap: 0.25rem;
+	align-items: center;
+	font-size: 0.875rem;
+	color: #757575;
+}
+
+.admin-link {
+	font-size: 0.625rem;
+	color: #757575;
+}
+
+.admin-status {
+  font-weight: 700;
+  .active-status {
+    color: rgb(10, 130, 60);
+  }
+  .suspended-status {
+    color: rgb(247, 23, 23);
+  }
+}
+
+.admin-options {
+	margin-left: 20%;
+	width: 150px;
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	color: #757575;
+	font-size: 0.875rem;
+  padding-top: 40px;
+  .view-button {
+    color: white;
+    background-color: $chartColor2;
+    padding: 10px;
+		height: 40px;
+    border-radius: 0.375rem;
+    border: 0;
+    transform: translateY(-50%);
+		font-weight: 700;
+  }
+  
+  .view-button:hover {
+    border: 2px solid $primaryColor;
+		color: $secondColor;
+    cursor: pointer;
+  }
+
+	.active-button {
+    color: white;
+    background-color: rgb(10, 130, 60);
+    padding: 10px;
+    height: 40px;
+    border-radius: 0.375rem;
+    border: 0;
+    transform: translateY(-50%);
+    font-weight: 700;
+  }
+
+  .active-button:hover {
+    border: 2px solid $primaryColor;
+		color: $secondColor;
+    cursor: pointer;
+  }
+
+  .delete-button {
+    color: white;
+    background-color: rgb(247, 23, 23);
+    padding: 10px;
+		height: 40px;
+    border-radius: 0.375rem;
+    border: 0;
+    transform: translateY(-50%);
+		font-weight: 700;
+  }
+  
+  .delete-button:hover {
+    border: 2px solid $primaryColor;
+		color: $secondColor;
+    cursor: pointer;
+  }
+}
+
+.admin-detail {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.admin-location {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

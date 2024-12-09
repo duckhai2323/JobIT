@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import styles from './candidateItem.module.scss';
 import classNames from 'classnames/bind';
-import { MdMarkEmailUnread } from "react-icons/md";
+import { MdMarkEmailUnread, MdDelete } from "react-icons/md";
 import { IoMdEye } from "react-icons/io";
 import { AiOutlineStop, AiOutlineReload } from "react-icons/ai";
+import { deleteUser } from '@/services/userService';
 
 const cx = classNames.bind(styles);
 
 const CandidateItem = ({ onClickHandle, candidateData, loader }) => {
+  const dispatch = useDispatch();
   const [isActive, setIsActive] = useState(true);
   useEffect(() => {
     setIsActive(candidateData.actived);
@@ -27,6 +30,24 @@ const CandidateItem = ({ onClickHandle, candidateData, loader }) => {
       loader(false);
     }, 2000);
     return () => clearTimeout(timer);
+  }
+  const deleteAccount = () => {
+    const deleteAcc = async () => {
+      console.log(candidateData.id);
+      const response = await deleteUser(candidateData.id, { id: candidateData.id });
+      if (response.success) {
+        console.log(response.message);
+      }
+      return null;
+    };
+    if(candidateData.id) {
+      deleteAcc();
+      const timer = setTimeout(() => {
+        dispatch(Actions.getUsersRequest());
+      }, 500);
+      window.scrollTo(0, 0);
+      return () => clearTimeout(timer);
+    }
   }
   return (
     <div className={cx("candidate-card")}>
@@ -69,7 +90,7 @@ const CandidateItem = ({ onClickHandle, candidateData, loader }) => {
           </div>
         ) : (
           <div className={cx("candidate-options")}>
-            <button className={cx('delete-button')}>
+            <button className={cx('delete-button')} onClick={deleteAccount}>
               <MdDelete /> Xóa
             </button>
             <button className={cx('active-button')} onClick={activateAccount}>

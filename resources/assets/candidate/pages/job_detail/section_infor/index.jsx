@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { RiMoneyDollarCircleLine } from 'react-icons/ri';
 import { MdLocationOn } from 'react-icons/md';
 import { FaHeart } from 'react-icons/fa6';
+import { GiSandsOfTime } from "react-icons/gi";
 
 const cx = classNames.bind(style);
 
@@ -53,7 +54,9 @@ const SectionJobInfor = (props) => {
                 </div>
 
                 <div className={cx('icon-group')}>
-                  <div className={cx('icon')}></div>
+                  <div className={cx('icon')}>
+                    <GiSandsOfTime style={{ fontSize: '35px', color: 'white' }} />
+                  </div>
                   <div className={cx('infor-subtitle-group')}>
                     <span className={cx('title')}>Kinh nghiệm</span>
                     <span className={cx('subtitle')}>{jobDetail && jobDetail.experience_require}</span>
@@ -96,7 +99,7 @@ const SectionJobInfor = (props) => {
               <div className={cx('item-infor-group')}>
                 <IoMdPeople style={{ fontSize: '20px', color: '#7f878f' }} />
                 <span className={cx('item-infor-group__title')}>Quy mô:</span>
-                <span className={cx('item-infor-group__subtitle')}>{jobDetail && jobDetail.company_scale}</span>
+                <span className={cx('item-infor-group__subtitle')}>{jobDetail && jobDetail.employee_scale}</span>
               </div>
               <div className={cx('item-infor-group')}>
                 <IoMdPeople style={{ fontSize: '20px', color: '#7f878f' }} />

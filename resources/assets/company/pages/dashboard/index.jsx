@@ -7,10 +7,38 @@ import MarketItem from '@/company/components/marketItem';
 import { FaA, FaArrowTrendUp } from "react-icons/fa6";
 import { LineChart } from '@/company/components/lineChart';
 import { BarChart } from '@/company/components/barChart';
+import useAuth from '@/hooks/useAuth';
+import { getInforCompanyByUser } from '@/services/companyService';
+import { getListJobsOfCompany } from '@/services/companyService';
+import { FadeLoader } from 'react-spinners';
 
 const cx = classNames.bind(styles);
 
 function Dashboard() {
+  const { authState } = useAuth();
+  const [companyImage, setCompanyImage] = useState("");
+  const [companyId, setCompanyId] = useState("");
+  const [listJobs, setListJobs] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentJob, setCurrentJob] = useState({});
+  const getListJobs = async () => {
+    setLoading(true);
+    const response = await getInforCompanyByUser(authState.data.data.id);
+    if (response.success) {
+      const response2 = await getListJobsOfCompany(response.data.company_id);
+      if (response2.success) {
+        const listOfJobs = response2.data;
+        console.log(listOfJobs);
+        setListJobs(listOfJobs);
+        setCompanyId(response.data.company_id);
+        setCompanyImage(response.data.company_image);
+      }
+    }
+    setLoading(false);
+  };
+  useEffect(() => {
+    getListJobs();
+  }, [])
   const [currentDate, setCurrentDate] = useState('');
   useEffect(() => {
     const today = new Date();
@@ -89,21 +117,13 @@ function Dashboard() {
                     Việc làm mới nhất
                   </p>
                   <div className={cx('slider')}>
-                    <JobItem 
-                      jobTitle="Chuyên Viên Kinh Doanh Xuất Nhập Khẩu/Order Hàng Trung Quốc - Taobao,1688 - Thưởng 2 Triệu Khi Nhận Việc" 
-                      companyName="CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ" 
-                      location="Hà Nội"
+                  {listJobs && listJobs.slice(0, 3).map((job) => (
+                    <JobItem
+                      jobTitle={job.job_title}
+                      location={job.job_location} 
+                      companyImage={companyImage}
                     />
-                    <JobItem 
-                      jobTitle="Chuyên Viên Kinh Doanh Xuất Nhập Khẩu/Order Hàng Trung Quốc - Taobao,1688 - Thưởng 2 Triệu Khi Nhận Việc" 
-                      companyName="CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ" 
-                      location="Hà Nội"
-                    />
-                    <JobItem 
-                      jobTitle="Chuyên Viên Kinh Doanh Xuất Nhập Khẩu/Order Hàng Trung Quốc - Taobao,1688 - Thưởng 2 Triệu Khi Nhận Việc" 
-                      companyName="CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ" 
-                      location="Hà Nội"
-                    />
+                  ))}
                   </div>
                 </div>
               </div>
@@ -111,6 +131,12 @@ function Dashboard() {
           </div>
         </div>
       </CompanyLayout>
+      <div style={{ display: loading ? 'flex' : 'none' }} className={cx('loading')}>
+        <div>
+          <FadeLoader color='rgba(255, 255, 255, 1)' height='10' width='6' />
+          <span style={{ fontWeight: '500', color: 'white', fontSize: '18px' }}>Loading...</span>
+        </div>
+      </div>
     </div>
   );
 }

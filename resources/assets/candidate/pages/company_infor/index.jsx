@@ -68,7 +68,7 @@ const CompanyInforPageCandidate = () => {
 
                   <div className={cx('subname')}>
                     <MdApartment style={{ color: '#fff', fontSize: '20px' }} />
-                    <span className={cx('content')}>{companyInfor && companyInfor.company_scale}</span>
+                    <span className={cx('content')}>{companyInfor && companyInfor.employee_scale}</span>
                   </div>
                 </div>
               </div>

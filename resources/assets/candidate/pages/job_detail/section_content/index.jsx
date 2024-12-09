@@ -5,6 +5,11 @@ import { WiMoonFull } from 'react-icons/wi';
 import JobItemHight from '@/candidate/components/jobItemHight';
 import { FaRegHeart } from 'react-icons/fa';
 import { FaHeart } from 'react-icons/fa6';
+import { RiMedalFill } from "react-icons/ri";
+import { GiSandsOfTime } from 'react-icons/gi';
+import { MdPeopleAlt } from "react-icons/md";
+import { FaBriefcase } from "react-icons/fa6";
+import { FaTransgender } from "react-icons/fa";
 
 const cx = classNames.bind(style);
 
@@ -151,7 +156,9 @@ const SectionContent = (props) => {
               <span className={cx('title')}>Thông tin chung</span>
               <div className={cx('item-group')}>
                 <div className={cx('item-group__infor-item')}>
-                  <div className={cx('icon-container')}></div>
+                  <div className={cx('icon-container')}>
+                    <RiMedalFill style={{ fontSize: '35px', color: 'white' }} />
+                  </div>
                   <div className={cx('title-container')}>
                     <span className={cx('title')}>Cấp bậc</span>
                     <span className={cx('subtitle')}>{jobDetail && jobDetail.level}</span>
@@ -159,7 +166,9 @@ const SectionContent = (props) => {
                 </div>
 
                 <div className={cx('item-group__infor-item')}>
-                  <div className={cx('icon-container')}></div>
+                  <div className={cx('icon-container')}>
+                    <GiSandsOfTime style={{ fontSize: '35px', color: 'white' }} />
+                  </div>
                   <div className={cx('title-container')}>
                     <span className={cx('title')}>Kinh nghiệm</span>
                     <span className={cx('subtitle')}>{jobDetail && jobDetail.experience_require}</span>
@@ -167,7 +176,9 @@ const SectionContent = (props) => {
                 </div>
 
                 <div className={cx('item-group__infor-item')}>
-                  <div className={cx('icon-container')}></div>
+                  <div className={cx('icon-container')}>
+                    <MdPeopleAlt style={{ fontSize: '35px', color: 'white' }} />
+                  </div>
                   <div className={cx('title-container')}>
                     <span className={cx('title')}>Số lượng tuyển</span>
                     <span className={cx('subtitle')}>{jobDetail && jobDetail.candidate_number} người</span>
@@ -175,7 +186,9 @@ const SectionContent = (props) => {
                 </div>
 
                 <div className={cx('item-group__infor-item')}>
-                  <div className={cx('icon-container')}></div>
+                  <div className={cx('icon-container')}>
+                    <FaBriefcase style={{ fontSize: '35px', color: 'white' }} />
+                  </div>
                   <div className={cx('title-container')}>
                     <span className={cx('title')}>Hình thức làm việc</span>
                     <span className={cx('subtitle')}>{jobDetail && jobDetail.work_form}</span>
@@ -183,7 +196,9 @@ const SectionContent = (props) => {
                 </div>
 
                 <div className={cx('item-group__infor-item')}>
-                  <div className={cx('icon-container')}></div>
+                  <div className={cx('icon-container')}>
+                    <FaTransgender style={{ fontSize: '35px', color: 'white' }} />
+                  </div>
                   <div className={cx('title-container')}>
                     <span className={cx('title')}>Giới tính</span>
                     <span className={cx('subtitle')}>{jobDetail && jobDetail.sex}</span>

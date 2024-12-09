@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Actions } from '@/redux/reducers/admin/adminJobsReducer';
 import styles from './jobLargeItem.module.scss';
 import classNames from 'classnames/bind';
 import { MdMarkEmailUnread, MdDelete } from "react-icons/md";
@@ -9,11 +11,34 @@ import { IoToday } from "react-icons/io5";
 import { AiFillProfile, AiOutlineGlobal } from "react-icons/ai";
 import { IoPerson } from "react-icons/io5";
 import { CgSandClock } from "react-icons/cg";
+import { deleteJob } from '@/services/jobDetailService';
 
 
 const cx = classNames.bind(styles);
 
-const JobLargeItem = ({ onClickHandle, jobData }) => {
+const JobLargeItem = ({ onClickHandle, jobData, loader }) => {
+  const dispatch = useDispatch();
+  const deleteCurrentJob = () => {
+    const deleteCurrent = async () => {
+      console.log(jobData.job_id);
+      loader(true);
+      const response = await deleteJob(jobData.job_id);
+      if (response.success) {
+        console.log(response.message);
+        dispatch(Actions.getJobsRequest());
+      }
+      return null;
+    };
+    if(jobData.job_id) {
+      deleteCurrent();
+      loader(true);
+      const timer = setTimeout(() => {
+        loader(false);
+      }, 5000);
+      window.scrollTo(0, 0);
+      return () => clearTimeout(timer);
+    }
+  }
   return (
     <div className={cx("job-card")}>
       <div className={cx("job-image")}>
@@ -62,7 +87,7 @@ const JobLargeItem = ({ onClickHandle, jobData }) => {
         <button className={cx('view-button')} onClick={onClickHandle}>
           <IoMdEye /> Xem chi tiết
         </button>
-        <button className={cx('delete-button')}>
+        <button className={cx('delete-button')} onClick={deleteCurrentJob}>
           <MdDelete /> Xóa
         </button>
       </div>

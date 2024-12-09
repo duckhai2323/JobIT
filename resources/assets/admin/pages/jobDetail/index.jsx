@@ -9,12 +9,14 @@ import AdminLayout from '../../components/layout';
 import { useParams } from 'react-router-dom';
 import { getInforJobDetail, updateInforJobDetail } from '@/services/jobDetailService';
 import { FadeLoader } from 'react-spinners';
+import { getListCompanies } from '@/services/companyService';
 
 const cx = classNames.bind(styles);
 
 const JobDetail = () => {
   const dispatch = useDispatch();
   const { jobId } = useParams();
+  const [listCompanies, setListCompanies] = useState([]);
   const [isEditingTab1, setIsEditingTab1] = useState(false);
   const [jobTitle, setJobTitle] = useState("");
   const [companyName, setCompanyName] = useState("");
@@ -28,8 +30,14 @@ const JobDetail = () => {
   const [experienceRequire, setExperienceRequire] = useState("");
   const [workFrom, setWorkFrom] = useState("");
   const [deadlineJob, setDeadlineJob] = useState("");
+  const [level, setLevel] = useState("");
+  const [sex, setSex] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const formatDate = (dateString) => {
+    const [year, month, day] = dateString.split("-");
+    return `${day}/${month}/${year}`;
+  };
 
   const getJobDetail = async () => {
     setLoading(true);
@@ -49,6 +57,8 @@ const JobDetail = () => {
       setExperienceRequire(jobData.experience_require);
       setWorkFrom(jobData.work_form);
       setDeadlineJob(jobData.deadline_job);
+      setLevel(jobData.level);
+      setSex(jobData.sex);
       console.log(jobDetails);
       setLoading(false);
     }
@@ -70,6 +80,8 @@ const JobDetail = () => {
       experience_require: experienceRequire,
       work_form: workFrom,
       deadline_job: deadlineJob,
+      level: level,
+      sex: sex,
     };
     console.log(inputData);
     dispatch(
@@ -93,6 +105,15 @@ const JobDetail = () => {
     console.log(jobId);
     if (jobId) {
       getJobDetail();
+      const getCompanies = async () => {
+        const response = await getListCompanies();
+        if (response.success) {
+          console.log(response.data);
+          setListCompanies(response.data);
+        }
+        return null;
+      }
+      getCompanies();
     } 
   }, [jobId]);
   return (
@@ -148,8 +169,9 @@ const JobDetail = () => {
     
                       }}
                     >
-                      <option value="Công ty Cổ phần Truyền thông Vàng châu Á">Công ty Cổ phần Truyền thông Vàng châu Á</option>
-                      <option value="CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ">CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ GOBIZ</option>
+                      {listCompanies && listCompanies.map((company) => (
+                        <option value={company.company_name}>{company.company_name}</option>
+                      ))}
                     </select>
                   </div>
                   <div className={cx('info-item')}>
@@ -166,6 +188,38 @@ const JobDetail = () => {
                       onChange={(e) => {
                         setSalary(e.target.value);
     
+                      }}
+                    />
+                  </div>
+                  <div className={cx('info-item')}>
+                    <label for="level" className={cx('info-label')}>
+                      Vị trí<i style={{ color: 'red' }}>*</i> : 
+                    </label>
+                    <input
+                      type="text"
+                      name="level"
+                      id="level"
+                      placeholder="" 
+                      className={cx('info-content')}
+                      value={level}
+                      onChange={(e) => {
+                        setLevel(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className={cx('info-item')}>
+                    <label for="sex" className={cx('info-label')}>
+                      Giới tính<i style={{ color: 'red' }}>*</i> : 
+                    </label>
+                    <input
+                      type="text"
+                      name="sex"
+                      id="sex"
+                      placeholder="" 
+                      className={cx('info-content')}
+                      value={sex}
+                      onChange={(e) => {
+                        setSex(e.target.value);
                       }}
                     />
                   </div>
@@ -205,7 +259,7 @@ const JobDetail = () => {
                   </div>
                   <div className={cx('info-item')}>
                     <label for="experience-require" className={cx('info-label')}>
-                      Mức lương<i style={{ color: 'red' }}>*</i> : 
+                      Kinh nghiệm<i style={{ color: 'red' }}>*</i> : 
                     </label>
                     <input
                       type="text"
@@ -242,7 +296,7 @@ const JobDetail = () => {
                       Thời hạn ứng tuyển<i style={{ color: 'red' }}>*</i> : 
                     </label>
                     <input
-                      type="text"
+                      type="date"
                       name="deadline_job"
                       id="deadline-job"
                       placeholder="" 
@@ -348,6 +402,14 @@ const JobDetail = () => {
                   <div className={cx('info-content')}>{salary}</div>
                 </div>
                 <div className={cx('info-item')}>
+                  <div className={cx('info-label')}>Vị trí: </div>
+                  <div className={cx('info-content')}>{level}</div>
+                </div>
+                <div className={cx('info-item')}>
+                  <div className={cx('info-label')}>Giới tính: </div>
+                  <div className={cx('info-content')}>{sex}</div>
+                </div>
+                <div className={cx('info-item')}>
                   <div className={cx('info-label')}>Địa chỉ: </div>
                   <div className={cx('info-content')}>{jobLocation}</div>
                 </div>
@@ -365,7 +427,7 @@ const JobDetail = () => {
                 </div>
                 <div className={cx('info-item')}>
                   <div className={cx('info-label')}>Thời hạn ứng tuyển: </div>
-                  <div className={cx('info-content')}>{deadlineJob}</div>
+                  <div className={cx('info-content')}>{formatDate(deadlineJob)}</div>
                 </div>
                 <hr></hr>
                 <div className={cx('form-header')}>

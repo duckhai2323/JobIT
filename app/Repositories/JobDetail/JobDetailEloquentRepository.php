@@ -33,6 +33,8 @@ class JobDetailEloquentRepository extends EloquentRepository implements JobDetai
             'work_form' => $data['work_form'],
             'status' => $data['status'],
             'deadline_job' => $data['deadline_job'],
+            'level' => $data['level'],
+            'sex' => $data['sex'],
         ]);
 
       return $jobdetail;
@@ -90,7 +92,7 @@ class JobDetailEloquentRepository extends EloquentRepository implements JobDetai
                     ->join('companies', 'job_details.company_id','=', 'companies.company_id')
                     ->where('job_details.company_id',$request->company_id)
                     ->orderBy('job_details.updated_at', 'desc')
-                    ->select('companies.company_image','companies.company_name','companies.company_id','job_details.job_id','job_details.job_title','job_details.job_location','job_details.experience_require','job_details.salary','job_details.deadline_job','job_details.status','job_details.candidate_number')
+                    ->select('companies.company_image','companies.company_name','companies.company_id', 'companies.company_link', 'job_details.*')
                     ->get();
       if($jobs) {
         return $jobs;
@@ -114,5 +116,14 @@ class JobDetailEloquentRepository extends EloquentRepository implements JobDetai
       $job = DB::table('job_details')->where('job_details.job_id', $request->job_id)
                       ->update($data);
       return $job;
+    }
+
+    public function deleteJob (Request $request) {
+      $job = $this->_model->where('job_id', $request->job_id)->first();
+      if (!$job) {
+          return throw new Exception('job not found');
+      }
+      $this->_model->where('job_id', $request->job_id)->delete();
+      return true;
     }
 }

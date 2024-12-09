@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-const JobItem = ({ jobTitle, companyName, location, companyImage }) => {
+const JobItem = ({ jobTitle, location, companyImage }) => {
   return (
     <div className={cx('job-item')}>
       <div className={cx('job-item__company-logo')}>
@@ -17,9 +17,6 @@ const JobItem = ({ jobTitle, companyName, location, companyImage }) => {
       <div className={cx('job-item__content')}>
         <span className={cx('job-title')}>
           {jobTitle}
-        </span>
-        <span className={cx('company-name')}>
-          {companyName}
         </span>
         <span className={cx('location')}>
           {location}

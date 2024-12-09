@@ -23,4 +23,6 @@ interface JobDetailRepositoryInterface
     public function index();
 
     public function getAllJobs(Request $request);
+
+    public function deleteJob(Request $request);
 }

@@ -83,24 +83,15 @@ const ListAdmin = () => {
             <div className={cx("recent-admins-box")}>
               <h1 className={cx("recent-title")}>Danh sách quản trị viên đăng nhập gần nhất</h1>
               <div className={cx("recent-admins")}>
-                <div className={cx("admin-card")}>
-                  <img src="https://cdn-icons-png.flaticon.com/512/219/219986.png" alt="" className={cx("admin-logo")} />
-                  <div className={cx("admin-info")}>
-                    <p className={cx("admin-name")}>Admin01</p>
+                {listAdmins && listAdmins.slice(0, 3).map((admin) => (
+                  <div className={cx("admin-card")}>
+                    <img src="https://cdn-icons-png.flaticon.com/512/219/219986.png" alt="" className={cx("admin-logo")} />
+                    <div className={cx("admin-info")}>
+                      <p className={cx("admin-name")}>{admin.name}</p>
+                      <p className={cx("admin-email")}>{admin.email}</p>
+                    </div>
                   </div>
-                </div>
-                <div className={cx("admin-card")}>
-                  <img src="https://cdn-icons-png.flaticon.com/512/219/219986.png" alt="" className={cx("admin-logo")} />
-                  <div className={cx("admin-info")}>
-                    <p className={cx("admin-name")}>Admin01</p>
-                  </div>
-                </div>
-                <div className={cx("admin-card")}>
-                  <img src="https://cdn-icons-png.flaticon.com/512/219/219986.png" alt="" className={cx("admin-logo")} />
-                  <div className={cx("admin-info")}>
-                    <p className={cx("admin-name")}>Admin01</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
