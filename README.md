@@ -1,5 +1,5 @@
 # JobIT - Tìm kiếm việc làm CNTT
-[Link Doc](https://docs.google.com/document/d/1czkhcktKfr4xmNlUH1Nj9d2L4GaholSt1kK-a22AkXg/edit?tab=t.0)
+[Link Doc](https://docs.google.com/document/d/1czkhcktKfr4xmNlUH1Nj9d2L4GaholSt1kK-a22AkXg/edit?tab=t.0](https://drive.google.com/file/d/1GB1YPTeDDm6DAy6rLJI2tUryQdUojaRo/view?usp=sharing)
 
 Các thành viên nhóm:
 - Trần Đức Khải (21020340) (Trưởng nhóm)
